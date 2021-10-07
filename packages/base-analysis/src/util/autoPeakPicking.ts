@@ -77,7 +77,6 @@ export function autoPeakPicking(
   return peaks.map((peak) => {
     const result: Record<string, number> = {};
     for (const [key, variable] of Object.entries(measurement.variables)) {
-      // @ts-expect-error Bug in type definitions
       result[key] = variable.data[peak.index];
     }
     result.width = peak.width;
