@@ -3,6 +3,7 @@ extends: cheminfo-typescript
 parserOptions:
   project:
     - './packages/*/tsconfig.json'
+    - './packages/*/tsconfig.test.json'
 rules:
   'import/no-unresolved':
     - error

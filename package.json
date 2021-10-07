@@ -11,6 +11,7 @@
     "eslint-fix": "npm run eslint -- --fix",
     "prettier": "prettier --check .",
     "prettier-write": "prettier --write .",
+    "test": "npm run eslint && npm run prettier && npm run tsc",
     "tsc": "tsc --build",
     "tsc-clean": "tsc --build --clean",
     "tsc-watch": "tsc --build --watch"
