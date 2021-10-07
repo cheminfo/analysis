@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "name": "analysis",
+  "version": "0.0.0",
+  "description": "Monorepo for libraries that work on scientific analysis data",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "eslint": "eslint .",
+    "eslint-fix": "npm run eslint -- --fix",
+    "prettier": "prettier --check .",
+    "prettier-write": "prettier --write .",
+    "tsc": "tsc --build",
+    "tsc-clean": "tsc --build --clean",
+    "tsc-watch": "tsc --build --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheminfo/analysis.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cheminfo/analysis/issues"
+  },
+  "homepage": "https://github.com/cheminfo/analysis#readme",
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "eslint": "^7.32.0",
+    "eslint-config-cheminfo-typescript": "^8.0.9",
+    "jest": "^27.2.4",
+    "prettier": "^2.4.1",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.3"
+  }
+}

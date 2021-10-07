@@ -1,0 +1,10 @@
+root: true
+extends: cheminfo-typescript
+parserOptions:
+  project:
+    - './packages/*/tsconfig.json'
+rules:
+  'import/no-unresolved':
+    - error
+    - ignore: ['-analysis$']
+      commonjs: true

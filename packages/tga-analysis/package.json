@@ -1,0 +1,85 @@
+{
+  "name": "tga-analysis",
+  "version": "0.0.0",
+  "description": "Provides tools to convert output files from thermogravimetric analysis (TGA) into JCAMP-DX, as well as tools to analyze the data (mass loss analysis)",
+  "main": "./lib/index.js",
+  "module": "./lib-esm/index.js",
+  "types": "./lib/index.d.ts",
+  "keywords": [],
+  "author": "Luc Patiny",
+  "license": "MIT",
+  "files": [
+    "src",
+    "lib",
+    "lib-esm"
+  ],
+  "scripts": {
+    "build": "cheminfo-build  --entry lib-esm/index.js --root TGASpectrum",
+    "test": "npm run test-coverage && npm run eslint && npm run prettier && npm run check-types",
+    "test-coverage": "npm run test-only -- --coverage",
+    "test-only": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheminfo/analysis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cheminfo/analysis/issues"
+  },
+  "homepage": "https://github.com/cheminfo/analysis#readme",
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "base-analysis": "^0.0.0",
+    "ensure-string": "^1.1.0",
+    "papaparse": "^5.3.1",
+    "physical-chemistry-parser": "^3.0.1",
+    "xlsx": "^0.17.2"
+  },
+  "info": {
+    "logo": "https://raw.githubusercontent.com/cheminfo/font/master/src/tga/assignment.svg",
+    "domain": [
+      "Physical Chemistry",
+      "Materials Science"
+    ],
+    "technique": {
+      "name": "TGA",
+      "chmo": "0000690",
+      "iupac": "https://doi.org/10.1351/goldbook.T06324"
+    },
+    "functionality": {
+      "fileTypes": [
+        {
+          "extension": "txt",
+          "manufacturer": "TA Instruments",
+          "example": "https://raw.githubusercontent.com/cheminfo/analysis/master/testFiles/TAInstruments.txt"
+        },
+        {
+          "extension": "csv",
+          "manufacturer": "Perkin Elmer",
+          "example": "https://raw.githubusercontent.com/cheminfo/analysis/master/testFiles/perkinElmer.csv"
+        },
+        {
+          "extension": "txt",
+          "manufacturer": "Perkin Elmer",
+          "example": "https://raw.githubusercontent.com/cheminfo/analysis/master/testFiles/perkinElmer_tga4000.txt"
+        },
+        {
+          "extension": "jcamp",
+          "manufacturer": "cheminfo",
+          "example": "https://raw.githubusercontent.com/cheminfo/analysis/master/testFiles/ntuples.jdx"
+        },
+        {
+          "extension": "txt",
+          "manufacturer": "Netzsch",
+          "example": "https://raw.githubusercontent.com/cheminfo/analysis/master/testFiles/netzsch.txt"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "@types/papaparse": "^5.2.6"
+  }
+}

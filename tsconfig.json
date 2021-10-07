@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/base-analysis/tsconfig.ref.json"
+    },
+    {
+      "path": "./packages/tga-analysis/tsconfig.ref.json"
+    }
+  ]
+}
