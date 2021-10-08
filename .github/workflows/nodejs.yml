@@ -36,11 +36,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
+      - name: Install latest npm
+        run: npm install -g npm
       - name: Install dependencies
         run: npm ci
       - name: Compile TypeScript before running tests
         run: npm run tsc
       - name: Run tests
-        run: npm test-only
+        run: npm run test-only
       - name: Send coverage report to Codecov
         uses: codecov/codecov-action@v2
