@@ -6,6 +6,7 @@ module.exports = {
   testEnvironment: 'node',
   testPathIgnorePatterns: ['/node_modules/', '/lib/', '/lib-esm/'],
   coveragePathIgnorePatterns: ['/node_modules/', '/lib/', '/lib-esm/'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   globals: {
     'ts-jest': {
       tsconfig: 'tsconfig.base.json',

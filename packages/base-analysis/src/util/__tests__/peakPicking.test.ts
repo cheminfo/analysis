@@ -1,9 +1,6 @@
 import type { MeasurementXY } from 'cheminfo-types';
-import { toBeDeepCloseTo, toMatchCloseTo } from 'jest-matcher-deep-close-to';
 
 import { peakPicking } from '../peakPicking';
-
-expect.extend({ toBeDeepCloseTo, toMatchCloseTo });
 
 describe('peakPicking', () => {
   const measurement: MeasurementXY = {

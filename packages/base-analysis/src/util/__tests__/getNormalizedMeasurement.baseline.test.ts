@@ -1,8 +1,4 @@
-import { toBeDeepCloseTo, toMatchCloseTo } from 'jest-matcher-deep-close-to';
-
 import { getNormalizedMeasurement } from '../getNormalizedMeasurement';
-
-expect.extend({ toBeDeepCloseTo, toMatchCloseTo });
 
 describe('getNormalizedMeasurement baseline', () => {
   let measurement = {

@@ -48,7 +48,6 @@
     "xy-parser": "^3.2.0"
   },
   "devDependencies": {
-    "@types/js-quantities": "^1.6.2",
-    "jest-matcher-deep-close-to": "^3.0.0"
+    "@types/js-quantities": "^1.6.2"
   }
 }

@@ -1,8 +1,4 @@
-import { toBeDeepCloseTo, toMatchCloseTo } from 'jest-matcher-deep-close-to';
-
 import { convertUnit } from '../convertUnit';
-
-expect.extend({ toBeDeepCloseTo, toMatchCloseTo });
 
 test('getConversionFactor', () => {
   expect(convertUnit(1, 'mg', 'g')).toBeCloseTo(0.001, 6);

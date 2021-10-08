@@ -1,9 +1,6 @@
 import type { MeasurementXY } from 'cheminfo-types';
-import { toBeDeepCloseTo, toMatchCloseTo } from 'jest-matcher-deep-close-to';
 
 import { getMeasurementXY } from '../getMeasurementXY';
-
-expect.extend({ toBeDeepCloseTo, toMatchCloseTo });
 
 const measurements: MeasurementXY[] = [
   {
