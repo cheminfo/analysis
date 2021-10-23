@@ -25,6 +25,6 @@ test('import from TA instruments excel file', () => {
   expect(variables.z.data).toHaveLength(71627);
   // @ts-expect-error
   expect(variables.t.data).toHaveLength(71627);
-  expect(variables.x.data[0]).toStrictEqual(25.77);
-  expect(variables.x.data[71625]).toStrictEqual(169.93);
+  expect(variables.x.data[0]).toBe(25.77);
+  expect(variables.x.data[71625]).toBe(169.93);
 });

@@ -11,8 +11,8 @@ test('fromNetzsch', () => {
   expect(result.measurements).toHaveLength(1);
   const measurement = result.getFirstMeasurement();
   expect(Object.keys(measurement.variables)).toStrictEqual(['x', 'y', 't']);
-  expect(measurement.variables.x.data[0]).toStrictEqual(27.141);
-  expect(measurement.variables.y.data[0]).toStrictEqual(890.9062668);
+  expect(measurement.variables.x.data[0]).toBe(27.141);
+  expect(measurement.variables.y.data[0]).toBe(890.9062668);
   expect(measurement.variables.x.data).toHaveLength(270);
   expect(measurement.variables.y.data).toHaveLength(270);
   // @ts-expect-error
