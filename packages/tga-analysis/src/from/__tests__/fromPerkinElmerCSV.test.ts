@@ -34,7 +34,5 @@ test('fromPerkinElmer', () => {
   // @ts-expect-error
   expect(measurementCopy.variables.p.units).toBe('°C');
   // @ts-expect-error
-  expect(measurementCopy.variables.p.label).toBe(
-    'Program temperature',
-  );
+  expect(measurementCopy.variables.p.label).toBe('Program temperature');
 });
