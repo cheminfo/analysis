@@ -26,7 +26,7 @@ interface NormalizedOptions {
 /**
  * Class allowing to store and manipulate an analysis.
  * An analysis may contain one or more measurements that can be selected
- * based on their units
+ * based on their units.
  */
 export class Analysis {
   public id: string;
@@ -44,7 +44,10 @@ export class Analysis {
   }
 
   /**
-   * Add a measurement in the internal measurements variable
+   * Add a measurement in the internal measurements variable.
+   *
+   * @param variables
+   * @param options
    */
   public pushMeasurement(
     variables: MeasurementXYVariables,
@@ -59,7 +62,9 @@ export class Analysis {
   }
 
   /**
-   * Retrieve a MeasurementXY based on x/y units
+   * Retrieve a MeasurementXY based on x/y units.
+   *
+   * @param selector
    */
   public getMeasurementXY(selector: MeasurementSelector = {}) {
     let id = JSON.stringify(selector);
@@ -70,10 +75,12 @@ export class Analysis {
   }
 
   /**
-   * Retrieve a xy object
-   * @param selector.units Units separated by vs like for example "g vs °C"
-   * @param selector.xUnits if undefined takes the first variable
-   * @param selector.yUnits if undefined takes the second variable
+   * Retrieve a xy object.
+   *
+   * @param selector.units - Units separated by vs like for example "g vs °C".
+   * @param selector.xUnits - If undefined takes the first variable.
+   * @param selector.yUnits - If undefined takes the second variable.
+   * @param selector
    */
   public getXY(selector: MeasurementSelector = {}) {
     let measurement = this.getMeasurementXY(selector);
@@ -86,9 +93,11 @@ export class Analysis {
 
   /**
    * Return the data object for specific x/y units with possibly some
-   * normalization options
-   * @param options.selector.xUnits // if undefined takes the first variable
-   * @param options.selector.yUnits // if undefined takes the second variable
+   * normalization options.
+   *
+   * @param options.selector.xUnits - // if undefined takes the first variable.
+   * @param options.selector.yUnits - // if undefined takes the second variable.
+   * @param options
    */
   public getNormalizedMeasurement(options: NormalizedOptions = {}) {
     const { normalization, selector } = options;
@@ -98,7 +107,8 @@ export class Analysis {
   }
 
   /**
-   * Returns the first measurement. This method could be improved in the future
+   * Returns the first measurement. This method could be improved in the future.
+   *
    * @returns
    */
   public getFirstMeasurement() {
@@ -106,18 +116,22 @@ export class Analysis {
   }
 
   /**
-   * Returns the xLabel
-   * @param selector.xUnits // if undefined takes the first variable
-   * @param selector.yUnits // if undefined takes the second variable
+   * Returns the xLabel.
+   *
+   * @param selector.xUnits - // if undefined takes the first variable.
+   * @param selector.yUnits - // if undefined takes the second variable.
+   * @param selector
    */
   public getXLabel(selector: MeasurementSelector) {
     return this.getMeasurementXY(selector)?.variables.x.label;
   }
 
   /**
-   * Returns the yLabel
-   * @param selector.xUnits // if undefined takes the first variable
-   * @param selector.yUnits // if undefined takes the second variable
+   * Returns the yLabel.
+   *
+   * @param selector.xUnits - // if undefined takes the first variable.
+   * @param selector.yUnits - // if undefined takes the second variable.
+   * @param selector
    */
   public getYLabel(selector: MeasurementSelector) {
     return this.getMeasurementXY(selector)?.variables.y.label;
@@ -125,7 +139,11 @@ export class Analysis {
 }
 
 /**
- * Internal function that ensure the order of x / y array
+ * Internal function that ensure the order of x / y array.
+ *
+ * @param variables
+ * @param options
+ * @param analysisOptions
  */
 function standardizeData(
   variables: MeasurementXYVariables,

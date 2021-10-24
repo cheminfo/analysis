@@ -4,9 +4,11 @@ import Papa from 'papaparse';
 import { Analysis } from '..';
 
 /**
- * Creates a new Chromatogram element based in a JCAMP string
- * @param {string} text - String containing the JCAMP data
- * @return {Analysis} - New class element with the given data
+ * Creates a new Chromatogram element based in a JCAMP string.
+ *
+ * @param text - String containing the JCAMP data.
+ * @param arrayBuffer
+ * @returns - New class element with the given data.
  */
 export function fromPerkinElmerCSV(
   arrayBuffer: string | ArrayBuffer | Uint8Array,

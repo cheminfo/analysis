@@ -5,6 +5,11 @@ interface StyleOptions {
   opacity?: number;
   lineWidth?: number;
 }
+/**
+ * @param serie
+ * @param measurement
+ * @param options
+ */
 export function addStyle(
   serie: Record<string, unknown>,
   measurement: Analysis,

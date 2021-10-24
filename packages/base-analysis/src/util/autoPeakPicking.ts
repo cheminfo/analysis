@@ -7,7 +7,12 @@ import { AutoPeakPickingOptions } from '../types/AutoPeakPickingOptions';
 
 import { getNormalizedMeasurement } from './getNormalizedMeasurement';
 
-/** Based on a x value we will return a peak*/
+/**
+ * Based on a x value we will return a peak.
+ *
+ * @param measurement
+ * @param options
+ */
 export function autoPeakPicking(
   measurement: MeasurementXY,
   options: AutoPeakPickingOptions = {},

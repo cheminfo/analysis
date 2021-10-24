@@ -1,5 +1,5 @@
 root: true
-extends: cheminfo-typescript
+extends: [cheminfo-typescript, cheminfo-typescript/jsdoc]
 parserOptions:
   project:
     - './packages/*/tsconfig.json'

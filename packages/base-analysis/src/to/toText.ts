@@ -9,6 +9,10 @@ interface ToTextOptions {
   fieldSeparator?: string;
 }
 
+/**
+ * @param analysis
+ * @param options
+ */
 export function toText(analysis: Analysis, options: ToTextOptions = {}) {
   // Export all the data to Csv
   if (!options.selector) {
@@ -20,6 +24,10 @@ export function toText(analysis: Analysis, options: ToTextOptions = {}) {
   return exportText(measurements ? [measurements] : [], options);
 }
 
+/**
+ * @param measurements
+ * @param options
+ */
 function exportText(measurements: MeasurementXY[], options: ToTextOptions) {
   const { endOfLine = '\n', fieldSeparator = ',' } = options;
   let result: string[] = new Array(measurements.length);

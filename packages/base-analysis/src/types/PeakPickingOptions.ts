@@ -3,15 +3,36 @@ import { OneLowerCase } from 'cheminfo-types';
 import { ShapeOptions } from './ShapeOptions';
 
 export interface PeakPickingOptions {
-  /** x variable label, by default 'x' */
+  /**
+   * X variable label.
+   *
+   * @default 'x'
+   */
   xVariable?: OneLowerCase;
-  /** y variable label, by default 'y' */
+  /**
+   * Y variable label.
+   *
+   * @default 'y'
+   */
   yVariable?: OneLowerCase;
-  /** should we look for the closest min / max, default true */
+  /**
+   * Whether to look for the closest min / max.
+   *
+   * @default true
+   */
   optimize?: boolean;
-  /** options of the peak shape fit */
+  /**
+   * Options of the peak shape fit.
+   */
   shapeOptions?: ShapeOptions;
-  /** are we looking for maxima or minima, default true */
+  /**
+   * Whether to  look for maxima or minima.
+   *
+   * @default true
+   */
   max?: boolean;
+  /**
+   * Expected width.
+   */
   expectedWidth?: number;
 }

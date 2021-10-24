@@ -8,7 +8,8 @@ import { COLORS } from './colors';
 
 interface JSGraphAxisOptions {
   /**
-   * Change the scale to logarihtmic
+   * Change the scale to logarithmic.
+   *
    * @default false
    */
   logScale?: boolean;
@@ -28,7 +29,10 @@ interface JSGraphOptions {
   yAxis?: JSGraphAxisOptions;
 }
 /**
- * Generate a jsgraph chart format from an array of Analysis
+ * Generate a jsgraph chart format from an array of Analysis.
+ *
+ * @param analyses
+ * @param options
  */
 export function getJSGraph(analyses: Analysis[], options: JSGraphOptions = {}) {
   const {

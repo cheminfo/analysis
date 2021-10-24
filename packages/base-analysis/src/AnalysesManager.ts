@@ -43,7 +43,7 @@ export class AnalysesManager {
   }
 
   /**
-   * Get an array of objects (key + count) of all the titles
+   * Get an array of objects (key + count) of all the titles.
    */
   public getDistinctTitles() {
     let values: Record<string, CounterType> = {};
@@ -56,7 +56,7 @@ export class AnalysesManager {
   }
 
   /**
-   * Get an array of objects (key + count) of all the units
+   * Get an array of objects (key + count) of all the units.
    */
   public getDistinctUnits() {
     let values: Record<string, CounterType> = {};
@@ -74,7 +74,7 @@ export class AnalysesManager {
   }
 
   /**
-   * Get an array of objects (key + count) of all the labels
+   * Get an array of objects (key + count) of all the labels.
    */
   public getDistinctLabels() {
     let values: Record<string, CounterType> = {};
@@ -89,7 +89,7 @@ export class AnalysesManager {
   }
 
   /**
-   * Get an array of objects (key + count) of all the dataTypes
+   * Get an array of objects (key + count) of all the dataTypes.
    */
   public getDistinctDataTypes() {
     let values: Record<string, CounterType> = {};
@@ -102,7 +102,7 @@ export class AnalysesManager {
   }
 
   /**
-   * Get an array of objects (key + count) of all the meta
+   * Get an array of objects (key + count) of all the meta.
    */
   public getDistinctMeta() {
     let values: Record<string, DifferentType> = {};
@@ -121,7 +121,9 @@ export class AnalysesManager {
   }
 
   /**
-   * Remove the analysis from the AnalysesManager for the specified id
+   * Remove the analysis from the AnalysesManager for the specified id.
+   *
+   * @param id
    */
   public removeAnalysis(id: string) {
     let index = this.getAnalysisIndex(id);
@@ -130,7 +132,9 @@ export class AnalysesManager {
   }
 
   /**
-   * Returns the index of the analysis in the analyses array
+   * Returns the index of the analysis in the analyses array.
+   *
+   * @param id
    */
   public getAnalysisIndex(id: string) {
     if (!id) return undefined;
@@ -142,7 +146,9 @@ export class AnalysesManager {
   }
 
   /**
-   * Checks if the ID of an analysis exists in the AnalysesManager
+   * Checks if the ID of an analysis exists in the AnalysesManager.
+   *
+   * @param id
    */
   public includes(id: string) {
     const index = this.getAnalysisIndex(id);

@@ -25,6 +25,10 @@ import Stat from 'ml-stat/array';
 
 import { MeasurementNormalizationOptions } from '../types/MeasurementNormalizationOptions';
 
+/**
+ * @param measurement
+ * @param options
+ */
 export function getNormalizedMeasurement(
   measurement: MeasurementXY,
   options: MeasurementNormalizationOptions = {},

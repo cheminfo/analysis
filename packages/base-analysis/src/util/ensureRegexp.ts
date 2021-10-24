@@ -1,5 +1,8 @@
 const testRegExp = /^\/((?:\\\/|[^/])+)\/([migyu]{0,5})?$/;
 
+/**
+ * @param string
+ */
 export function ensureRegexp(string: string | RegExp) {
   if (typeof string !== 'string') return string;
   const parts = testRegExp.exec(string);
@@ -14,6 +17,10 @@ export function ensureRegexp(string: string | RegExp) {
   }
 }
 
+/**
+ * @param string
+ * @param flags
+ */
 function stringToRegexp(string: string, flags = 'i') {
   return new RegExp(
     string.replace(/[[\]\\{}()+*?.$^|]/g, (match: string) => `\\${match}`),

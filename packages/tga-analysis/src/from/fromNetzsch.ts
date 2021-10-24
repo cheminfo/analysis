@@ -1,6 +1,9 @@
 import { Analysis, MeasurementXY } from 'base-analysis';
 import { ensureString } from 'ensure-string';
 
+/**
+ * @param arrayBuffer
+ */
 export function fromNetzsch(
   arrayBuffer: string | ArrayBuffer | Uint8Array,
 ): Analysis {

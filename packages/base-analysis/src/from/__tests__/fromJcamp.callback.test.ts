@@ -5,6 +5,9 @@ import type { MeasurementVariable } from 'cheminfo-types';
 
 import { fromJcamp } from '../fromJcamp';
 
+/**
+ * @param variables
+ */
 function irCallback(variables: Record<string, MeasurementVariable>) {
   if (variables.y.label === 'ABSORBANCE') {
     variables.t = {

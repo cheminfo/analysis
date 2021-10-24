@@ -5,9 +5,11 @@ import { Analysis } from '..';
 import { parsePerkinElmer } from './parsePerkinElmer';
 
 /**
- * Creates a new Chromatogram element based in a JCAMP string
- * @param {string} text - String containing the JCAMP data
- * @return {Analysis} - New class element with the given data
+ * Creates a new Chromatogram element based in a JCAMP string.
+ *
+ * @param text - String containing the JCAMP data.
+ * @param arrayBuffer
+ * @returns - New class element with the given data.
  */
 export function fromPerkinElmer(
   arrayBuffer: string | ArrayBuffer | Uint8Array,

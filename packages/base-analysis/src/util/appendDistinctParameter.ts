@@ -1,5 +1,10 @@
 import type { DifferentType } from '../types/types';
 
+/**
+ * @param values
+ * @param key
+ * @param value
+ */
 export function appendDistinctParameter(
   values: Record<string, DifferentType>,
   key: string,

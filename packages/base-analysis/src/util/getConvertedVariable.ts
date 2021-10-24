@@ -5,6 +5,10 @@ import { xIsMonotone } from 'ml-spectra-processing';
 
 import { convertUnit } from './convertUnit';
 
+/**
+ * @param variable
+ * @param newUnits
+ */
 export function getConvertedVariable(
   variable: MeasurementVariable,
   newUnits: string,

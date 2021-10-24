@@ -4,13 +4,14 @@ import { convert } from 'jcampconverter';
 import { Analysis } from '../Analysis';
 
 /**
- * Creates a new Analysis from a JCAMP string
- * @param {string} jcamp - String containing the JCAMP data
- * @param {object} [options={}]
- * @param {object} [options.id=Math.random()]
- * @param {string} [options.label=options.id] human redeable label
- * @param {string} [options.measurementCallback] a callback to apply on variables when creating measurement
- * @return {Analysis} - New class element with the given data
+ * Creates a new Analysis from a JCAMP string.
+ *
+ * @param jcamp - String containing the JCAMP data.
+ * @param [options={}]
+ * @param [options.id=Math.random()]
+ * @param [options.label=options.id] - Human redeable label.
+ * @param [options.measurementCallback] - A callback to apply on variables when creating measurement.
+ * @returns - New class element with the given data.
  */
 export function fromJcamp(jcamp: string | ArrayBuffer, options = {}): Analysis {
   let analysis = new Analysis(options);
@@ -18,6 +19,10 @@ export function fromJcamp(jcamp: string | ArrayBuffer, options = {}): Analysis {
   return analysis;
 }
 
+/**
+ * @param analysis
+ * @param jcamp
+ */
 function addJcamp(analysis: Analysis, jcamp: string | ArrayBuffer) {
   let converted = convert(jcamp, {
     keepRecordsRegExp: /.*/,

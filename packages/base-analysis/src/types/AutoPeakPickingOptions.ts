@@ -4,9 +4,9 @@ import { GSDOptions } from 'ml-gsd';
 import { MeasurementNormalizationOptions } from './MeasurementNormalizationOptions';
 
 export interface AutoPeakPickingOptions {
-  /** x variable label, by default 'x' */
+  /** X variable label, by default 'x' */
   xVariable?: OneLowerCase;
-  /** y variable label, by default 'y' */
+  /** Y variable label, by default 'y' */
   yVariable?: OneLowerCase;
   /** First X value for the peak picking (default: first X value */
   from?: number;

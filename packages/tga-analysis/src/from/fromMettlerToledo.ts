@@ -3,6 +3,9 @@ import { tgaParseMettlerToledo } from 'physical-chemistry-parser';
 
 import { Analysis } from '..';
 
+/**
+ * @param arrayBuffer
+ */
 export function fromMettlerToledo(
   arrayBuffer: string | ArrayBuffer | Uint8Array,
 ) {

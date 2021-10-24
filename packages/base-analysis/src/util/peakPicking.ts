@@ -5,14 +5,19 @@ import { xFindClosestIndex } from 'ml-spectra-processing';
 
 import { PeakPickingOptions } from '../types/PeakPickingOptions';
 
-/** Based on a x value we will return a peak
+/**
+ * Based on a x value we will return a peak
  * if you set optimize=True the returned positions will be
  * the closest actual datapoints to the fitted peak location.
- * the x/y of the fitted peak will be in xOptimized and yOptimized
+ * The x/y of the fitted peak will be in xOptimized and yOptimized.
+ *
+ * @param measurement
+ * @param target
+ * @param options
  */
 export function peakPicking(
   measurement: MeasurementXY,
-  /** value to search (on x axis) */
+  /** Value to search (on x axis) */
   target: number,
   options: PeakPickingOptions = {},
 ) {

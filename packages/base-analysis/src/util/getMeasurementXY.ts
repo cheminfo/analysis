@@ -13,7 +13,10 @@ import { getConvertedVariable } from './getConvertedVariable';
 /**
  * Retrieve the measurement with only X/Y data that match all the selectors
  * If more than one variable match the selector the 'x' or 'y' variable will be
- * taken
+ * taken.
+ *
+ * @param measurements
+ * @param selector
  */
 export function getMeasurementXY(
   measurements: Array<MeasurementXY> = [],
@@ -121,6 +124,10 @@ interface Selector {
   label?: string | RegExp;
   variableName?: OneLowerCase;
 }
+/**
+ * @param variables
+ * @param selector
+ */
 function getPossibleVariable(
   variables: MeasurementXYVariables,
   selector: Selector = {},

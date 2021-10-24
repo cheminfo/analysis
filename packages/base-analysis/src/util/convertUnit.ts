@@ -12,6 +12,11 @@ export function convertUnit(
   toUnit: string,
 ): number | undefined;
 
+/**
+ * @param array
+ * @param fromUnit
+ * @param toUnit
+ */
 export function convertUnit(
   array: any,
   fromUnit: string,
@@ -30,6 +35,9 @@ export function convertUnit(
   }
 }
 
+/**
+ * @param unit
+ */
 function normalize(unit: string) {
   unit = unit.replace(/°C/g, 'tempC');
   unit = unit.replace(/°F/g, 'tempF');

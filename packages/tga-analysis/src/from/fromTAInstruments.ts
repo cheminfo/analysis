@@ -4,6 +4,9 @@ import { Analysis } from '..';
 
 import { parseTAInstruments } from './parseTAInstruments';
 
+/**
+ * @param arrayBuffer
+ */
 export function fromTAInstruments(
   arrayBuffer: string | ArrayBuffer | Uint16Array,
 ) {

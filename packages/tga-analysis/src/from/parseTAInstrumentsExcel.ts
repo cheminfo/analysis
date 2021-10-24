@@ -1,5 +1,8 @@
 import { read, utils } from 'xlsx';
 
+/**
+ * @param blob
+ */
 export function parseTAInstrumentsExcel(blob: ArrayBuffer | Uint8Array) {
   const workbook = read(blob);
   let meta = parseMeta(workbook.Sheets.Details);
@@ -28,14 +31,23 @@ export function parseTAInstrumentsExcel(blob: ArrayBuffer | Uint8Array) {
   return data;
 }
 
+/**
+ * @param cell
+ */
 function valueElseUndefined(cell: any) {
   return cell ? cell.v : undefined;
 }
 
+/**
+ * @param cell
+ */
 function valueElseUndefinedFloat(cell: any) {
   return cell ? parseFloat(cell.v) : undefined;
 }
 
+/**
+ * @param sheet
+ */
 function parseDataSheet(sheet: any) {
   let range = utils.decode_range(sheet['!ref']);
   let data: any = [[], [], [], []]; // we assume that it is time, temperature, weight, weight %
@@ -55,6 +67,9 @@ function parseDataSheet(sheet: any) {
   return data;
 }
 
+/**
+ * @param detailsSheet
+ */
 function parseMeta(detailsSheet: any) {
   let meta: any = {};
   meta.fileName = valueElseUndefined(detailsSheet.B1);

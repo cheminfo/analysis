@@ -5,21 +5,26 @@ import { parseXY } from 'xy-parser';
 import { Analysis } from '../Analysis';
 
 /**
- * Convert strings into JCAMP and add extra information
- * @param {string} data - values to add to the file, usually a csv or tsv values
+ * Convert strings into JCAMP and add extra information.
+ *
+ * @param {string} data - Values to add to the file, usually a csv or tsv values.
  * @param {object} [options={}]
- * @param {string} [options.info={}] - metadata of the file
- * @param {string} [options.info.description = ''] - description of the file
- * @param {string} [options.info.dataType = ''] - type of data
- * @param {string} [options.info.xUnits = ''] - units for the x axis
- * @param {string} [options.info.yUnits = ''] - units for the y axis
- * @param {string} [options.info.xLabel = ''] - label for the x axis
- * @param {string} [options.info.yLabel = ''] - label for the y axis
- * @param {object} [options.meta = {}] - comments to add to the file
- * @param {object} [options.parser = {}] - 'xy-parser' options. arrayType = 'xyxy' is enforced
- * @return {string} JCAMP of the input
+ * @param {string} [options.info={}] - Metadata of the file.
+ * @param {string} [options.info.description = ''] - Description of the file.
+ * @param {string} [options.info.dataType = ''] - Type of data.
+ * @param {string} [options.info.xUnits = ''] - Units for the x axis.
+ * @param {string} [options.info.yUnits = ''] - Units for the y axis.
+ * @param {string} [options.info.xLabel = ''] - Label for the x axis.
+ * @param {string} [options.info.yLabel = ''] - Label for the y axis.
+ * @param {object} [options.meta = {}] - Comments to add to the file.
+ * @param {object} [options.parser = {}] - 'xy-parser' options. ArrayType = 'xyxy' is enforced.
+ * @returns {string} JCAMP of the input.
  */
 
+/**
+ * @param data
+ * @param options
+ */
 export function fromText(data: string | ArrayBuffer, options = {}): Analysis {
   let analysis = new Analysis(options);
 

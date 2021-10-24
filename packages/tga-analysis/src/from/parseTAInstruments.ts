@@ -1,5 +1,8 @@
 import { ensureString } from 'ensure-string';
 
+/**
+ * @param arrayBuffer
+ */
 export function parseTAInstruments(
   arrayBuffer: string | ArrayBuffer | Uint8Array,
 ) {
@@ -36,10 +39,17 @@ export function parseTAInstruments(
   return result;
 }
 
+/**
+ * @param string
+ * @param item
+ */
 function splitTrim(string: string, item = 1) {
   return string.split(/\t/)[item].replace(/^[ \t]*(.*?)[ \t]*$/, '$1');
 }
 
+/**
+ * @param lines
+ */
 function parseMeta(lines: string[]) {
   const meta: any = { comments: [], methodSteps: [] };
   for (let [i, line] of lines.entries()) {

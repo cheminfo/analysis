@@ -1,6 +1,6 @@
 export interface ShapeOptions {
-  /** kind of shape; lorentzian, gaussian and pseudovoigt are supported. */
+  /** Kind of shape; lorentzian, gaussian and pseudovoigt are supported. */
   kind?: string;
-  /** options depending the kind of shape */
+  /** Options depending the kind of shape */
   options?: any;
 }

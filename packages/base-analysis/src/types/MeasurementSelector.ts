@@ -15,11 +15,15 @@ export interface MeasurementSelector {
   yLabel?: string | RegExp;
   /** Allows to specify X and Y variables using a string like 'c vs d' */
   variables?: string;
-  /** Select a specific X variable by one letter name
+  /**
+   * Select a specific X variable by one letter name.
+   *
    * @default 'x'
    */
   xVariable?: OneLowerCase;
-  /** Select a specific Y variable by one letter name
+  /**
+   * Select a specific Y variable by one letter name.
+   *
    * @default 'y'
    */
   yVariable?: OneLowerCase;

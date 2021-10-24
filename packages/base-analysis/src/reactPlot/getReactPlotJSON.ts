@@ -4,6 +4,7 @@ import { Analysis } from '../Analysis';
 import { MeasurementSelector } from '../types/MeasurementSelector';
 
 type LineSeriesType = { type: 'line' } & LineSeriesProps;
+
 export type ReactPlotOptions = Omit<PlotObjectType, 'axes' | 'content'> & {
   enforceGrowing?: boolean;
   xAxis?: Partial<AxisProps>;
@@ -12,13 +13,19 @@ export type ReactPlotOptions = Omit<PlotObjectType, 'axes' | 'content'> & {
 };
 
 /**
- * Parses from {x[], y[]} to [{x,y}]
+ * Parses from {x[], y[]} to [{x,y}].
  */
 interface DataXY {
   x: number;
   y: number;
 }
+
 type ListNumber = number[] | Float64Array;
+
+/**
+ * @param x
+ * @param y
+ */
 function getData(x: ListNumber, y: ListNumber) {
   let data: DataXY[] = new Array(x.length);
   for (let i = 0; i < x.length; i++) {
@@ -28,7 +35,11 @@ function getData(x: ListNumber, y: ListNumber) {
 }
 
 /**
- * Generate a jsgraph chart format from an array of Analysis
+ * Generate a jsgraph chart format from an array of Analysis.
+ *
+ * @param analyses
+ * @param query
+ * @param options
  */
 export function getReactPlotJSON(
   analyses: Analysis[],

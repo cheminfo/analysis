@@ -7,6 +7,10 @@ interface GetJcampOptions {
   info?: Record<string, string>;
   meta?: Record<string, string>;
 }
+/**
+ * @param analysis
+ * @param options
+ */
 export function toJcamps(analysis: Analysis, options: GetJcampOptions = {}) {
   let jcamps = [];
   for (let measurement of analysis.measurements) {
@@ -15,6 +19,10 @@ export function toJcamps(analysis: Analysis, options: GetJcampOptions = {}) {
   return jcamps;
 }
 
+/**
+ * @param measurement
+ * @param options
+ */
 function getJcamp(measurement: MeasurementXY, options: GetJcampOptions) {
   const { info = {}, meta = {} } = options;
 

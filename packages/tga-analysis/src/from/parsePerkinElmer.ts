@@ -1,5 +1,8 @@
 import { ensureString } from 'ensure-string';
 
+/**
+ * @param arrayBuffer
+ */
 export function parsePerkinElmer(
   arrayBuffer: string | ArrayBuffer | Uint8Array,
 ) {
@@ -41,6 +44,9 @@ export function parsePerkinElmer(
   }
   return result;
 }
+/**
+ * @param string
+ */
 function trim(string: string) {
   return string.replace(/^[ \t]*(.*?)[ \t]*$/, '$1');
 }
