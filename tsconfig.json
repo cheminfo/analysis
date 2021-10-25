@@ -5,10 +5,16 @@
       "path": "./packages/base-analysis/tsconfig.json"
     },
     {
+      "path": "./packages/base-analysis/tsconfig.esm.json"
+    },
+    {
       "path": "./packages/base-analysis/tsconfig.test.json"
     },
     {
       "path": "./packages/tga-analysis/tsconfig.json"
+    },
+    {
+      "path": "./packages/tga-analysis/tsconfig.esm.json"
     },
     {
       "path": "./packages/tga-analysis/tsconfig.test.json"
