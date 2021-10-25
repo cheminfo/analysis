@@ -6,37 +6,30 @@
   "module": "./lib-esm/index.js",
   "types": "./lib/index.d.ts",
   "keywords": [],
-  "author": "Luc Patiny",
   "license": "MIT",
+  "scripts": {},
   "files": [
     "src",
     "lib",
     "lib-esm"
   ],
-  "scripts": {
-    "build": "cheminfo-build  --entry lib-esm/index.js --root TGASpectrum",
-    "test": "npm run test-coverage && npm run eslint && npm run prettier && npm run check-types",
-    "test-coverage": "npm run test-only -- --coverage",
-    "test-only": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cheminfo/analysis.git"
-  },
-  "bugs": {
-    "url": "https://github.com/cheminfo/analysis/issues"
-  },
-  "homepage": "https://github.com/cheminfo/analysis#readme",
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node"
-  },
   "dependencies": {
     "base-analysis": "^0.0.0",
     "ensure-string": "^1.1.0",
     "papaparse": "^5.3.1",
     "physical-chemistry-parser": "^3.0.1",
     "xlsx": "^0.17.2"
+  },
+  "devDependencies": {
+    "@types/papaparse": "^5.2.6"
+  },
+  "homepage": "https://github.com/cheminfo/analysis#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheminfo/analysis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cheminfo/analysis/issues"
   },
   "info": {
     "logo": "https://raw.githubusercontent.com/cheminfo/font/master/src/tga/assignment.svg",
@@ -78,8 +71,5 @@
         }
       ]
     }
-  },
-  "devDependencies": {
-    "@types/papaparse": "^5.2.6"
   }
 }

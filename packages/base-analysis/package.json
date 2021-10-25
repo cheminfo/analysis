@@ -5,27 +5,14 @@
   "main": "./lib/index.js",
   "module": "./lib-esm/index.js",
   "types": "./lib/index.d.ts",
+  "keywords": [],
+  "license": "MIT",
+  "scripts": {},
   "files": [
     "lib",
     "lib-esm",
     "src"
   ],
-  "scripts": {
-    "build": "cheminfo-build -r BaseAnalysis",
-    "test": "npm run test-coverage && npm run eslint && npm run check-types",
-    "test-coverage": "npm run test-only -- --coverage",
-    "test-only": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cheminfo/analysis.git"
-  },
-  "keywords": [],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/cheminfo/analysis/issues"
-  },
-  "homepage": "https://github.com/cheminfo/analysis#readme",
   "dependencies": {
     "baselines": "^1.1.0",
     "cheminfo-types": "^0.6.0",
@@ -49,5 +36,13 @@
   },
   "devDependencies": {
     "@types/js-quantities": "^1.6.2"
+  },
+  "homepage": "https://github.com/cheminfo/analysis#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheminfo/analysis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cheminfo/analysis/issues"
   }
 }
