@@ -7,6 +7,31 @@
 
 - [base-analysis](./packages/base-analysis)
 - [tga-analysis](./packages/tga-analysis)
+<!-- END-Packages (do not remove) -->
+
+## Development
+
+### Add a new package
+
+Let's say you want to add a new package named `test-analysis`.
+
+1. Run the create-package script
+
+   ```console
+   node scripts/create-package.mjs test-analysis
+   ```
+
+2. Add a description to your package:
+   - In `packages/test-analysis/package.json`
+   - In `packages/test-analysis/README.md`
+3. Implement the package. Do not forget to update the usage example in `packages/test-analysis/README.md`.
+
+### Add a local dependency to a package
+
+Example: `test-analysis` needs to depend on `other-analysis`.
+
+- If `other-analysis` is already published in the npm registry: `npm i -w test-analysis other-analysis`.
+- If `other-analysis` is not published yet, add the dependency manually, as `"other-analysis": "^0.0.0"`.
 
 ## License
 
