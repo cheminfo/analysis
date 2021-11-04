@@ -1,0 +1,65 @@
+{
+  "name": "iv-analysis",
+  "version": "0.15.0",
+  "description": "Read different formats and unify the format",
+  "main": "./lib/index.js",
+  "module": "./lib-esm/index.js",
+  "types": "./lib/index.d.ts",
+  "keywords": [],
+  "author": "Luc Patiny",
+  "contributors": [
+    "Miguel Angel Asencio Hurtado"
+  ],
+  "license": "MIT",
+  "files": [
+    "src",
+    "lib",
+    "lib-esm"
+  ],
+  "scripts": {
+    "build": "npm run tsc && cheminfo-build -r IVSpectrum",
+    "build-doc": "cheminfo doc",
+    "check-types": "tsc --noEmit",
+    "clean": "rimraf lib lib-esm",
+    "eslint": "eslint src --ext ts --cache",
+    "eslint-fix": "npm run eslint -- --fix",
+    "prepublishOnly": "npm run tsc",
+    "test": "npm run test-coverage && npm run eslint && npm run check-types",
+    "test-coverage": "npm run test-only -- --coverage",
+    "test-only": "jest",
+    "tsc": "npm run clean && npm run tsc-cjs && npm run tsc-esm",
+    "tsc-cjs": "tsc --project tsconfig.cjs.json",
+    "tsc-esm": "tsc --project tsconfig.esm.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheminfo/iv-analysis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cheminfo/iv-analysis/issues"
+  },
+  "homepage": "https://github.com/cheminfo/iv-analysis#readme",
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all"
+  },
+  "dependencies": {
+    "base-analysis": "^0.0.0",
+    "cheminfo-types": "^0.6.0",
+    "ml-regression-simple-linear": "^2.0.3",
+    "ml-savitzky-golay": "^5.0.0",
+    "ndim-parser": "^0.4.0"
+  },
+  "devDependencies": {
+    "@types/d3-scale": "^4.0.1",
+    "@types/react": "^17.0.24",
+    "react-plot": "^0.10.1"
+  }
+}
