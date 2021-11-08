@@ -1,7 +1,14 @@
-import type { MeasurementXY } from 'base-analysis/lib/types';
+import type { MeasurementXY } from 'cheminfo-types';
 
 import { ThresholdVoltageOptions, ThresholdVoltageResult } from './types';
 
+/**
+ * Calculates the threshold voltage of a measurement.
+ *
+ * @param spectrum - The spectrum to search for the threshold voltage.
+ * @param options - The options for the threshold voltage calculation.
+ * @returns - Threshold voltage result.
+ */
 export function thresholdVoltage(
   spectrum: MeasurementXY,
   options: ThresholdVoltageOptions = {},

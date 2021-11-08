@@ -41,7 +41,7 @@ describe('Capacitance integral on high voltage', () => {
         yLabel: 'C_dens',
         yUnits: 'F/mm',
       });
-      expect(spectrum?.meta?.capacitanceIntegral).not.toBeUndefined();
+      expect(spectrum?.meta?.capacitanceIntegral).toBeDefined();
       const res = JSON.parse(spectrum?.meta?.capacitanceIntegral ?? '');
       expect(res?.integral).toBeCloseTo(2.1483e-11, 10);
     }
@@ -81,7 +81,7 @@ describe('Capacitance integral on MOSFET', () => {
         yLabel: 'C_dens',
         yUnits: 'F/mm',
       });
-      expect(spectrum?.meta?.capacitanceIntegral).not.toBeUndefined();
+      expect(spectrum?.meta?.capacitanceIntegral).toBeDefined();
       const res = JSON.parse(spectrum?.meta?.capacitanceIntegral ?? '');
       expect(res?.integral).toBeCloseTo(1.3615e-8, 8);
     }

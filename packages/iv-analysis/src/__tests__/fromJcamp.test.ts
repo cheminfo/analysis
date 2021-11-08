@@ -9,7 +9,7 @@ test('fromJcamp', () => {
     'utf8',
   );
   const analysis = fromJcamp(jcamp);
-  const spectrum = analysis.spectra[0];
+  const spectrum = analysis.measurements[0];
   expect(spectrum.variables.x.data).toHaveLength(120);
   expect(spectrum.variables.y.data).toHaveLength(120);
   expect(spectrum.meta?.workingTemperature).toBe(298);

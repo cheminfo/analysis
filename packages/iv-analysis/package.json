@@ -55,7 +55,7 @@
     "cheminfo-types": "^0.6.0",
     "ml-regression-simple-linear": "^2.0.3",
     "ml-savitzky-golay": "^5.0.0",
-    "ndim-parser": "^0.4.0"
+    "ndim-parser": "^0.5.1"
   },
   "devDependencies": {
     "@types/d3-scale": "^4.0.1",

@@ -1,9 +1,16 @@
 import { Analysis } from 'base-analysis';
+import {
+  MeasurementVariable,
+  MeasurementXYVariables,
+  OneLowerCase,
+} from 'cheminfo-types';
 import { ndParse } from 'ndim-parser';
 
 import { appendUnits } from '../b1505/utils';
 
-function parseMeta(meta: Record<string, string>): Record<string, string> {
+function parseMeta(
+  meta: Record<string, string> | undefined,
+): Record<string, string> {
   if (!meta) return {};
 
   let ans: Record<string, string> = {};
@@ -23,36 +30,44 @@ function keyMap(keys: string[]) {
     if (key === 'Id') return 'y';
     if (key === 'Vg') return 'g';
     if (key === 'Vs') return 's';
-    return String.fromCharCode(65 + index);
+    return String.fromCharCode(97 + index) as OneLowerCase;
   });
 }
 
+/**
+ * Parse a file from 2636B instrument.
+ *
+ * @param text - Text from the file.
+ * @param name - Name of the experiment.
+ * @returns - Analysis object.
+ */
 export function from2636b(text: string, name?: string) {
-  const { data, meta } = ndParse(text, { keyMap });
+  const { variables, meta } = ndParse(text, { keyMap });
 
-  const min = Object.values(data).reduce(
+  const min = Object.values(variables).reduce(
     (prev, curr) => Math.min(curr.data.length, prev),
     Infinity,
   );
 
-  for (const key in data) {
-    if (Object.prototype.hasOwnProperty.call(data, key)) {
-      data[key].data.length = min;
+  for (const key in variables) {
+    if (Object.prototype.hasOwnProperty.call(variables, key)) {
+      (
+        variables[key as keyof MeasurementXYVariables] as MeasurementVariable<
+          number[]
+        >
+      ).data.length = min;
     }
   }
 
-  let analysis = new Analysis();
-  const title =
+  const label =
     name ||
-    (data.g
-      ? `Vg = ${data.g.data[0]}V`
-      : data.s
-      ? `Vs = ${data.s.data[0]}V`
+    (variables.g
+      ? `Vg = ${variables.g.data[0]}V`
+      : variables.s
+      ? `Vs = ${variables.s.data[0]}V`
       : '2636b');
-  analysis.pushMeasurement(appendUnits(data), {
-    title,
-    meta: parseMeta(meta),
-  });
+  let analysis = new Analysis({ label });
+  analysis.pushMeasurement(appendUnits(variables), { meta: parseMeta(meta) });
 
   return analysis;
 }

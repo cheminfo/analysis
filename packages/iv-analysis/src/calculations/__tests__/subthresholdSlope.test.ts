@@ -37,7 +37,7 @@ describe('ss transfer', () => {
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      expect(spectrum?.meta?.subthresholdSlope).not.toBeUndefined();
+      expect(spectrum?.meta?.subthresholdSlope).toBeDefined();
       const res = JSON.parse(spectrum?.meta?.subthresholdSlope ?? '');
       expect(res?.medianSlope).toBeCloseTo(0.476, 2);
     }

@@ -1,8 +1,15 @@
-import { MeasurementXY } from 'base-analysis/lib/types';
+import { MeasurementXY } from 'cheminfo-types';
 import fit from 'ml-savitzky-golay';
 
 import { MedianSlopeResult, SlopeOptions } from './types';
 
+/**
+ * Calculates the slope of the subthreshold current.
+ *
+ * @param spectrum - The spectrum to calculate the subthreshold slope.
+ * @param options - Options for the calculation.
+ * @returns - The subthreshold slope.
+ */
 export function subthresholdSlope(
   spectrum: MeasurementXY,
   options: SlopeOptions = {},

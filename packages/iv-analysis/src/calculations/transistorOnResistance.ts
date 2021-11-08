@@ -1,9 +1,16 @@
-import { MeasurementXY } from 'base-analysis/lib/types';
+import { MeasurementXY } from 'cheminfo-types';
 import SimpleLinearRegression from 'ml-regression-simple-linear';
 import fit from 'ml-savitzky-golay';
 
 import { SlopeOptions, SlopeResult } from './types';
 
+/**
+ * Calculates the transistor resistance.
+ *
+ * @param spectrum - The spectrum to calculate the transistor resistance.
+ * @param options - Options for the calculation.
+ * @returns - The calculated resistance.
+ */
 export function transistorOnResistance(
   spectrum: MeasurementXY,
   options: SlopeOptions = {},

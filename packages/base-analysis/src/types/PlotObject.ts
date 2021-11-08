@@ -1,4 +1,4 @@
-import { json } from './types';
+import { Json } from './types';
 
 export interface PlotObject {
   series: Array<{
@@ -9,5 +9,5 @@ export interface PlotObject {
   }>;
   axes: Array<{ position: 'bottom' | 'left'; label: string }>;
   dimensions: { width: number; heigth: number };
-  meta: json[];
+  meta: Json[];
 }

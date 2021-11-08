@@ -1,7 +1,14 @@
-import type { MeasurementXY } from 'base-analysis/lib/types';
+import type { MeasurementXY } from 'cheminfo-types';
 
 import { IntegralOptions, IntegralResult } from './types';
 
+/**
+ * Calculates the capacitance integral of a given XY measurement.
+ *
+ * @param spectrum - Measurement to integrate.
+ * @param options - Options for integration.
+ * @returns - Integral result.
+ */
 export function capacitanceIntegral(
   spectrum: MeasurementXY,
   options: IntegralOptions = {},

@@ -1,9 +1,16 @@
 import { Analysis } from 'base-analysis';
+import type {
+  MeasurementVariable,
+  MeasurementXYVariables,
+  OneLowerCase,
+} from 'cheminfo-types';
 import { ndParse } from 'ndim-parser';
 
 import { appendUnits } from './b1505/utils';
 
-function parseMeta(meta: Record<string, string>): Record<string, string> {
+function parseMeta(
+  meta: Record<string, string> | undefined,
+): Record<string, string> {
   if (!meta) return {};
 
   let ans: Record<string, string> = {};
@@ -18,31 +25,45 @@ function parseMeta(meta: Record<string, string>): Record<string, string> {
 }
 
 function keyMap(keys: string[]) {
-  return keys.map((key, index) => {
+  let index = 0;
+  return keys.map((key) => {
     if (key === 'Vd') return 'x';
     if (key === 'Id') return 'y';
     if (key === 'Vg') return 'g';
-    return String.fromCharCode(65 + index);
+    if ([6, 24].includes(index)) index++;
+    if (index === 23) index += 2;
+    return String.fromCharCode(97 + index++) as OneLowerCase;
   });
 }
 
+/**
+ * Parse a multi-channel capacitance file.
+ *
+ * @param text - The text to parse.
+ * @returns - Analysis with the parsed data.
+ */
 export function fromMulChannelCap(text: string) {
-  const { data, meta } = ndParse(text, { keyMap });
+  const { variables, meta } = ndParse(text, { keyMap });
 
-  const min = Object.values(data).reduce(
+  const min = Object.values(variables).reduce(
     (prev, curr) => Math.min(curr.data.length, prev),
     Infinity,
   );
 
-  for (const key in data) {
-    if (Object.prototype.hasOwnProperty.call(data, key)) {
-      data[key].data.length = min;
+  for (const key in variables) {
+    if (Object.prototype.hasOwnProperty.call(variables, key)) {
+      (
+        variables[key as keyof MeasurementXYVariables] as MeasurementVariable<
+          number[]
+        >
+      ).data.length = min;
     }
   }
 
-  let analysis = new Analysis();
-  analysis.pushMeasurement(appendUnits(data), {
-    title: `Vg = ${data.g.data[0]}V`,
+  let analysis = new Analysis({
+    label: variables.g ? `Vg = ${variables.g.data[0]}V` : undefined,
+  });
+  analysis.pushMeasurement(appendUnits(variables), {
     meta: parseMeta(meta),
   });
 
