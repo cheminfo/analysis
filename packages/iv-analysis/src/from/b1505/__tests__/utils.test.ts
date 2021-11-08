@@ -26,13 +26,12 @@ function testFile(
   );
   const analysis = func(csv)[0];
   const { xLabel, yLabel, units } = getLabels(analysis);
-  const spectrum = analysis.getMeasurementXY({ xLabel, yLabel });
 
-  expect(spectrum?.title).toBe(title);
+  expect(analysis?.label).toBe(title);
   expect(xLabel).toBe(x);
   expect(yLabel).toBe(y);
-  expect(units[xLabel]).not.toBeUndefined();
-  expect(units[yLabel]).not.toBeUndefined();
+  expect(units[xLabel]).toBeDefined();
+  expect(units[yLabel]).toBeDefined();
 }
 
 describe('Breakdown', () => {

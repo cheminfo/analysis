@@ -37,7 +37,7 @@ describe('Vth breakdown', () => {
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      expect(spectrum?.meta?.thresholdVoltage).not.toBeUndefined();
+      expect(spectrum?.meta?.thresholdVoltage).toBeDefined();
       const res = JSON.parse(spectrum?.meta?.thresholdVoltage ?? '');
       expect(res?.value).toBeCloseTo(555, 2);
     }
@@ -77,7 +77,7 @@ describe('Vth transfer', () => {
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      expect(spectrum?.meta?.thresholdVoltage).not.toBeUndefined();
+      expect(spectrum?.meta?.thresholdVoltage).toBeDefined();
       const res = JSON.parse(spectrum?.meta?.thresholdVoltage ?? '');
       expect(res?.value).toBeCloseTo(-1.2, 2);
     }

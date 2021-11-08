@@ -40,7 +40,7 @@ describe('Ron transistor', () => {
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      expect(spectrum?.meta?.resistanceOn).not.toBeUndefined();
+      expect(spectrum?.meta?.resistanceOn).toBeDefined();
       const res = JSON.parse(spectrum?.meta?.resistanceOn ?? '');
       expect(res?.slope).toBeCloseTo(20.49, 2);
       expect(res?.score.r2).toBeCloseTo(0.977, 2);
@@ -83,7 +83,7 @@ describe('Ron diode', () => {
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      expect(spectrum?.meta?.resistanceOn).not.toBeUndefined();
+      expect(spectrum?.meta?.resistanceOn).toBeDefined();
       const res = JSON.parse(spectrum?.meta?.resistanceOn ?? '');
       expect(res?.slope).toBeCloseTo(20.819, 2);
       expect(res?.score.r2).toBeCloseTo(0.992, 2);

@@ -17,7 +17,13 @@ const metaVarHeaders = [
   'Function.User',
 ];
 
-export function metaUnits(meta: Record<string, string>) {
+/**
+ * Add the units from the original metadata file.
+ *
+ * @param meta - Metadata from the analysis.
+ * @returns - Metadata with the units from headers.
+ */
+export function metaUnits(meta: Record<string, string> = {}) {
   let knownUnits: Record<string, string> = {};
   for (const key of metaVarHeaders) {
     const keyName = `${key}.${VarHeadersKeys.name}`;
@@ -56,7 +62,9 @@ export default class BaseB1505 {
     this.calculations.push([name, calculation]);
   }
 
-  private parseMeta(meta: Record<string, string>): Record<string, string> {
+  private parseMeta(
+    meta: Record<string, string> | undefined,
+  ): Record<string, string> {
     if (!meta) return {};
 
     let ans: Record<string, string> = {};
@@ -80,18 +88,18 @@ export default class BaseB1505 {
     const series = appendedParser(text);
     let analyses = [];
 
-    for (const { data, meta } of series) {
+    for (const { variables, meta } of series) {
       const parsedMeta = this.parseMeta(meta);
       const knownUnits = metaUnits(meta);
 
-      const title =
+      const label =
         parsedMeta.Remarks ||
         parsedMeta['TestRecord.Remarks'] ||
         parsedMeta['Device ID'] ||
         parsedMeta['Setup title'] ||
         parsedMeta.SetupTitle;
-      let analysis = new Analysis();
-      analysis.pushMeasurement(appendUnits(data, title, knownUnits), {
+      let analysis = new Analysis({ label });
+      analysis.pushMeasurement(appendUnits(variables, knownUnits), {
         meta: parsedMeta,
       });
 

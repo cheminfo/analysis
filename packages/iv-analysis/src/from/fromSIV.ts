@@ -60,7 +60,7 @@ export function fromSIV(content: string) {
           data: data.y,
         },
       },
-      { dataType: 'IV spectrum', title: '', meta },
+      { dataType: 'IV spectrum', meta },
     );
   }
   return analysis;

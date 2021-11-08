@@ -1,4 +1,4 @@
-import { MeasurementXY } from 'base-analysis/lib/types';
+import { MeasurementXY } from 'cheminfo-types';
 import SimpleLinearRegression from 'ml-regression-simple-linear';
 import fit from 'ml-savitzky-golay';
 
@@ -9,6 +9,13 @@ interface DiodeResult extends SlopeResult {
   onVoltage?: number;
 }
 
+/**
+ * Calculates the diode on resistance.
+ *
+ * @param spectrum - The spectrum to calculate the diode on resistance.
+ * @param options - Options to calculate the diode on resistance.
+ * @returns - The diode on resistance.
+ */
 export function diodeOnResistance(
   spectrum: MeasurementXY,
   options: SlopeOptions = {},

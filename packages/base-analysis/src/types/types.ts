@@ -1,4 +1,4 @@
-export type json = Record<string, string>;
+export type Json = Record<string, string>;
 
 export interface CounterType {
   key: string;

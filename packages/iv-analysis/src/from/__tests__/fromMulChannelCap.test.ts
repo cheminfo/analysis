@@ -12,10 +12,10 @@ test('fromMulChannelCap', () => {
   let spectrum = analysis.getMeasurementXY({ xLabel: 'Vd', yLabel: 'Id' });
 
   expect(spectrum?.variables.x.data).toHaveLength(6);
-  expect(spectrum?.variables.x.label).toStrictEqual('Vd [V]');
+  expect(spectrum?.variables.x.label).toBe('Vd');
 
   expect(spectrum?.variables.y.data).toHaveLength(6);
-  expect(spectrum?.variables.y.label).toStrictEqual('Id [A]');
+  expect(spectrum?.variables.y.label).toBe('Id');
 
-  expect(spectrum?.title).toBe('Vg = 7V');
+  expect(analysis?.label).toBe('Vg = 7V');
 });

@@ -26,20 +26,16 @@ function testFile(
   let analyses = func(csv);
   for (const analysis of analyses) {
     const { 'default.xLabel': xLabel, 'default.yLabel': yLabel } =
-      analysis.spectra[0]?.meta || {};
+      analysis.measurements[0]?.meta || {};
     let spectrum = analysis.getMeasurementXY({ xLabel, yLabel });
 
-    expect(spectrum?.title).toBe(title);
+    expect(analysis?.label).toBe(title);
 
     expect(spectrum?.variables.x.data).toHaveLength(length);
-    expect(spectrum?.variables.x.label).toStrictEqual(
-      `${xLabel} [${spectrum?.variables.x.units || ''}]`,
-    );
+    expect(spectrum?.variables.x.label).toStrictEqual(xLabel);
 
     expect(spectrum?.variables.y.data).toHaveLength(length);
-    expect(spectrum?.variables.y.label).toStrictEqual(
-      `${yLabel} [${spectrum?.variables.y.units || ''}]`,
-    );
+    expect(spectrum?.variables.y.label).toStrictEqual(yLabel);
   }
 }
 
@@ -50,8 +46,8 @@ describe('Automatic labels selection', () => {
       'latin1',
     );
     const analyses = fromB1505(csv);
-    expect(analyses[0].spectra[0].variables.x.label).toBe('Vd [V]');
-    expect(analyses[0].spectra[0].variables.D.label).toBe('Id_dens [A/mm]');
+    expect(analyses[0].measurements[0].variables.x.label).toBe('Vd');
+    expect(analyses[0].measurements[0].variables.d?.label).toBe('Id_dens');
   });
 
   it('Capacitance', () => {
@@ -63,8 +59,8 @@ describe('Automatic labels selection', () => {
       'latin1',
     );
     const analyses = fromB1505(csv);
-    expect(analyses[0].spectra[0].variables.x.label).toBe('Vd [V]');
-    expect(analyses[0].spectra[0].variables.y.label).toBe('C_dens [F/mm]');
+    expect(analyses[0].measurements[0].variables.x.label).toBe('Vd');
+    expect(analyses[0].measurements[0].variables.y.label).toBe('C_dens');
   });
 });
 

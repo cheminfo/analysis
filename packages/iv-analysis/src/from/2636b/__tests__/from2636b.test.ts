@@ -12,14 +12,10 @@ function testFile(name: string, length: number) {
   let spectrum = analysis.getMeasurementXY({ xLabel: 'Vd', yLabel: 'Id' });
 
   expect(spectrum?.variables.x.data).toHaveLength(length);
-  expect(spectrum?.variables.x.label).toStrictEqual(
-    `Vd [${spectrum?.variables.x.units || ''}]`,
-  );
+  expect(spectrum?.variables.x.label).toBe('Vd');
 
   expect(spectrum?.variables.y.data).toHaveLength(length);
-  expect(spectrum?.variables.y.label).toStrictEqual(
-    `Id [${spectrum?.variables.y.units || ''}]`,
-  );
+  expect(spectrum?.variables.y.label).toBe('Id');
 }
 
 test('IV', () => {

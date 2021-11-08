@@ -10,6 +10,12 @@ interface Options {
   units: Record<string, string>;
 }
 
+/**
+ * Unifies the densities of the variables.
+ *
+ * @param label - The label of the variable.
+ * @returns - Replaced label with boolean if it had a density word.
+ */
 export function getDensities(label: string): [string, boolean] {
   const isDens = /dens/.exec(label);
   if (isDens) {
@@ -37,9 +43,15 @@ const stdUnits: Record<string, string> = {
 };
 const generatedVars = ['Ron', 'gm'];
 
+/**
+ * Append the units to the measurement.
+ *
+ * @param data - The data to be check the units.
+ * @param knownUnits - Dictionary of known units.
+ * @returns - Data with the units replaced.
+ */
 export function appendUnits(
   data: MeasurementXYVariables,
-  title: string,
   knownUnits: Record<string, string> = {},
 ): MeasurementXYVariables {
   let key: keyof MeasurementXYVariables;
@@ -78,6 +90,12 @@ export function appendUnits(
   return data;
 }
 
+/**
+ * Query the analysis for the variables.
+ *
+ * @param analysis - The analysis to query all labels.
+ * @returns - Main labels, scale and units.
+ */
 export function getLabels(analysis: Analysis): Options {
   const { meta = {}, variables } = analysis.measurements[0];
   const [xLabel] = getDensities(
