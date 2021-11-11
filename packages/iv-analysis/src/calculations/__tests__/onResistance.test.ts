@@ -20,7 +20,7 @@ describe('Ron transistor', () => {
       });
       if (measurement) {
         const res = transistorOnResistance(measurement);
-        expect(res?.slope).toBeCloseTo(20.49, 2);
+        expect(res?.slope.value).toBeCloseTo(20.49, 2);
         expect(res?.score.r2).toBeCloseTo(0.977, 2);
       } else {
         expect(measurement).not.toBeNull();
@@ -42,7 +42,7 @@ describe('Ron transistor', () => {
       });
       expect(measurement?.meta?.resistanceOn).toBeDefined();
       const res = JSON.parse(measurement?.meta?.resistanceOn ?? '');
-      expect(res?.slope).toBeCloseTo(20.49, 2);
+      expect(res?.slope.value).toBeCloseTo(20.49, 2);
       expect(res?.score.r2).toBeCloseTo(0.977, 2);
     }
   });
@@ -63,7 +63,7 @@ describe('Ron diode', () => {
       });
       if (measurement) {
         const res = diodeOnResistance(measurement);
-        expect(res?.slope).toBeCloseTo(20.819, 2);
+        expect(res?.slope.value).toBeCloseTo(20.819, 2);
         expect(res?.score.r2).toBeCloseTo(0.992, 2);
         expect(res?.forwardVoltage).toBeCloseTo(3.05, 2);
         expect(res?.onVoltage).toBeCloseTo(0, 2);
@@ -85,7 +85,7 @@ describe('Ron diode', () => {
       });
       expect(measurement?.meta?.resistanceOn).toBeDefined();
       const res = JSON.parse(measurement?.meta?.resistanceOn ?? '');
-      expect(res?.slope).toBeCloseTo(20.819, 2);
+      expect(res?.slope.value).toBeCloseTo(20.819, 2);
       expect(res?.score.r2).toBeCloseTo(0.992, 2);
       expect(res?.forwardVoltage).toBeCloseTo(3.05, 2);
       expect(res?.onVoltage).toBeCloseTo(0, 2);
