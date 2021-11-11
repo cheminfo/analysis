@@ -18,6 +18,15 @@
     },
     {
       "path": "./packages/tga-analysis/tsconfig.test.json"
+    },
+    {
+      "path": "./packages/iv-analysis/tsconfig.json"
+    },
+    {
+      "path": "./packages/iv-analysis/tsconfig.esm.json"
+    },
+    {
+      "path": "./packages/iv-analysis/tsconfig.test.json"
     }
   ]
 }
