@@ -1,6 +1,6 @@
 {
   "name": "iv-analysis",
-  "version": "0.15.0",
+  "version": "0.0.0",
   "description": "Read different formats and unify the format",
   "main": "./lib/index.js",
   "module": "./lib-esm/index.js",
@@ -16,21 +16,7 @@
     "lib",
     "lib-esm"
   ],
-  "scripts": {
-    "build": "npm run tsc && cheminfo-build -r IVSpectrum",
-    "build-doc": "cheminfo doc",
-    "check-types": "tsc --noEmit",
-    "clean": "rimraf lib lib-esm",
-    "eslint": "eslint src --ext ts --cache",
-    "eslint-fix": "npm run eslint -- --fix",
-    "prepublishOnly": "npm run tsc",
-    "test": "npm run test-coverage && npm run eslint && npm run check-types",
-    "test-coverage": "npm run test-only -- --coverage",
-    "test-only": "jest",
-    "tsc": "npm run clean && npm run tsc-cjs && npm run tsc-esm",
-    "tsc-cjs": "tsc --project tsconfig.cjs.json",
-    "tsc-esm": "tsc --project tsconfig.esm.json"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cheminfo/iv-analysis.git"
@@ -39,17 +25,6 @@
     "url": "https://github.com/cheminfo/iv-analysis/issues"
   },
   "homepage": "https://github.com/cheminfo/iv-analysis#readme",
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node"
-  },
-  "prettier": {
-    "arrowParens": "always",
-    "semi": true,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "all"
-  },
   "dependencies": {
     "base-analysis": "^0.0.0",
     "cheminfo-types": "^0.6.0",
