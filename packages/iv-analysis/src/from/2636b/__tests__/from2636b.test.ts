@@ -9,13 +9,13 @@ function testFile(name: string, length: number) {
     'latin1',
   );
   const analysis = from2636b(csv, 'test');
-  let spectrum = analysis.getMeasurementXY({ xLabel: 'Vd', yLabel: 'Id' });
+  let measurement = analysis.getMeasurementXY({ xLabel: 'Vd', yLabel: 'Id' });
 
-  expect(spectrum?.variables.x.data).toHaveLength(length);
-  expect(spectrum?.variables.x.label).toBe('Vd');
+  expect(measurement?.variables.x.data).toHaveLength(length);
+  expect(measurement?.variables.x.label).toBe('Vd');
 
-  expect(spectrum?.variables.y.data).toHaveLength(length);
-  expect(spectrum?.variables.y.label).toBe('Id');
+  expect(measurement?.variables.y.data).toHaveLength(length);
+  expect(measurement?.variables.y.label).toBe('Id');
 }
 
 test('IV', () => {

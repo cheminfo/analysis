@@ -1,7 +1,8 @@
+import { Value } from 'cheminfo-types';
 import type { RegressionScore } from 'ml-regression-base';
 
 export interface SlopeResult {
-  slope: number;
+  slope: Value;
   score: RegressionScore;
   toIndex: number;
   fromIndex: number;
@@ -17,13 +18,12 @@ export interface ThresholdVoltageOptions {
   threshold?: number;
 }
 
-export interface ThresholdVoltageResult {
+export interface ThresholdVoltageResult extends Value {
   index: number;
-  value: number;
 }
 
 export interface MedianSlopeResult {
-  medianSlope: number;
+  medianSlope: Value;
   toIndex: number;
   fromIndex: number;
 }
@@ -34,7 +34,7 @@ export interface IntegralOptions {
 }
 
 export interface IntegralResult {
-  integral: number;
+  integral: Value;
   fromIndex: number;
   toIndex: number;
 }

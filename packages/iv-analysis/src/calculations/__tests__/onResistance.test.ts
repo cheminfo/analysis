@@ -12,18 +12,18 @@ describe('Ron transistor', () => {
       readFileSync(join(__dirname, filename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'Vd',
         xUnits: 'V',
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      if (spectrum) {
-        const res = transistorOnResistance(spectrum);
+      if (measurement) {
+        const res = transistorOnResistance(measurement);
         expect(res?.slope).toBeCloseTo(20.49, 2);
         expect(res?.score.r2).toBeCloseTo(0.977, 2);
       } else {
-        expect(spectrum).not.toBeNull();
+        expect(measurement).not.toBeNull();
       }
     }
   });
@@ -34,14 +34,14 @@ describe('Ron transistor', () => {
       readFileSync(join(__dirname, filename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'Vd',
         xUnits: 'V',
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      expect(spectrum?.meta?.resistanceOn).toBeDefined();
-      const res = JSON.parse(spectrum?.meta?.resistanceOn ?? '');
+      expect(measurement?.meta?.resistanceOn).toBeDefined();
+      const res = JSON.parse(measurement?.meta?.resistanceOn ?? '');
       expect(res?.slope).toBeCloseTo(20.49, 2);
       expect(res?.score.r2).toBeCloseTo(0.977, 2);
     }
@@ -55,20 +55,20 @@ describe('Ron diode', () => {
       readFileSync(join(__dirname, filename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'Vd',
         xUnits: 'V',
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      if (spectrum) {
-        const res = diodeOnResistance(spectrum);
+      if (measurement) {
+        const res = diodeOnResistance(measurement);
         expect(res?.slope).toBeCloseTo(20.819, 2);
         expect(res?.score.r2).toBeCloseTo(0.992, 2);
         expect(res?.forwardVoltage).toBeCloseTo(3.05, 2);
         expect(res?.onVoltage).toBeCloseTo(0, 2);
       } else {
-        expect(spectrum).not.toBeNull();
+        expect(measurement).not.toBeNull();
       }
     }
   });
@@ -77,14 +77,14 @@ describe('Ron diode', () => {
     const filename = '../../../testFiles/B1505/IV/sweep_diode.csv';
     const analyses = fromIV(readFileSync(join(__dirname, filename), 'latin1'));
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'Vd',
         xUnits: 'V',
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      expect(spectrum?.meta?.resistanceOn).toBeDefined();
-      const res = JSON.parse(spectrum?.meta?.resistanceOn ?? '');
+      expect(measurement?.meta?.resistanceOn).toBeDefined();
+      const res = JSON.parse(measurement?.meta?.resistanceOn ?? '');
       expect(res?.slope).toBeCloseTo(20.819, 2);
       expect(res?.score.r2).toBeCloseTo(0.992, 2);
       expect(res?.forwardVoltage).toBeCloseTo(3.05, 2);

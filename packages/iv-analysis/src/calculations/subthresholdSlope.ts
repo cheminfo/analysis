@@ -6,22 +6,24 @@ import { MedianSlopeResult, SlopeOptions } from './types';
 /**
  * Calculates the slope of the subthreshold current.
  *
- * @param spectrum - The spectrum to calculate the subthreshold slope.
+ * @param measurement - The measurement to calculate the subthreshold slope.
  * @param options - Options for the calculation.
  * @returns - The subthreshold slope.
  */
 export function subthresholdSlope(
-  spectrum: MeasurementXY,
+  measurement: MeasurementXY,
   options: SlopeOptions = {},
 ): MedianSlopeResult | null {
   const { delta = 1e-2 } = options;
   let { fromIndex, toIndex } = options;
 
-  const x = spectrum.variables.x.data as number[];
+  const x = measurement.variables.x.data as number[];
   const dx = Math.abs(x[0] - x[1]);
   if (dx === 0) return null;
 
-  const y = spectrum.variables.y.data.map((val) => Math.log10(val)) as number[];
+  const y = measurement.variables.y.data.map((val) =>
+    Math.log10(val),
+  ) as number[];
   const dy = fit(y, dx, { derivative: 1 });
 
   if (fromIndex === undefined) {
@@ -63,11 +65,9 @@ export function subthresholdSlope(
   if (toIndex === undefined || fromIndex === undefined) return null;
 
   const medianIndex = fromIndex + Math.floor((toIndex - fromIndex) / 2);
-  const response = {
-    medianSlope: 1 / dy[medianIndex],
+  return {
+    medianSlope: { value: 1 / dy[medianIndex], units: 'V/dec' },
     toIndex,
     fromIndex,
   };
-
-  return response;
 }

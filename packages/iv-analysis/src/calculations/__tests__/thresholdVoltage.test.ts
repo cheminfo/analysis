@@ -11,17 +11,17 @@ describe('Vth breakdown', () => {
       readFileSync(join(__dirname, breakdownFilename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'Vd',
         xUnits: 'V',
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      if (spectrum) {
-        const res = thresholdVoltage(spectrum);
+      if (measurement) {
+        const res = thresholdVoltage(measurement);
         expect(res?.value).toBeCloseTo(555, 2);
       } else {
-        expect(spectrum).not.toBeNull();
+        expect(measurement).not.toBeNull();
       }
     }
   });
@@ -31,14 +31,14 @@ describe('Vth breakdown', () => {
       readFileSync(join(__dirname, breakdownFilename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'Vd',
         xUnits: 'V',
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      expect(spectrum?.meta?.thresholdVoltage).toBeDefined();
-      const res = JSON.parse(spectrum?.meta?.thresholdVoltage ?? '');
+      expect(measurement?.meta?.thresholdVoltage).toBeDefined();
+      const res = JSON.parse(measurement?.meta?.thresholdVoltage ?? '');
       expect(res?.value).toBeCloseTo(555, 2);
     }
   });
@@ -51,17 +51,17 @@ describe('Vth transfer', () => {
       readFileSync(join(__dirname, transferFilename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'Vg',
         xUnits: 'V',
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      if (spectrum) {
-        const res = thresholdVoltage(spectrum);
+      if (measurement) {
+        const res = thresholdVoltage(measurement);
         expect(res?.value).toBeCloseTo(-1.2, 2);
       } else {
-        expect(spectrum).not.toBeNull();
+        expect(measurement).not.toBeNull();
       }
     }
   });
@@ -71,14 +71,14 @@ describe('Vth transfer', () => {
       readFileSync(join(__dirname, transferFilename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'Vg',
         xUnits: 'V',
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      expect(spectrum?.meta?.thresholdVoltage).toBeDefined();
-      const res = JSON.parse(spectrum?.meta?.thresholdVoltage ?? '');
+      expect(measurement?.meta?.thresholdVoltage).toBeDefined();
+      const res = JSON.parse(measurement?.meta?.thresholdVoltage ?? '');
       expect(res?.value).toBeCloseTo(-1.2, 2);
     }
   });

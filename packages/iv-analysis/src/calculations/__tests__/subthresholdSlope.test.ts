@@ -11,17 +11,17 @@ describe('ss transfer', () => {
       readFileSync(join(__dirname, filename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'Vg',
         xUnits: 'V',
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      if (spectrum) {
-        const res = subthresholdSlope(spectrum);
+      if (measurement) {
+        const res = subthresholdSlope(measurement);
         expect(res?.medianSlope).toBeCloseTo(0.476, 2);
       } else {
-        expect(spectrum).not.toBeNull();
+        expect(measurement).not.toBeNull();
       }
     }
   });
@@ -31,14 +31,14 @@ describe('ss transfer', () => {
       readFileSync(join(__dirname, filename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'Vg',
         xUnits: 'V',
         yLabel: 'Id_dens',
         yUnits: 'A/mm',
       });
-      expect(spectrum?.meta?.subthresholdSlope).toBeDefined();
-      const res = JSON.parse(spectrum?.meta?.subthresholdSlope ?? '');
+      expect(measurement?.meta?.subthresholdSlope).toBeDefined();
+      const res = JSON.parse(measurement?.meta?.subthresholdSlope ?? '');
       expect(res?.medianSlope).toBeCloseTo(0.476, 2);
     }
   });

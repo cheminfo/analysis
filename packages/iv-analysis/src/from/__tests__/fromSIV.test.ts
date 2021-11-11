@@ -20,10 +20,10 @@ test('fromSIV', () => {
     'PhotoCurrent4',
     'transient0',
   ]);
-  const spectrum = analysis.measurements[0];
-  expect(spectrum.variables.x.data).toHaveLength(120);
-  expect(spectrum.variables.y.data).toHaveLength(120);
-  expect(Object.keys(spectrum.meta || {})).toHaveLength(18);
+  const measurement = analysis.measurements[0];
+  expect(measurement.variables.x.data).toHaveLength(120);
+  expect(measurement.variables.y.data).toHaveLength(120);
+  expect(Object.keys(measurement.meta || {})).toHaveLength(18);
 
   expect(Object.keys(analysis.measurements[4].variables.x.data)).toHaveLength(
     1536,
