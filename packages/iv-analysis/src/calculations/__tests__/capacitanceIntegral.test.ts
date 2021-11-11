@@ -23,7 +23,7 @@ describe('Capacitance integral on high voltage', () => {
       });
       if (measurement) {
         const res = capacitanceIntegral(measurement);
-        expect(res?.integral).toBeCloseTo(2.1483e-11, 10);
+        expect(res?.integral.value).toBeCloseTo(2.1483e-11, 10);
       } else {
         expect(measurement).not.toBeNull();
       }
@@ -43,7 +43,7 @@ describe('Capacitance integral on high voltage', () => {
       });
       expect(measurement?.meta?.capacitanceIntegral).toBeDefined();
       const res = JSON.parse(measurement?.meta?.capacitanceIntegral ?? '');
-      expect(res?.integral).toBeCloseTo(2.1483e-11, 10);
+      expect(res?.integral.value).toBeCloseTo(2.1483e-11, 10);
     }
   });
 });
@@ -63,7 +63,7 @@ describe('Capacitance integral on MOSFET', () => {
       });
       if (measurement) {
         const res = capacitanceIntegral(measurement);
-        expect(res?.integral).toBeCloseTo(1.3615e-8, 8);
+        expect(res?.integral.value).toBeCloseTo(1.3615e-8, 8);
       } else {
         expect(measurement).not.toBeNull();
       }
@@ -83,7 +83,7 @@ describe('Capacitance integral on MOSFET', () => {
       });
       expect(measurement?.meta?.capacitanceIntegral).toBeDefined();
       const res = JSON.parse(measurement?.meta?.capacitanceIntegral ?? '');
-      expect(res?.integral).toBeCloseTo(1.3615e-8, 8);
+      expect(res?.integral.value).toBeCloseTo(1.3615e-8, 8);
     }
   });
 });
