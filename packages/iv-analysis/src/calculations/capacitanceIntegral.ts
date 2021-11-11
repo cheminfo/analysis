@@ -5,16 +5,16 @@ import { IntegralOptions, IntegralResult } from './types';
 /**
  * Calculates the capacitance integral of a given XY measurement.
  *
- * @param spectrum - Measurement to integrate.
+ * @param measurement - Measurement to integrate.
  * @param options - Options for integration.
  * @returns - Integral result.
  */
 export function capacitanceIntegral(
-  spectrum: MeasurementXY,
+  measurement: MeasurementXY,
   options: IntegralOptions = {},
 ): IntegralResult {
-  const x = spectrum.variables.x.data as number[];
-  const y = spectrum.variables.y.data as number[];
+  const x = measurement.variables.x.data as number[];
+  const y = measurement.variables.y.data as number[];
 
   const { fromIndex = 0, toIndex = x.length - 1 } = options;
 
@@ -24,6 +24,6 @@ export function capacitanceIntegral(
   for (let i = fromIndex + 1; i <= toIndex - 1; i++) {
     sum += y[i];
   }
-  const integral = dx * (sum + (y[fromIndex] + y[toIndex]) / 2);
-  return { integral, fromIndex, toIndex };
+  const value = dx * (sum + (y[fromIndex] + y[toIndex]) / 2);
+  return { integral: { value, units: 'C/mm' }, fromIndex, toIndex };
 }

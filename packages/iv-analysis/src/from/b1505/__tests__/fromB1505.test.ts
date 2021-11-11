@@ -27,15 +27,15 @@ function testFile(
   for (const analysis of analyses) {
     const { 'default.xLabel': xLabel, 'default.yLabel': yLabel } =
       analysis.measurements[0]?.meta || {};
-    let spectrum = analysis.getMeasurementXY({ xLabel, yLabel });
+    let measurement = analysis.getMeasurementXY({ xLabel, yLabel });
 
     expect(analysis?.label).toBe(title);
 
-    expect(spectrum?.variables.x.data).toHaveLength(length);
-    expect(spectrum?.variables.x.label).toStrictEqual(xLabel);
+    expect(measurement?.variables.x.data).toHaveLength(length);
+    expect(measurement?.variables.x.label).toStrictEqual(xLabel);
 
-    expect(spectrum?.variables.y.data).toHaveLength(length);
-    expect(spectrum?.variables.y.label).toStrictEqual(yLabel);
+    expect(measurement?.variables.y.data).toHaveLength(length);
+    expect(measurement?.variables.y.label).toStrictEqual(yLabel);
   }
 }
 

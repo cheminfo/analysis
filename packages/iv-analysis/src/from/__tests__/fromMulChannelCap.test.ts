@@ -9,13 +9,13 @@ test('fromMulChannelCap', () => {
     'latin1',
   );
   let analysis = fromMulChannelCap(csv);
-  let spectrum = analysis.getMeasurementXY({ xLabel: 'Vd', yLabel: 'Id' });
+  let measurement = analysis.getMeasurementXY({ xLabel: 'Vd', yLabel: 'Id' });
 
-  expect(spectrum?.variables.x.data).toHaveLength(6);
-  expect(spectrum?.variables.x.label).toBe('Vd');
+  expect(measurement?.variables.x.data).toHaveLength(6);
+  expect(measurement?.variables.x.label).toBe('Vd');
 
-  expect(spectrum?.variables.y.data).toHaveLength(6);
-  expect(spectrum?.variables.y.label).toBe('Id');
+  expect(measurement?.variables.y.data).toHaveLength(6);
+  expect(measurement?.variables.y.label).toBe('Id');
 
   expect(analysis?.label).toBe('Vg = 7V');
 });

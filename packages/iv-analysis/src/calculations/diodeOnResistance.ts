@@ -12,20 +12,20 @@ interface DiodeResult extends SlopeResult {
 /**
  * Calculates the diode on resistance.
  *
- * @param spectrum - The spectrum to calculate the diode on resistance.
+ * @param measurement - The measurement to calculate the diode on resistance.
  * @param options - Options to calculate the diode on resistance.
  * @returns - The diode on resistance.
  */
 export function diodeOnResistance(
-  spectrum: MeasurementXY,
+  measurement: MeasurementXY,
   options: SlopeOptions = {},
 ): DiodeResult | null {
   const { delta = 1e-2, fromIndex, toIndex } = options;
 
-  const x = spectrum.variables.x.data as number[];
+  const x = measurement.variables.x.data as number[];
   const dx = Math.abs(x[0] - x[1]);
 
-  const y = spectrum.variables.y.data as number[];
+  const y = measurement.variables.y.data as number[];
   const dy = fit(y, dx, { derivative: 1 });
 
   let Von = { x: 0, y: Infinity };
@@ -58,14 +58,12 @@ export function diodeOnResistance(
 
   const regression = new SimpleLinearRegression(xRes, yRes);
   const score = regression.score(xRes, yRes);
-  const response = {
-    slope: 1 / regression.slope,
+  return {
+    slope: { value: 1 / regression.slope, units: 'Ohm' },
     score,
     toIndex: xStart,
     fromIndex: xStart + xRes.length,
     forwardVoltage: Vf.found ? Vf.x : undefined,
     onVoltage: Von.x,
   };
-
-  return response;
 }

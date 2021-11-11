@@ -15,17 +15,17 @@ describe('Capacitance integral on high voltage', () => {
       readFileSync(join(__dirname, basicFilename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'Vd',
         xUnits: 'V',
         yLabel: 'C_dens',
         yUnits: 'F/mm',
       });
-      if (spectrum) {
-        const res = capacitanceIntegral(spectrum);
+      if (measurement) {
+        const res = capacitanceIntegral(measurement);
         expect(res?.integral).toBeCloseTo(2.1483e-11, 10);
       } else {
-        expect(spectrum).not.toBeNull();
+        expect(measurement).not.toBeNull();
       }
     }
   });
@@ -35,14 +35,14 @@ describe('Capacitance integral on high voltage', () => {
       readFileSync(join(__dirname, basicFilename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'Vd',
         xUnits: 'V',
         yLabel: 'C_dens',
         yUnits: 'F/mm',
       });
-      expect(spectrum?.meta?.capacitanceIntegral).toBeDefined();
-      const res = JSON.parse(spectrum?.meta?.capacitanceIntegral ?? '');
+      expect(measurement?.meta?.capacitanceIntegral).toBeDefined();
+      const res = JSON.parse(measurement?.meta?.capacitanceIntegral ?? '');
       expect(res?.integral).toBeCloseTo(2.1483e-11, 10);
     }
   });
@@ -55,17 +55,17 @@ describe('Capacitance integral on MOSFET', () => {
       readFileSync(join(__dirname, mosFilename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'VBias',
         xUnits: 'V',
         yLabel: 'C_dens',
         yUnits: 'F/mm',
       });
-      if (spectrum) {
-        const res = capacitanceIntegral(spectrum);
+      if (measurement) {
+        const res = capacitanceIntegral(measurement);
         expect(res?.integral).toBeCloseTo(1.3615e-8, 8);
       } else {
-        expect(spectrum).not.toBeNull();
+        expect(measurement).not.toBeNull();
       }
     }
   });
@@ -75,14 +75,14 @@ describe('Capacitance integral on MOSFET', () => {
       readFileSync(join(__dirname, mosFilename), 'latin1'),
     );
     for (const analysis of analyses) {
-      const spectrum = analysis.getMeasurementXY({
+      const measurement = analysis.getMeasurementXY({
         xLabel: 'VBias',
         xUnits: 'V',
         yLabel: 'C_dens',
         yUnits: 'F/mm',
       });
-      expect(spectrum?.meta?.capacitanceIntegral).toBeDefined();
-      const res = JSON.parse(spectrum?.meta?.capacitanceIntegral ?? '');
+      expect(measurement?.meta?.capacitanceIntegral).toBeDefined();
+      const res = JSON.parse(measurement?.meta?.capacitanceIntegral ?? '');
       expect(res?.integral).toBeCloseTo(1.3615e-8, 8);
     }
   });

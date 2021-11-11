@@ -7,20 +7,20 @@ import { SlopeOptions, SlopeResult } from './types';
 /**
  * Calculates the transistor resistance.
  *
- * @param spectrum - The spectrum to calculate the transistor resistance.
+ * @param measurement - The measurement to calculate the transistor resistance.
  * @param options - Options for the calculation.
  * @returns - The calculated resistance.
  */
 export function transistorOnResistance(
-  spectrum: MeasurementXY,
+  measurement: MeasurementXY,
   options: SlopeOptions = {},
 ): SlopeResult | null {
   const { delta = 1e-2, fromIndex, toIndex } = options;
 
-  const x = spectrum.variables.x.data as number[];
+  const x = measurement.variables.x.data as number[];
   const dx = Math.abs(x[0] - x[1]);
 
-  const y = spectrum.variables.y.data as number[];
+  const y = measurement.variables.y.data as number[];
   const dy = fit(y, dx, { derivative: 1 });
 
   let xRes = [];
@@ -43,12 +43,10 @@ export function transistorOnResistance(
 
   const regression = new SimpleLinearRegression(xRes, yRes);
   const score = regression.score(xRes, yRes);
-  const response = {
-    slope: 1 / regression.slope,
+  return {
+    slope: { value: 1 / regression.slope, units: 'Ohm/mm' },
     score,
     toIndex: xStart,
     fromIndex: xStart + xRes.length,
   };
-
-  return response;
 }

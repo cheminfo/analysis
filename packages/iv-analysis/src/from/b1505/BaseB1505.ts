@@ -104,17 +104,17 @@ export default class BaseB1505 {
       });
 
       for (const [name, calculation] of this.calculations) {
-        const spectrum = analysis.getMeasurementXY({
+        const measurement = analysis.getMeasurementXY({
           xLabel: this.xLabel,
           yLabel: this.yLabel,
         });
-        if (spectrum) {
-          const result = JSON.stringify(calculation(spectrum));
+        if (measurement) {
+          const result = JSON.stringify(calculation(measurement));
           if (result) {
-            if (spectrum.meta) {
-              spectrum.meta[name] = result;
+            if (measurement.meta) {
+              measurement.meta[name] = result;
             } else {
-              spectrum.meta = { [name]: result };
+              measurement.meta = { [name]: result };
             }
           }
         }
