@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0 (2021-11-15)
+
+
+### Features
+
+* setup packages for publication ([8bf1107](https://www.github.com/cheminfo/analysis/commit/8bf1107c30da3f458d8442e9c54e7c39044ab845))
+
 ### [0.43.2](https://www.github.com/cheminfo/common-spectrum/compare/v0.43.1...v0.43.2) (2021-09-28)
 
 
