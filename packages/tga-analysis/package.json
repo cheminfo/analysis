@@ -1,6 +1,6 @@
 {
   "name": "tga-analysis",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Provides tools to convert output files from thermogravimetric analysis (TGA) into JCAMP-DX, as well as tools to analyze the data (mass loss analysis)",
   "main": "./lib/index.js",
   "module": "./lib-esm/index.js",
@@ -14,7 +14,7 @@
     "lib-esm"
   ],
   "dependencies": {
-    "base-analysis": "^0.0.0",
+    "base-analysis": "^0.1.0",
     "ensure-string": "^1.1.0",
     "papaparse": "^5.3.1",
     "physical-chemistry-parser": "^3.0.1",
