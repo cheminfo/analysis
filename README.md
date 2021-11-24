@@ -34,6 +34,10 @@ Example: `test-analysis` needs to depend on `other-analysis`.
 - If `other-analysis` is already published in the npm registry: `npm i -w test-analysis other-analysis`.
 - If `other-analysis` is not published yet, add the dependency manually, as `"other-analysis": "^0.0.0"`.
 
+### Add a dependency to a specific package
+
+Exemple: `npm i -w iv-analysis ensure-string`
+
 ## License
 
 [MIT](./LICENSE)
