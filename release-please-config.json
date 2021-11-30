@@ -1,11 +1,14 @@
 {
   "bootstrap-sha": "3b7fca13b911d359016ad58693ccfc8f95d29b0c",
-  "plugins": ["node-workspace"],
+  "plugins": [
+    "node-workspace"
+  ],
   "release-type": "node",
   "bump-minor-pre-major": true,
   "monorepo-tags": true,
   "packages": {
     "packages/base-analysis": {},
-    "packages/tga-analysis": {}
+    "packages/tga-analysis": {},
+    "packages/ir-spectrum": {}
   }
 }

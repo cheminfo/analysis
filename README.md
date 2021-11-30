@@ -7,6 +7,7 @@
 
 - [base-analysis](./packages/base-analysis)
 - [tga-analysis](./packages/tga-analysis)
+- [ir-spectrum](./packages/ir-spectrum)
 <!-- END-Packages (do not remove) -->
 
 ## Development

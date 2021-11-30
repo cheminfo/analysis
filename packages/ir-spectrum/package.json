@@ -1,0 +1,52 @@
+{
+  "name": "ir-spectrum",
+  "version": "1.0.3",
+  "description": "Library to deal with infrared spectra in jcamp and spc format",
+  "main": "./lib/index.js",
+  "module": "./lib-esm/index.js",
+  "types": "./lib/index.d.ts",
+  "keywords": [],
+  "license": "MIT",
+  "scripts": {},
+  "files": [
+    "src",
+    "lib",
+    "lib-esm"
+  ],
+  "dependencies": {
+    "base-analysis": "^0.0.0",
+    "ml-gsd": "^8.0.0",
+    "spc-parser": "^0.5.1"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/cheminfo/analysis#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheminfo/analysis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cheminfo/analysis/issues"
+  },
+  "info": {
+    "logo": "https://raw.githubusercontent.com/cheminfo/font/master/src/ir/assignment.svg",
+    "domain": [
+      "Physical Chemistry",
+      "Materials Science",
+      "Organic Chemistry"
+    ],
+    "technique": {
+      "name": "IR",
+      "chmo": "0000630",
+      "iupac": "https://goldbook.iupac.org/terms/view/IT07399"
+    },
+    "functionality": {
+      "fileTypes": [
+        {
+          "extension": "jdx",
+          "manufacturer": "IUPAC",
+          "example": "https://raw.githubusercontent.com/cheminfo/ir-spectrum/master/testFiles/absorbance.jdx"
+        }
+      ]
+    }
+  }
+}

@@ -13,7 +13,10 @@ import { Analysis } from '../Analysis';
  * @param [options.measurementCallback] - A callback to apply on variables when creating measurement.
  * @returns - New class element with the given data.
  */
-export function fromJcamp(jcamp: string | ArrayBuffer, options = {}): Analysis {
+export function fromJcamp(
+  jcamp: string | ArrayBuffer | Uint8Array,
+  options = {},
+): Analysis {
   let analysis = new Analysis(options);
   addJcamp(analysis, jcamp);
   return analysis;
