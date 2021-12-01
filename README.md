@@ -38,6 +38,18 @@ Example: `test-analysis` needs to depend on `other-analysis`.
 
 Exemple: `npm i -w iv-analysis ensure-string`
 
+### Recursive update of packages
+
+`ncu -u --deep`
+
+### Testing the code
+
+You need to start the TSC server
+
+`npm run dev`
+
+and after you can
+
 ## License
 
 [MIT](./LICENSE)
