@@ -19,12 +19,12 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cheminfo/iv-analysis.git"
+    "url": "git+https://github.com/cheminfo/analysis.git"
   },
   "bugs": {
-    "url": "https://github.com/cheminfo/iv-analysis/issues"
+    "url": "https://github.com/cheminfo/analysis/issues"
   },
-  "homepage": "https://github.com/cheminfo/iv-analysis#readme",
+  "homepage": "https://github.com/cheminfo/analysis#readme",
   "dependencies": {
     "base-analysis": "^0.1.0",
     "cheminfo-types": "^0.8.0",
