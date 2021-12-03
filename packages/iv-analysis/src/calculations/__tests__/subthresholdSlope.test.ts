@@ -19,7 +19,7 @@ describe('ss transfer', () => {
       });
       if (measurement) {
         const res = subthresholdSlope(measurement);
-        expect(res?.medianSlope.value).toBeCloseTo(0.476, 2);
+        expect(res?.slope.value).toBeCloseTo(0.181, 2);
       } else {
         expect(measurement).not.toBeNull();
       }
@@ -39,7 +39,7 @@ describe('ss transfer', () => {
       });
       expect(measurement?.meta?.subthresholdSlope).toBeDefined();
       const res = JSON.parse(measurement?.meta?.subthresholdSlope ?? '');
-      expect(res?.medianSlope.value).toBeCloseTo(0.476, 2);
+      expect(res?.slope.value).toBeCloseTo(0.181, 2);
     }
   });
 });

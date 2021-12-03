@@ -3,6 +3,11 @@ import { diodeOnResistance } from '../../calculations/diodeOnResistance';
 import { subthresholdSlope } from '../../calculations/subthresholdSlope';
 import { thresholdVoltage } from '../../calculations/thresholdVoltage';
 import { transistorOnResistance } from '../../calculations/transistorOnResistance';
+import {
+  ThresholdVoltageOptions,
+  SlopeOptions,
+  RangeOptions,
+} from '../../calculations/types';
 
 import BaseB1505 from './BaseB1505';
 import { getLabels } from './utils';
@@ -36,64 +41,100 @@ export function fromB1505(text: string, options?: Options) {
   }
 }
 
+interface BreakdownOptions {
+  thresholdVoltage?: ThresholdVoltageOptions;
+}
 /**
  * Parser from breakdown process.
  *
  * @param text - Original text from the file.
+ * @param options - Calculation options.
  * @returns - List of breakdown analysis.
  */
-export function fromBreakdown(text: string) {
+export function fromBreakdown(text: string, options: BreakdownOptions = {}) {
   const analysis = new BaseB1505('Vd', 'Id_dens', 'log');
-  analysis.addCalculation('thresholdVoltage', thresholdVoltage);
+  analysis.addCalculation('thresholdVoltage', (val) =>
+    thresholdVoltage(val, options.thresholdVoltage),
+  );
   return analysis.parseText(text);
 }
 
+interface TransferOptions {
+  thresholdVoltage?: ThresholdVoltageOptions;
+  subthresholdSlope?: SlopeOptions;
+}
 /**
  * Parser from transfer process.
  *
  * @param text - Original text from the file.
+ * @param options - Calculation options.
  * @returns - List of transfer analysis.
  */
-export function fromTransfer(text: string) {
+export function fromTransfer(text: string, options: TransferOptions = {}) {
   const analysis = new BaseB1505('Vg', 'Id_dens', 'log');
-  analysis.addCalculation('thresholdVoltage', thresholdVoltage);
-  analysis.addCalculation('subthresholdSlope', subthresholdSlope);
+  analysis.addCalculation('thresholdVoltage', (val) =>
+    thresholdVoltage(val, options.thresholdVoltage),
+  );
+  analysis.addCalculation('subthresholdSlope', (val) =>
+    subthresholdSlope(val, options.subthresholdSlope),
+  );
   return analysis.parseText(text);
 }
 
+interface OutputOptions {
+  transistorOnResistance?: SlopeOptions;
+}
 /**
  * Parser from output process.
  *
  * @param text - Original text from the file.
+ * @param options - Calculation options.
  * @returns - List of output analysis.
  */
-export function fromOutput(text: string) {
+export function fromOutput(text: string, options: OutputOptions = {}) {
   const analysis = new BaseB1505('Vd', 'Id_dens', 'linear');
-  analysis.addCalculation('resistanceOn', transistorOnResistance);
+  analysis.addCalculation('resistanceOn', (val) =>
+    transistorOnResistance(val, options.transistorOnResistance),
+  );
   return analysis.parseText(text);
 }
 
+interface IVOptions {
+  diodeOnResistance?: SlopeOptions;
+}
 /**
  * Parser from IV process.
  *
  * @param text - Original text from the file.
+ * @param options - Calculation options.
  * @returns - List of IV analysis.
  */
-export function fromIV(text: string) {
+export function fromIV(text: string, options: IVOptions = {}) {
   const analysis = new BaseB1505('Vd', 'Id_dens', 'linear');
-  analysis.addCalculation('resistanceOn', diodeOnResistance);
+  analysis.addCalculation('resistanceOn', (val) =>
+    diodeOnResistance(val, options.diodeOnResistance),
+  );
   return analysis.parseText(text);
 }
 
+interface CapacitanceOptions {
+  capacitanceIntegral?: RangeOptions;
+}
 /**
  * Parser from capacitance process.
  *
  * @param text - Original text from the file.
+ * @param options - Calculation options.
  * @returns - List of capacitance analysis.
  */
-export function fromCapacitance(text: string) {
+export function fromCapacitance(
+  text: string,
+  options: CapacitanceOptions = {},
+) {
   const analysis = new BaseB1505('Vd', 'C_dens', 'linear');
-  analysis.addCalculation('capacitanceIntegral', capacitanceIntegral);
+  analysis.addCalculation('capacitanceIntegral', (val) =>
+    capacitanceIntegral(val, options.capacitanceIntegral),
+  );
   return analysis.parseText(text);
 }
 
@@ -101,10 +142,16 @@ export function fromCapacitance(text: string) {
  * Parser from MOS capacitance process.
  *
  * @param text - Original text from the file.
+ * @param options - Calculation options.
  * @returns - List of MOS capacitance analysis.
  */
-export function fromMOSCapacitance(text: string) {
+export function fromMOSCapacitance(
+  text: string,
+  options: CapacitanceOptions = {},
+) {
   const analysis = new BaseB1505('VBias', 'C_dens', 'linear');
-  analysis.addCalculation('capacitanceIntegral', capacitanceIntegral);
+  analysis.addCalculation('capacitanceIntegral', (val) =>
+    capacitanceIntegral(val, options.capacitanceIntegral),
+  );
   return analysis.parseText(text);
 }

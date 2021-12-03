@@ -1,7 +1,8 @@
 import { MeasurementXY } from 'cheminfo-types';
-import fit from 'ml-savitzky-golay';
+import SimpleLinearRegression from 'ml-regression-simple-linear';
 
-import { MedianSlopeResult, SlopeOptions } from './types';
+import { thresholdVoltage } from './thresholdVoltage';
+import { SlopeResult, RangeOptions } from './types';
 
 /**
  * Calculates the slope of the subthreshold current.
@@ -12,61 +13,34 @@ import { MedianSlopeResult, SlopeOptions } from './types';
  */
 export function subthresholdSlope(
   measurement: MeasurementXY,
-  options: SlopeOptions = {},
-): MedianSlopeResult | null {
-  const { delta = 1e-2 } = options;
+  options: RangeOptions = {},
+): SlopeResult | null {
   let { fromIndex, toIndex } = options;
 
-  const x = measurement.variables.x.data as number[];
-  const dx = Math.abs(x[0] - x[1]);
-  if (dx === 0) return null;
-
-  const y = measurement.variables.y.data.map((val) =>
-    Math.log10(val),
-  ) as number[];
-  const dy = fit(y, dx, { derivative: 1 });
-
   if (fromIndex === undefined) {
-    let maxDiffIndex = 0;
-    let maxDiff = -1;
-    for (let i = 0; i < dy.length - 1; i++) {
-      const diff = Math.abs(dy[i] - dy[i + 1]);
-      if (diff > maxDiff) {
-        maxDiff = diff;
-        maxDiffIndex = i;
-      }
-    }
-
-    if (maxDiff !== -1) {
-      fromIndex = maxDiffIndex;
-    }
+    const fromVoltage = thresholdVoltage(measurement, { threshold: 1e-7 });
+    if (fromVoltage === null) return null;
+    fromIndex = fromVoltage.index;
   }
 
-  let xRes = [];
-  let yRes = [];
-  let firstSkip = false;
-
-  for (
-    let j = fromIndex ?? 0;
-    j < y.length - 1 && (toIndex === undefined || j < toIndex);
-    j++
-  ) {
-    if (Math.abs(dy[j + 1] - dy[j]) > delta) {
-      xRes.push(x[j]);
-      yRes.push(y[j]);
-    } else if (firstSkip) {
-      toIndex = j;
-    } else {
-      firstSkip = true;
-    }
+  if (toIndex === undefined) {
+    const toVoltage = thresholdVoltage(measurement, { threshold: 1e-5 });
+    if (toVoltage === null) return null;
+    toIndex = toVoltage.index;
   }
 
-  // Checks convergence
-  if (toIndex === undefined || fromIndex === undefined) return null;
+  let xRes: number[] = [];
+  let yRes: number[] = [];
+  for (let i = fromIndex; i < toIndex; i++) {
+    xRes.push(measurement.variables.x.data[i]);
+    yRes.push(Math.log10(measurement.variables.y.data[i]));
+  }
 
-  const medianIndex = fromIndex + Math.floor((toIndex - fromIndex) / 2);
+  const regression = new SimpleLinearRegression(xRes, yRes);
+  const score = regression.score(xRes, yRes);
   return {
-    medianSlope: { value: 1 / dy[medianIndex], units: 'V/dec' },
+    slope: { value: 1 / regression.slope, units: 'V/dec' },
+    score,
     toIndex,
     fromIndex,
   };
