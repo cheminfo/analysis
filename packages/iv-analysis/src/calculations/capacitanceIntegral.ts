@@ -1,6 +1,6 @@
 import type { MeasurementXY } from 'cheminfo-types';
 
-import { IntegralOptions, IntegralResult } from './types';
+import { RangeOptions, IntegralResult } from './types';
 
 /**
  * Calculates the capacitance integral of a given XY measurement.
@@ -11,7 +11,7 @@ import { IntegralOptions, IntegralResult } from './types';
  */
 export function capacitanceIntegral(
   measurement: MeasurementXY,
-  options: IntegralOptions = {},
+  options: RangeOptions = {},
 ): IntegralResult {
   const x = measurement.variables.x.data as number[];
   const y = measurement.variables.y.data as number[];
