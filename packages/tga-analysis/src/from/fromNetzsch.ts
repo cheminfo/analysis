@@ -35,7 +35,7 @@ export function fromNetzsch(
       const [temperature, time, weight] = line.split(';').map(parseFloat);
       parsed.variables.x.data.push(temperature);
       parsed.variables.y.data.push(weight);
-      // @ts-ignore
+      // @ts-expect-error
       parsed.variables.t.data.push(time);
     } else if (line.startsWith('##')) {
       inData = true;
@@ -59,6 +59,5 @@ export function fromNetzsch(
     dataType: 'TGA',
   });
 
-  // @ts-ignore
   return analysis;
 }

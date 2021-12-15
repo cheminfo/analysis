@@ -137,13 +137,13 @@ function getPossibleVariable(
   let key: keyof typeof possible;
   if (units !== undefined) {
     for (key in possible) {
-      // @ts-ignore
+      // @ts-expect-error
       let converted = convertUnit(1, variables[key].units || '', units);
       if (converted) {
-        // @ts-ignore
+        // @ts-expect-error
         possible[key] = getConvertedVariable(variables[key], units);
       } else {
-        // @ts-ignore
+        // @ts-expect-error
         possible[key] = undefined;
       }
     }
@@ -151,9 +151,9 @@ function getPossibleVariable(
 
   if (label !== undefined) {
     for (key in possible) {
-      // @ts-ignore
+      // @ts-expect-error
       if (!variables[key].label.match(label)) {
-        // @ts-ignore
+        // @ts-expect-error
         possible[key] = undefined;
       }
     }
@@ -161,14 +161,14 @@ function getPossibleVariable(
 
   if (variableName !== undefined) {
     if (possible[variableName]) return possible[variableName];
-    // @ts-ignore this should disappear if once for ever the variables are lowercases
+    // @ts-expect-error this should disappear if once for ever the variables are lowercases
     if (possible[variableName.toUpperCase()]) {
-      // @ts-ignore
+      // @ts-expect-error
       return possible[variableName.toUpperCase()];
     }
-    // @ts-ignore
+    // @ts-expect-error
     if (possible[variableName.toLowerCase()]) {
-      // @ts-ignore
+      // @ts-expect-error
       return possible[variableName.toLowerCase()];
     }
   }
