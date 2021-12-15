@@ -48,7 +48,7 @@ You need to start the TSC server
 
 `npm run dev`
 
-and after you can
+and after you can use `npx jest --watch` as usual.
 
 ## License
 

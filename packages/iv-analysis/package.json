@@ -27,7 +27,7 @@
   "homepage": "https://github.com/cheminfo/analysis#readme",
   "dependencies": {
     "base-analysis": "^0.1.0",
-    "cheminfo-types": "^0.8.0",
+    "cheminfo-types": "^0.9.1",
     "ensure-string": "^1.1.0",
     "ml-regression-simple-linear": "^2.0.3",
     "ml-savitzky-golay": "^5.0.0",
