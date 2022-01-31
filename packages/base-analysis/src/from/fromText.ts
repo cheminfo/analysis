@@ -1,3 +1,5 @@
+// TODO: enable ts in this file.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import { parseXY } from 'xy-parser';

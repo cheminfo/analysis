@@ -1,6 +1,5 @@
 import { OneLowerCase } from 'cheminfo-types';
-
-import { ShapeOptions } from './ShapeOptions';
+import { OptimizeOptions } from 'ml-spectra-fitting';
 
 export interface PeakPickingOptions {
   /**
@@ -24,7 +23,7 @@ export interface PeakPickingOptions {
   /**
    * Options of the peak shape fit.
    */
-  shapeOptions?: ShapeOptions;
+  shapeOptions?: OptimizeOptions['shape'];
   /**
    * Whether to  look for maxima or minima.
    *

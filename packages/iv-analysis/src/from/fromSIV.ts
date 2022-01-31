@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
 import { Analysis } from 'base-analysis';
 
+/**
+ * @param content
+ */
 export function fromSIV(content: string) {
   const analysis = new Analysis();
 

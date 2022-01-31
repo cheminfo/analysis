@@ -1,3 +1,7 @@
+// TODO: enable ts in this file.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import type {
   OneLowerCase,
   MeasurementXY,
@@ -137,13 +141,10 @@ function getPossibleVariable(
   let key: keyof typeof possible;
   if (units !== undefined) {
     for (key in possible) {
-      // @ts-ignore
       let converted = convertUnit(1, variables[key].units || '', units);
       if (converted) {
-        // @ts-ignore
         possible[key] = getConvertedVariable(variables[key], units);
       } else {
-        // @ts-ignore
         possible[key] = undefined;
       }
     }
@@ -151,9 +152,7 @@ function getPossibleVariable(
 
   if (label !== undefined) {
     for (key in possible) {
-      // @ts-ignore
       if (!variables[key].label.match(label)) {
-        // @ts-ignore
         possible[key] = undefined;
       }
     }
@@ -161,14 +160,11 @@ function getPossibleVariable(
 
   if (variableName !== undefined) {
     if (possible[variableName]) return possible[variableName];
-    // @ts-ignore this should disappear if once for ever the variables are lowercases
+    // TODO: this should disappear if once for ever the variables are lowercases
     if (possible[variableName.toUpperCase()]) {
-      // @ts-ignore
       return possible[variableName.toUpperCase()];
     }
-    // @ts-ignore
     if (possible[variableName.toLowerCase()]) {
-      // @ts-ignore
       return possible[variableName.toLowerCase()];
     }
   }

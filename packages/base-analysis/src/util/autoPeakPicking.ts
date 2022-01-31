@@ -1,5 +1,4 @@
 import type { MeasurementXY } from 'cheminfo-types';
-// @ts-ignore
 import { gsd } from 'ml-gsd';
 import { xyMaxClosestYPoint, xyMinClosestYPoint } from 'ml-spectra-processing';
 

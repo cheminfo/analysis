@@ -1,0 +1,9 @@
+{
+  "deep": true,
+  "reject": [
+    "// New versions do not provide the peak.index property",
+    "ml-gsd",
+    "// New version doesn't give the same results as expected in the tests",
+    "ml-spectra-fitting"
+  ]
+}

@@ -27,7 +27,7 @@ export function peakPicking(
     optimize = false,
     expectedWidth = 1,
     max: isMax = true,
-    shapeOptions = {},
+    shapeOptions = { kind: 'gaussian' },
   } = options;
 
   const x = measurement.variables[xVariable]?.data;
@@ -56,7 +56,7 @@ export function peakPicking(
     optimizedPeak = optimizePeak(
       { x, y },
       [{ x: x[targetIndex], y: y[targetIndex], width: expectedWidth }],
-      shapeOptions,
+      { shape: shapeOptions },
     );
 
     optimizedIndex = xFindClosestIndex(x, optimizedPeak.peaks[0].x);
@@ -64,6 +64,8 @@ export function peakPicking(
     for (let [key, variable] of Object.entries(measurement.variables)) {
       result[key] = variable.data[optimizedIndex];
     }
+    // TODO: result is supposed to only contain numbers.
+    // @ts-expect-error This should be changed.
     result.optimized = optimizedPeak.peaks[0];
   } else {
     for (let [key, variable] of Object.entries(measurement.variables)) {

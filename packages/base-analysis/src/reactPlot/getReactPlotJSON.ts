@@ -1,15 +1,19 @@
-import type { AxisProps, LineSeriesProps, PlotObjectType } from 'react-plot';
+import type { AxisProps, LineSeriesProps, PlotObjectPlot } from 'react-plot';
 
 import { Analysis } from '../Analysis';
 import { MeasurementSelector } from '../types/MeasurementSelector';
 
 type LineSeriesType = { type: 'line' } & LineSeriesProps;
 
-export type ReactPlotOptions = Omit<PlotObjectType, 'axes' | 'content'> & {
+export type ReactPlotOptions = Omit<
+  PlotObjectPlot,
+  'axes' | 'content' | 'dimensions'
+> & {
   enforceGrowing?: boolean;
   xAxis?: Partial<AxisProps>;
   yAxis?: Partial<AxisProps>;
   content?: Partial<LineSeriesProps>;
+  dimensions?: PlotObjectPlot['dimensions'];
 };
 
 /**
@@ -45,7 +49,7 @@ export function getReactPlotJSON(
   analyses: Analysis[],
   query: MeasurementSelector,
   options: ReactPlotOptions = {},
-): PlotObjectType & { meta: Record<string, string>[] } {
+): PlotObjectPlot & { meta: Record<string, string>[] } {
   const {
     enforceGrowing = false,
     xAxis: xAxisOptions = {},
@@ -54,7 +58,7 @@ export function getReactPlotJSON(
     dimensions = { width: 550, height: 500 },
     ...otherOptions
   } = options;
-  let content: PlotObjectType['content'] = [];
+  let content: PlotObjectPlot['content'] = [];
   let meta: Record<string, string>[] = [];
   type Axes = { type: 'main' } & AxisProps;
   let xAxis: Axes | null = null;

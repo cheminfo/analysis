@@ -23,6 +23,6 @@ export function getConvertedVariable(
     data: data || [],
     min: data ? min(data) : undefined,
     max: data ? max(data) : undefined,
-    isMonotone: xIsMonotone(data),
+    isMonotone: data ? xIsMonotone(data) : false,
   };
 }
