@@ -13,7 +13,7 @@ jobs:
       npm-setup-command: |
         # Node.js 14 has npm 6, so we need to update to the latest.
         npm install -g npm
-        npm install
+        npm ci
         # Compile TypeScript files before running tests.
         npm run tsc
       node-version-matrix: '[14, 16]'
