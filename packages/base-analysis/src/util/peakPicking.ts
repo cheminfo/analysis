@@ -1,5 +1,6 @@
 import type { MeasurementXY } from 'cheminfo-types';
 import max from 'ml-array-max';
+// @ts-expect-error Untyped library.
 import { optimize as optimizePeak } from 'ml-spectra-fitting';
 import { xFindClosestIndex } from 'ml-spectra-processing';
 
@@ -65,7 +66,6 @@ export function peakPicking(
       result[key] = variable.data[optimizedIndex];
     }
     // TODO: result is supposed to only contain numbers.
-    // @ts-expect-error This should be changed.
     result.optimized = optimizedPeak.peaks[0];
   } else {
     for (let [key, variable] of Object.entries(measurement.variables)) {
