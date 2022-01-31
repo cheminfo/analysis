@@ -73,6 +73,8 @@ function addJcamp(analysis: Analysis, jcamp: string | ArrayBuffer) {
 
     analysis.pushMeasurement(currentMeasurement.variables, {
       dataType: entry.dataType,
+      // TODO: check this.
+      // @ts-expect-error It seems description does not exist in jcampconverter types.
       description: entry.description || entry.title, // todo hack waiting for jcampconverter update
       meta: entry.meta,
     });

@@ -1,4 +1,7 @@
-//@ts-ignore
+// TODO: enable ts in this file.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { tgaParseMettlerToledo } from 'physical-chemistry-parser';
 
 import { Analysis } from '..';

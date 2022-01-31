@@ -3,6 +3,11 @@ interface DataType {
   y: number[];
 }
 
+/**
+ * @param root0
+ * @param root0.x
+ * @param root0.y
+ */
 export function getInfo({ x, y }: DataType) {
   let x0 = { x: x[0], y: y[0] };
   let y0 = { x: x[0], y: y[0] };

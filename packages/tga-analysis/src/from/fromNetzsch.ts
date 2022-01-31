@@ -1,3 +1,7 @@
+// TODO: enable ts in this file.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { Analysis, MeasurementXY } from 'base-analysis';
 import { ensureString } from 'ensure-string';
 
@@ -35,7 +39,6 @@ export function fromNetzsch(
       const [temperature, time, weight] = line.split(';').map(parseFloat);
       parsed.variables.x.data.push(temperature);
       parsed.variables.y.data.push(weight);
-      // @ts-ignore
       parsed.variables.t.data.push(time);
     } else if (line.startsWith('##')) {
       inData = true;
@@ -59,6 +62,5 @@ export function fromNetzsch(
     dataType: 'TGA',
   });
 
-  // @ts-ignore
   return analysis;
 }

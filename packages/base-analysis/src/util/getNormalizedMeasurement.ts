@@ -4,13 +4,16 @@ import {
   iterativePolynomialBaseline,
   rollingBallBaseline,
   rollingMedianBaseline,
+  // @ts-expect-error Untyped library.
 } from 'baselines';
 import type { MeasurementXY } from 'cheminfo-types';
 import max from 'ml-array-max';
 import min from 'ml-array-min';
 import normed from 'ml-array-normed';
 import rescale from 'ml-array-rescale';
+// @ts-expect-error Untyped library.
 import equallySpaced from 'ml-array-xy-equally-spaced';
+// @ts-expect-error Untyped library.
 import filterX from 'ml-array-xy-filter-x';
 import savitzkyGolay from 'ml-savitzky-golay';
 import {
@@ -21,6 +24,7 @@ import {
   xIsMonotone,
   xyEnsureGrowingX,
 } from 'ml-spectra-processing';
+// @ts-expect-error Untyped library.
 import Stat from 'ml-stat/array';
 
 import { MeasurementNormalizationOptions } from '../types/MeasurementNormalizationOptions';

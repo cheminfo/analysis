@@ -19,7 +19,6 @@ export * from './types/NormalizedFilters';
 export * from './types/MeasurementNormalizationOptions';
 export { MeasurementVariable, MeasurementXY } from 'cheminfo-types';
 export * from './types/PlotObject';
-export * from './types/ShapeOptions';
 export * from './types/MeasurementSelector';
 
 export { getReactPlotJSON } from './reactPlot/getReactPlotJSON';

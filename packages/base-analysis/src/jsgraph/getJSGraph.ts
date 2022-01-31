@@ -74,6 +74,8 @@ export function getJSGraph(analyses: Analysis[], options: JSGraphOptions = {}) {
     };
 
     if (xAxis.logScale) {
+      // TODO: check if data can always exist.
+      // @ts-expect-error Something wrong here.
       serie.data = xyFilterXPositive(serie.data);
     }
 
