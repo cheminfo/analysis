@@ -74,7 +74,7 @@ describe('getNormalizedMeasurement', () => {
     let normalized = getNormalizedMeasurement(measurement, {
       filters: [{ name: 'add', options: { value: 1 } }],
     });
-    expect(normalized.variables.y.data).toStrictEqual([3, 4]);
+    expect(normalized.variables.y.data).toStrictEqual(new Float64Array([3, 4]));
   });
   it('multiply', () => {
     let normalized = getNormalizedMeasurement(measurement, {

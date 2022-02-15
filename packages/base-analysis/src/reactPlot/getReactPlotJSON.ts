@@ -27,8 +27,11 @@ interface DataXY {
 type ListNumber = number[] | Float64Array;
 
 /**
- * @param x
- * @param y
+ * Transforms a list of numbers into a list of objects with x and y properties.
+ *
+ * @param x - List of x values.
+ * @param y - List of y values.
+ * @returns array of x-y objects
  */
 function getData(x: ListNumber, y: ListNumber) {
   let data: DataXY[] = new Array(x.length);
@@ -39,11 +42,12 @@ function getData(x: ListNumber, y: ListNumber) {
 }
 
 /**
- * Generate a jsgraph chart format from an array of Analysis.
+ * Generate a react-plot chart format from an array of Analysis.
  *
- * @param analyses
- * @param query
- * @param options
+ * @param analyses - An array of Analysis objects.
+ * @param query - Object with keys for each measurement selector.
+ * @param options - Options for the plot.
+ * @returns properties for a react-plot chart
  */
 export function getReactPlotJSON(
   analyses: Analysis[],
@@ -107,13 +111,13 @@ export function getReactPlotJSON(
       measurements.variables.x.data,
       measurements.variables.y.data,
     );
-    const serie: LineSeriesType = {
+    const series: LineSeriesType = {
       type: 'line',
       label: measurements.description,
       data,
       ...seriesOptions,
     };
-    content.push(serie);
+    content.push(series);
   }
 
   if (xAxis === null || yAxis === null) {
