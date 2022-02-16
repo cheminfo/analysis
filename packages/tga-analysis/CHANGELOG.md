@@ -1,5 +1,14 @@
 # Changelog
 
+### [0.1.2](https://www.github.com/cheminfo/analysis/compare/tga-analysis-v0.1.1...tga-analysis-v0.1.2) (2022-02-16)
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * base-analysis bumped from ^0.1.1 to ^0.1.2
+
 ### [0.1.1](https://www.github.com/cheminfo/analysis/compare/tga-analysis-v0.1.0...tga-analysis-v0.1.1) (2022-01-31)
 
 
