@@ -4,9 +4,12 @@ interface DataType {
 }
 
 /**
- * @param root0
- * @param root0.x
- * @param root0.y
+ * Calculate the max and min value of the data
+ *
+ * @param data - The data to calculate
+ * @param data.x - The x data
+ * @param data.y - The y data
+ * @returns min x and y point, max power value and power series
  */
 export function getInfo({ x, y }: DataType) {
   let x0 = { x: x[0], y: y[0] };
