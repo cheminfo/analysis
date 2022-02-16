@@ -19,8 +19,9 @@ import { getConvertedVariable } from './getConvertedVariable';
  * If more than one variable match the selector the 'x' or 'y' variable will be
  * taken.
  *
- * @param measurements
- * @param selector
+ * @param measurements - the measurements to filter
+ * @param selector - the selector to match
+ * @returns measurement with x/y data
  */
 export function getMeasurementXY(
   measurements: Array<MeasurementXY> = [],
@@ -120,7 +121,7 @@ export function getMeasurementXY(
       };
     }
   }
-  return;
+  return undefined;
 }
 
 interface Selector {

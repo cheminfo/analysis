@@ -2,7 +2,10 @@
 import { Analysis } from 'base-analysis';
 
 /**
- * @param content
+ * From SIV file
+ *
+ * @param content - File content
+ * @returns Analysis
  */
 export function fromSIV(content: string) {
   const analysis = new Analysis();
