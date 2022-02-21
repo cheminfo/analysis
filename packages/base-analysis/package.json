@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "baselines": "^1.1.1",
-    "cheminfo-types": "^0.10.1",
+    "cheminfo-types": "^0.11.1",
     "convert-to-jcamp": "^5.1.1",
     "is-any-array": "^2.0.0",
     "jcampconverter": "^8.2.4",
@@ -29,10 +29,10 @@
     "ml-gsd": "^6.9.2",
     "ml-savitzky-golay": "^5.0.0",
     "ml-spectra-fitting": "^1.0.0",
-    "ml-spectra-processing": "^10.1.2",
+    "ml-spectra-processing": "^10.2.0",
     "ml-stat": "^1.3.3",
     "react-plot": "^0.16.0",
-    "xy-parser": "^4.0.1"
+    "xy-parser": "^5.0.0"
   },
   "devDependencies": {
     "@types/js-quantities": "^1.6.3"

@@ -2,7 +2,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { parseXY } from 'xy-parser';
+import { parseXYAndKeepInfo } from 'xy-parser';
 
 import { Analysis } from '../Analysis';
 
@@ -32,8 +32,7 @@ export function fromText(data: string | ArrayBuffer, options = {}): Analysis {
 
   const { info = {}, parser = {} } = options;
 
-  parser.keepInfo = true;
-  let parsed = parseXY(data, parser);
+  let parsed = parseXYAndKeepInfo(data, parser);
   const variables = {
     x: {
       data: parsed.data.x,
