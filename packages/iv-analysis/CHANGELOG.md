@@ -1,5 +1,19 @@
 # Changelog
 
+### [0.1.3](https://www.github.com/cheminfo/analysis/compare/iv-analysis-v0.1.2...iv-analysis-v0.1.3) (2022-02-25)
+
+
+### Bug Fixes
+
+* update dependencies ([#21](https://www.github.com/cheminfo/analysis/issues/21)) ([7237acb](https://www.github.com/cheminfo/analysis/commit/7237acbb0db1060a93f23b9c24b5bca890c66422))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * base-analysis bumped from ^0.1.2 to ^0.1.3
+
 ### [0.1.2](https://www.github.com/cheminfo/analysis/compare/iv-analysis-v0.1.1...iv-analysis-v0.1.2) (2022-02-16)
 
 
