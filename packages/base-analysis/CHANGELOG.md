@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.3](https://www.github.com/cheminfo/analysis/compare/base-analysis-v0.1.2...base-analysis-v0.1.3) (2022-02-25)
+
+
+### Bug Fixes
+
+* update dependencies ([#21](https://www.github.com/cheminfo/analysis/issues/21)) ([7237acb](https://www.github.com/cheminfo/analysis/commit/7237acbb0db1060a93f23b9c24b5bca890c66422))
+
 ### [0.1.2](https://www.github.com/cheminfo/analysis/compare/base-analysis-v0.1.1...base-analysis-v0.1.2) (2022-02-16)
 
 
