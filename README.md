@@ -8,6 +8,7 @@
 - [base-analysis](./packages/base-analysis)
 - [tga-analysis](./packages/tga-analysis)
 - [iv-analysis](./packages/iv-analysis)
+- [xray-analysis](./packages/xray-analysis)
 <!-- END-Packages (do not remove) -->
 
 ## Development

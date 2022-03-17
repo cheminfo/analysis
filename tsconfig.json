@@ -27,6 +27,15 @@
     },
     {
       "path": "./packages/iv-analysis/tsconfig.test.json"
+    },
+    {
+      "path": "./packages/xray-analysis/tsconfig.json"
+    },
+    {
+      "path": "./packages/xray-analysis/tsconfig.esm.json"
+    },
+    {
+      "path": "./packages/xray-analysis/tsconfig.test.json"
     }
   ]
 }
