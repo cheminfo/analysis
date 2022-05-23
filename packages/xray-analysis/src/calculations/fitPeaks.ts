@@ -21,11 +21,7 @@ export function fitPeaks(measurement: MeasurementXY) {
 
   let peaks = optimizePeaks(data, basePeaks);
   return optimize(data, peaks, {
-    // @ts-expect-error This kind needs to be updated on the package
-    shape: { kind: 'pseudovoigt' },
-    optimization: {
-      kind: 'levenberg-marquardt',
-      options: { maxIterations: 10 },
-    },
+    shape: { kind: 'pseudoVoigt' },
+    optimization: { kind: 'lm', options: { maxIterations: 10 } },
   });
 }
