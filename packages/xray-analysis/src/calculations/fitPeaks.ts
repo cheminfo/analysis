@@ -13,7 +13,7 @@ export function fitPeaks(measurement: MeasurementXY) {
   const y = measurement.variables.y.data as number[];
   const data = { x, y };
   let basePeaks = gsd(data, {
-    minMaxRatio: 0.2,
+    minMaxRatio: 0.1,
     maxCriteria: true,
     smoothY: true,
     sgOptions: { windowSize: 7, polynomial: 3 },
