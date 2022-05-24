@@ -12,7 +12,7 @@ X-ray analysis package for treatment of an x-ray rocking curve (XRC) and an x-ra
 ## Usage
 
 ```ts
-export { fromXRay } from 'xray-analysis';
+export { fromXRD } from 'xray-analysis';
 
 const content = readFileSync(join(__dirname, 'XRD.csv'), 'latin1');
 const analysis = fromXRay(content);

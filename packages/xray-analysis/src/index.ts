@@ -6,4 +6,4 @@ export {
   JSGraph,
 } from 'base-analysis';
 
-export { fromXRay } from './from/fromXRay';
+export { fromXRC, fromXRD } from './from/fromXRay';
