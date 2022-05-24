@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.4](https://www.github.com/cheminfo/analysis/compare/base-analysis-v0.1.3...base-analysis-v0.1.4) (2022-05-24)
+
+
+### Bug Fixes
+
+* avoid reversing data in-place ([#23](https://www.github.com/cheminfo/analysis/issues/23)) ([ccaede4](https://www.github.com/cheminfo/analysis/commit/ccaede45adb9b879bb356cea3178eb9ead9b5554))
+
 ### [0.1.3](https://www.github.com/cheminfo/analysis/compare/base-analysis-v0.1.2...base-analysis-v0.1.3) (2022-02-25)
 
 
