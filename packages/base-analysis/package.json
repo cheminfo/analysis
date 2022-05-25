@@ -1,6 +1,6 @@
 {
   "name": "base-analysis",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Common package to deal with analysis",
   "main": "./lib/index.js",
   "module": "./lib-esm/index.js",
