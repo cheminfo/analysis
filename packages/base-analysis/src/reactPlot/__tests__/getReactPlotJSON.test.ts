@@ -52,7 +52,6 @@ test('simple test case', () => {
       id: 'y',
       label: 'Current [A]',
       position: 'left',
-      labelSpace: 40,
       type: 'main',
     },
   ]);
@@ -88,7 +87,6 @@ test('enforce growing', () => {
       id: 'y',
       label: 'Current [mA]',
       position: 'left',
-      labelSpace: 40,
       type: 'main',
     },
   ]);

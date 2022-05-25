@@ -57,7 +57,7 @@ export function getReactPlotJSON(
   const {
     enforceGrowing = false,
     xAxis: xAxisOptions = {},
-    yAxis: yAxisOptions = { labelSpace: 40 },
+    yAxis: yAxisOptions = {},
     content: seriesOptions = { displayMarker: true },
     dimensions = { width: 550, height: 500 },
     ...otherOptions
@@ -79,38 +79,25 @@ export function getReactPlotJSON(
         })
       : analysis.getMeasurementXY(query);
     if (!measurements) continue;
+    if (measurements.meta) meta.push(measurements.meta);
 
-    if (measurements.meta) {
-      meta.push(measurements.meta);
-    }
-
+    const { x, y } = measurements.variables;
     xAxis = {
       id: 'x',
-      label:
-        measurements.variables.x.label +
-        (measurements.variables.x.units
-          ? ` [${measurements.variables.x.units}]`
-          : ''),
+      label: x.label + (x.units ? ` [${x.units}]` : ''),
       ...xAxisOptions,
       position: 'bottom',
       type: 'main',
     };
     yAxis = {
       id: 'y',
-      label:
-        measurements.variables.y.label +
-        (measurements.variables.y.units
-          ? ` [${measurements.variables.y.units}]`
-          : ''),
+      label: y.label + (y.units ? ` [${y.units}]` : ''),
       ...yAxisOptions,
       position: 'left',
       type: 'main',
     };
 
-    const data = getData(
-      measurements.variables.x.data,
-      measurements.variables.y.data,
-    );
+    const data = getData(x.data, y.data);
     const series: LineSeriesType = {
       type: 'line',
       label: measurements.description,
