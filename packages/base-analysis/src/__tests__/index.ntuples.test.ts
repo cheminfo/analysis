@@ -99,6 +99,8 @@ describe('case for ntuples', () => {
           min: 1,
           max: 2,
           label: 'X axis',
+          first: 1,
+          last: 2,
         },
         y: {
           symbol: 'y',
@@ -110,6 +112,8 @@ describe('case for ntuples', () => {
           max: 4,
           data: [3, 4],
           label: 'Y axis',
+          first: 3,
+          last: 4,
         },
         t: {
           symbol: 't',
@@ -121,6 +125,8 @@ describe('case for ntuples', () => {
           max: 6,
           data: [5, 6],
           label: 'T axis',
+          first: 5,
+          last: 6,
         },
       },
       description: 'My measurement',

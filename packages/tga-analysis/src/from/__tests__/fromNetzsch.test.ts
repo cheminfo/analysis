@@ -15,9 +15,8 @@ test('fromNetzsch', () => {
   expect(measurement.variables.y.data[0]).toBe(890.9062668);
   expect(measurement.variables.x.data).toHaveLength(270);
   expect(measurement.variables.y.data).toHaveLength(270);
-  // @ts-expect-error
-  expect(measurement.variables.t.data).toHaveLength(270);
+  expect(measurement.variables?.t?.data ?? []).toHaveLength(270);
   let jcamp = toJcamp(result);
   expect(jcamp.length).toBeGreaterThan(7500);
-  expect(jcamp.length).toBeLessThan(9200);
+  expect(jcamp.length).toBeLessThan(9400);
 });
