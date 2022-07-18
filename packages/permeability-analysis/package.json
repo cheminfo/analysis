@@ -1,0 +1,26 @@
+{
+  "name": "permeability-analysis",
+  "version": "0.0.0",
+  "description": "Deal with permeability analysis",
+  "main": "./lib/index.js",
+  "module": "./lib-esm/index.js",
+  "types": "./lib/index.d.ts",
+  "keywords": [],
+  "license": "MIT",
+  "scripts": {},
+  "files": [
+    "src",
+    "lib",
+    "lib-esm"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "homepage": "https://github.com/cheminfo/analysis#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheminfo/analysis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cheminfo/analysis/issues"
+  }
+}

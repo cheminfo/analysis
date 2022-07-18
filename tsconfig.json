@@ -36,6 +36,15 @@
     },
     {
       "path": "./packages/xray-analysis/tsconfig.test.json"
+    },
+    {
+      "path": "./packages/permeability-analysis/tsconfig.json"
+    },
+    {
+      "path": "./packages/permeability-analysis/tsconfig.esm.json"
+    },
+    {
+      "path": "./packages/permeability-analysis/tsconfig.test.json"
     }
   ]
 }
