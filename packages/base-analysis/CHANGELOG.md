@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://www.github.com/cheminfo/analysis/compare/base-analysis-v0.1.5...base-analysis-v0.2.0) (2022-07-19)
+
+
+### Features
+
+* add permeability analysis ([2f11868](https://www.github.com/cheminfo/analysis/commit/2f11868fb67e7cf0d0af3fe9855fcbaa4b53fa36))
+
 ### [0.1.5](https://www.github.com/cheminfo/analysis/compare/base-analysis-v0.1.4...base-analysis-v0.1.5) (2022-05-25)
 
 

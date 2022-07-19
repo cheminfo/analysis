@@ -1,6 +1,6 @@
 {
   "name": "permeability-analysis",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Deal with permeability analysis",
   "main": "./lib/index.js",
   "module": "./lib-esm/index.js",
@@ -14,7 +14,7 @@
     "lib-esm"
   ],
   "dependencies": {
-    "base-analysis": "^0.1.5",
+    "base-analysis": "^0.2.0",
     "xlsx": "^0.18.5"
   },
   "homepage": "https://github.com/cheminfo/analysis#readme",
