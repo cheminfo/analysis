@@ -23,7 +23,7 @@ export function parseTAInstruments(
   meta.samplePurgeFlow = [];
   // We now assume that we always have 5 columns in the same order ...
   const result: any = {
-    meta: meta,
+    meta,
     data: {
       time: [],
       weight: [],
