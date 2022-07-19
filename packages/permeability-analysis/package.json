@@ -1,17 +1,11 @@
 {
-  "name": "xray-analysis",
-  "version": "0.1.1",
-  "description": "X-ray analysis package for treatment of an x-ray rocking curve (XRC) and an x-ray diffraction (XRD) measurement",
+  "name": "permeability-analysis",
+  "version": "0.0.0",
+  "description": "Deal with permeability analysis",
   "main": "./lib/index.js",
   "module": "./lib-esm/index.js",
   "types": "./lib/index.d.ts",
-  "keywords": [
-    "xray",
-    "x-ray",
-    "xrc",
-    "xrd",
-    "xray-analysis"
-  ],
+  "keywords": [],
   "license": "MIT",
   "scripts": {},
   "files": [
@@ -21,11 +15,8 @@
   ],
   "dependencies": {
     "base-analysis": "^0.1.5",
-    "cheminfo-types": "^1.2.0",
-    "ml-gsd": "^10.2.0",
-    "ml-spectra-fitting": "^4.0.2"
+    "xlsx": "^0.18.5"
   },
-  "devDependencies": {},
   "homepage": "https://github.com/cheminfo/analysis#readme",
   "repository": {
     "type": "git",

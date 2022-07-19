@@ -10,6 +10,7 @@
     "packages/base-analysis": {},
     "packages/tga-analysis": {},
     "packages/iv-analysis": {},
-    "packages/xray-analysis": {}
+    "packages/xray-analysis": {},
+    "packages/permeability-analysis": {}
   }
 }

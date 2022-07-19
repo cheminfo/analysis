@@ -18,10 +18,8 @@ export function parsePerkinElmer(
     if (inMethodSteps) {
       if (line.startsWith('1) TGA')) {
         inMethodSteps = false;
-      } else {
-        if (!line.startsWith('\t') && line.length > 2) {
-          result.meta.methodSteps.push(line.replace(/\t\n,+$/g, ''));
-        }
+      } else if (!line.startsWith('\t') && line.length > 2) {
+        result.meta.methodSteps.push(line.replace(/\t\n,+$/g, ''));
       }
     } else if (/^[a-zA-Z -]+$/.exec(line)) {
       section = trim(line);

@@ -89,6 +89,6 @@ function parseMeta(detailsSheet: any) {
 }
 
 export const testables = {
-  parseMeta: parseMeta,
-  parseDataSheet: parseDataSheet,
+  parseMeta,
+  parseDataSheet,
 };

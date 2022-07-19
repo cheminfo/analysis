@@ -46,7 +46,7 @@ export function peakPicking(
   let optimizedIndex;
   const result: Record<string, number> = {};
   if (optimize) {
-    if (isMax === false) {
+    if (!isMax) {
       let maximumY = max(y);
       for (let i = 0; i < y.length; i++) {
         y[i] *= -1;

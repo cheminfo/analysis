@@ -9,6 +9,7 @@
 - [tga-analysis](./packages/tga-analysis)
 - [iv-analysis](./packages/iv-analysis)
 - [xray-analysis](./packages/xray-analysis)
+- [permeability-analysis](./packages/permeability-analysis)
 <!-- END-Packages (do not remove) -->
 
 ## Development

@@ -27,13 +27,13 @@
   "homepage": "https://github.com/cheminfo/iv-analysis#readme",
   "dependencies": {
     "base-analysis": "^0.1.5",
-    "cheminfo-types": "^1.1.0",
+    "cheminfo-types": "^1.2.0",
     "ml-regression-simple-linear": "^2.0.3",
     "ml-savitzky-golay": "^5.0.0",
     "ndim-parser": "^0.5.1"
   },
   "devDependencies": {
     "@types/d3-scale": "^4.0.2",
-    "@types/react": "^17.0.39"
+    "@types/react": "^18.0.15"
   }
 }
