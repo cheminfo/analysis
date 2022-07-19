@@ -1,5 +1,3 @@
-//@ts-expect-error types are not defiend
-import { parseString } from 'dynamic-typing';
 import { read, utils } from 'xlsx';
 
 /**
@@ -23,34 +21,58 @@ export function parseHidenXLSX(binary: ArrayBuffer | Uint8Array) {
 function parseScanSetup(matrix: string[][]) {
   const headers = matrix[0];
   const data = matrix.slice(1);
-  const result = [];
+  const array = [];
   for (let row of data) {
     const data: Record<string, string> = {};
     for (let i = 0; i < headers.length; i++) {
       data[headers[i]] = row[i];
     }
-    result.push(data);
+    array.push(data);
   }
-
+  const result: Record<string, any> = {};
+  array.forEach((item) => (result[item['Gas Name']] = item));
   return result;
 }
 
 interface Variable {
   label: string;
-  data: (number | string | boolean)[];
+  data: (number | string)[];
 }
 
 function parseData(matrix: string[][]) {
-  const variables = matrix[0].map((label): Variable => {
-    return { label, data: [] };
-  });
-  console.log(variables);
-  const data = matrix.slice(1);
-  for (let row of data) {
-    for (let i = 0; i < variables.length; i++) {
-      if (!row[i]) continue;
-      variables[i].data.push(parseString(row[i]));
+  // The first defines the categories
+  const categoriesLabel = matrix[0];
+  const categories: Record<string, any> = {};
+  // The second row contains the headers
+  const headers = matrix[1];
+  let from = 0;
+  let currentCategory = categoriesLabel[0];
+  for (let i = 0; i < headers.length; i++) {
+    if (headers[i] === undefined || i === headers.length - 1) {
+      categories[currentCategory] = getVariables(matrix, from, i - 1);
+      from = i + 1;
+      currentCategory = categoriesLabel[i + 1];
     }
   }
-  return variables;
+  return categories;
+}
+
+function getVariables(matrix: string[][], from: number, to: number) {
+  const headers = matrix[1].slice(from, to + 1);
+  matrix = matrix.slice(2);
+  const submatrix = matrix.map((row) => row.slice(from, to + 1));
+
+  const variables = headers.map((label): Variable => {
+    return { label, data: [] };
+  });
+
+  for (let row of submatrix) {
+    for (let i = 0; i < variables.length; i++) {
+      if (!row[i]) continue;
+      variables[i].data.push(row[i]);
+    }
+  }
+  const result: Record<string, any> = {};
+  variables.forEach((variable) => (result[variable.label] = variable));
+  return result;
 }
