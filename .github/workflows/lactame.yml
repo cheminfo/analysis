@@ -1,0 +1,59 @@
+name: Deploy build on lactame.com
+
+on:
+  release:
+    types: [published]
+
+env:
+  NODE_VERSION: 16.x
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    outputs:
+      packageName: ${{ steps.step1.outputs.packageName }}
+      buildName: ${{ steps.step2.outputs.buildName }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: event.release.tagName
+        run: echo "${{github.event.release.tag_name}}"
+      - name: Get package name
+        run: echo "PACKAGE_NAME=`echo "${{github.event.release.tag_name}}" | sed -r "s/-[^-]*$//"`" >> $GITHUB_ENV
+      - name: Set jobs variable packageName
+        id: step1
+        run: echo "::set-output name=packageName::${{ env.PACKAGE_NAME}}"
+      - name: Build name
+        run: echo "BUILD_NAME=$(jq ".\"${{ env.PACKAGE_NAME }}\" // empty" lactame.json | tr -d '"')" >> $GITHUB_ENV
+      - name: Set jobs variable buildName
+        id: step2
+        run: echo "::set-output name=buildName::${{ env.BUILD_NAME}}"
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: install
+    if: ${{ needs.install.outputs.buildName }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Echo package name
+        run: echo "${{ needs.install.outputs.buildName }}"
+      - name: Get package name
+        run: echo "PACKAGE_NAME=${{ needs.install.outputs.packageName }}" >> $GITHUB_ENV
+      - name: Build name
+        run: echo "BUILD_NAME=${{ needs.install.outputs.buildname }}" >> $GITHUB_ENV
+      - name: Set current folder name
+        run: echo "CURRENT_FOLDER=packages/${{ env.PACKAGE_NAME }}" >> $GITHUB_ENV
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install dependencies
+        run: npm install
+      - name: Run TSC
+        run: npm run tsc
+      - name: Build project
+        run: npx cheminfo-build --cwd ${{ env.CURRENT_FOLDER }} --out-name ${{ env.PACKAGE_NAME }} --entry lib-esm/index.js --root ${{ env.BUILD_NAME }}
+      - name: Deploy to lactame.com
+        uses: zakodium/lactame-action@v1
+        with:
+          token: ${{ secrets.LACTAME_TOKEN }}
+          name: ${{ env.PACKAGE_NAME }}
+          folder: ${{ env.CURRENT_FOLDER }}/dist
