@@ -32,7 +32,7 @@ export function fromTAInstrumentsExcel(arrayBuffer: ArrayBuffer | Uint8Array) {
         label: 'Time [s]',
       },
     },
-    { dataType: 'TGA', description: parsed.meta.sampleName, meta: parsed.meta },
+    { dataType: 'TGA', title: parsed.meta.sampleName, meta: parsed.meta },
   );
 
   return analysis;

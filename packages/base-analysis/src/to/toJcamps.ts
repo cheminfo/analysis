@@ -29,7 +29,7 @@ function getJcamp(measurement: MeasurementXY, options: GetJcampOptions) {
   let jcampOptions = {
     options: {},
     info: {
-      title: measurement.description,
+      title: measurement.title,
       dataType: measurement.dataType,
       ...info,
     },

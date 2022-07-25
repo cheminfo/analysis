@@ -100,7 +100,7 @@ export function getReactPlotJSON(
     const data = getData(x.data, y.data);
     const series: LineSeriesType = {
       type: 'line',
-      label: measurements.description,
+      label: measurements.title,
       data,
       ...seriesOptions,
     };

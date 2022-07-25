@@ -30,7 +30,7 @@ describe('AnalysesManager test', () => {
       },
     },
     {
-      description: 'My measurement',
+      title: 'My measurement',
       dataType: 'TGA',
       meta: {
         meta1: 'Meta 1',
@@ -65,7 +65,7 @@ describe('AnalysesManager test', () => {
       },
     },
     {
-      description: 'My measurement 2',
+      title: 'My measurement 2',
       dataType: 'TGA',
       meta: {
         meta1: 'Meta2 1',
@@ -93,7 +93,7 @@ describe('AnalysesManager test', () => {
       },
     },
     {
-      description: 'My measurement',
+      title: 'My measurement',
       dataType: 'TGA',
       meta: {
         meta1: 'Meta2 1',

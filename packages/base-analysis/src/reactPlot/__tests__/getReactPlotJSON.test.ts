@@ -32,7 +32,7 @@ test('simple test case', () => {
   for (let i = 0; i < len; i++) {
     analyses[i] = new Analysis();
     analyses[i].pushMeasurement(measurements.variables, {
-      description: `Vg = ${i + 3}`,
+      title: `Vg = ${i + 3}`,
     });
   }
 
@@ -63,7 +63,7 @@ test('enforce growing', () => {
   for (let i = 0; i < len; i++) {
     analyses[i] = new Analysis();
     analyses[i].pushMeasurement(measurements.variables, {
-      description: `Vg = ${i + 3}`,
+      title: `Vg = ${i + 3}`,
     });
   }
 

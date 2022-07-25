@@ -25,9 +25,9 @@ export function parsePerkinElmer(
       section = trim(line);
     } else if (/.*:.*/.exec(line)) {
       let position = line.indexOf(':');
-      let description = line.substring(0, position);
+      let title = line.substring(0, position);
       let value = trim(line.substring(position + 1));
-      result.meta[(section ? `${section}_` : '') + description] = value;
+      result.meta[(section ? `${section}_` : '') + title] = value;
     } else if (/^[0-9\t .]+$/.exec(line)) {
       let fields = line.replace(/^\t/, '').split('\t');
       result.data.time.push(Number(fields[0]) * 60);
