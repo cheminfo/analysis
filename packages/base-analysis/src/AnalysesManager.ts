@@ -74,6 +74,34 @@ export class AnalysesManager {
   }
 
   /**
+   * Get an array of objects (key + unit + label + count) of all the units
+   */
+  public getDistinctLabelUnits() {
+    let values: Record<
+      string,
+      { key: string; units: string; label: string; count: number }
+    > = {};
+    for (let spectrum of this.getMeasurements()) {
+      if (spectrum.variables) {
+        for (let [, variable] of Object.entries(spectrum.variables)) {
+          const { label, units } = normalizeLabelUnits(
+            variable.label,
+            variable.units,
+          );
+          const key = label + (units ? ` (${units})` : '');
+          if (key) {
+            if (!values[key]) {
+              values[key] = { key, units, label, count: 0 };
+            }
+            values[key].count++;
+          }
+        }
+      }
+    }
+    return Object.keys(values).map((key) => values[key]);
+  }
+
+  /**
    * Get an array of objects (key + count) of all the labels.
    */
   public getDistinctLabels() {
@@ -154,4 +182,18 @@ export class AnalysesManager {
     const index = this.getAnalysisIndex(id);
     return index === undefined ? false : !isNaN(index);
   }
+}
+
+function normalizeLabelUnits(
+  originalLabel: string,
+  originalUnits: string,
+): { units: string; label: string } {
+  if (!originalLabel) {
+    return { units: '', label: '' };
+  }
+  if (originalLabel.search(/[[(]]/) >= 0) {
+    const [units, label] = originalLabel.split(/\s*[[(]/);
+    return { units: originalUnits || units, label };
+  }
+  return { label: originalLabel, units: originalUnits };
 }
