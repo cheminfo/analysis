@@ -34,7 +34,7 @@ export class AnalysesManager {
     return analyses;
   }
 
-  public getSpectra() {
+  public getMeasurements() {
     const measurements = [];
     for (const analysis of this.analyses) {
       measurements.push(...analysis.measurements);
@@ -47,7 +47,7 @@ export class AnalysesManager {
    */
   public getDistinctTitles() {
     let values: Record<string, CounterType> = {};
-    for (let measurement of this.getSpectra()) {
+    for (let measurement of this.getMeasurements()) {
       if (measurement.description) {
         appendDistinctValue(values, measurement.description);
       }
@@ -60,7 +60,7 @@ export class AnalysesManager {
    */
   public getDistinctUnits() {
     let values: Record<string, CounterType> = {};
-    for (let measurement of this.getSpectra()) {
+    for (let measurement of this.getMeasurements()) {
       if (measurement.variables) {
         for (let [, variable] of Object.entries(measurement.variables)) {
           const units = variable.units?.replace(/\s+\[.*/, '');
@@ -78,7 +78,7 @@ export class AnalysesManager {
    */
   public getDistinctLabels() {
     let values: Record<string, CounterType> = {};
-    for (let measurement of this.getSpectra()) {
+    for (let measurement of this.getMeasurements()) {
       if (measurement.variables) {
         for (let [, variable] of Object.entries(measurement.variables)) {
           appendDistinctValue(values, variable.label.replace(/\s+\[.*/, ''));
@@ -93,7 +93,7 @@ export class AnalysesManager {
    */
   public getDistinctDataTypes() {
     let values: Record<string, CounterType> = {};
-    for (let measurement of this.getSpectra()) {
+    for (let measurement of this.getMeasurements()) {
       if (measurement.dataType) {
         appendDistinctValue(values, measurement.dataType);
       }
@@ -106,7 +106,7 @@ export class AnalysesManager {
    */
   public getDistinctMeta() {
     let values: Record<string, DifferentType> = {};
-    for (let measurement of this.getSpectra()) {
+    for (let measurement of this.getMeasurements()) {
       if (measurement.meta) {
         for (let key in measurement.meta) {
           appendDistinctParameter(values, key, measurement.meta[key]);
