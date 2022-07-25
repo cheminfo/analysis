@@ -1,3 +1,4 @@
+import { v4 } from '@lukeed/uuid';
 import type { MeasurementXYVariables, MeasurementXY } from 'cheminfo-types';
 import { isAnyArray } from 'is-any-array';
 import max from 'ml-array-max';
@@ -6,6 +7,7 @@ import { xIsMonotone } from 'ml-spectra-processing';
 
 import { MeasurementNormalizationOptions } from './types/MeasurementNormalizationOptions';
 import { MeasurementSelector } from './types/MeasurementSelector';
+import { MeasurementXYWithId } from './types/MeasurementXYWithId';
 import { getMeasurementXY } from './util/getMeasurementXY';
 import { getNormalizedMeasurement } from './util/getNormalizedMeasurement';
 
@@ -32,11 +34,11 @@ export class Analysis {
   public id: string;
   public label: string;
   public measurementCallback: MeasurementCallback | undefined;
-  public measurements: Array<MeasurementXY>;
+  public measurements: Array<MeasurementXYWithId>;
   public cache: Record<string, MeasurementXY | undefined>;
 
   public constructor(options: AnalysisOptions = {}) {
-    this.id = options.id || Math.random().toString(36).substring(2, 10);
+    this.id = options.id || v4();
     this.label = options.label || this.id;
     this.measurementCallback = options.measurementCallback;
     this.measurements = [];
@@ -65,6 +67,7 @@ export class Analysis {
    * Retrieve a MeasurementXY based on x/y units.
    *
    * @param selector
+   * @returns an object contaning x and y
    */
   public getMeasurementXY(selector: MeasurementSelector = {}) {
     let id = JSON.stringify(selector);
@@ -81,6 +84,7 @@ export class Analysis {
    * @param selector.xUnits - If undefined takes the first variable.
    * @param selector.yUnits - If undefined takes the second variable.
    * @param selector
+   * @returns Object containing x and y
    */
   public getXY(selector: MeasurementSelector = {}) {
     let measurement = this.getMeasurementXY(selector);
@@ -92,12 +96,13 @@ export class Analysis {
   }
 
   /**
-   * Return the data object for specific x/y units with possibly some
+   * Returns the data object for specific x/y units with possibly some
    * normalization options.
    *
    * @param options.selector.xUnits - // if undefined takes the first variable.
    * @param options.selector.yUnits - // if undefined takes the second variable.
    * @param options
+   * @returns object containing x and y
    */
   public getNormalizedMeasurement(options: NormalizedOptions = {}) {
     const { normalization, selector } = options;
@@ -121,6 +126,7 @@ export class Analysis {
    * @param selector.xUnits - // if undefined takes the first variable.
    * @param selector.yUnits - // if undefined takes the second variable.
    * @param selector
+   * @returns A string containing the x label.
    */
   public getXLabel(selector: MeasurementSelector) {
     return this.getMeasurementXY(selector)?.variables.x.label;
@@ -150,7 +156,7 @@ function standardizeData(
   options: Omit<MeasurementXY, 'variables'>,
   analysisOptions: Pick<AnalysisOptions, 'measurementCallback'>,
 ) {
-  let { meta = {}, dataType = '', description = '' } = options;
+  let { meta = {}, dataType = '', title = '' } = options;
   const { measurementCallback } = analysisOptions;
 
   if (measurementCallback) {
@@ -188,8 +194,9 @@ function standardizeData(
 
   return {
     variables,
-    description,
+    title,
     dataType,
     meta,
+    id: v4(), // todo we should be able to have predefined id
   };
 }

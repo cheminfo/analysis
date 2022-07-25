@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "base-analysis": "^0.2.0",
-    "cheminfo-types": "^1.2.0",
+    "cheminfo-types": "^1.4.0",
     "ml-gsd": "^10.2.0",
     "ml-spectra-fitting": "^4.0.2"
   },

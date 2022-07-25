@@ -55,10 +55,12 @@ export function getNormalizedMeasurement(
       },
     },
   };
-  if (measurement.description) {
-    newMeasurement.description = measurement.description;
+  if (measurement.title) {
+    newMeasurement.title = measurement.title;
   }
-  if (measurement.meta) newMeasurement.meta = measurement.meta;
+  if (measurement.meta) {
+    newMeasurement.meta = measurement.meta;
+  }
 
   let {
     from = measurement.variables.x.min,

@@ -42,14 +42,32 @@ export class AnalysesManager {
     return measurements;
   }
 
+  public getAnalysisByMeasurementId(id: string) {
+    for (const analysis of this.analyses) {
+      for (const measurement of analysis.measurements) {
+        if (measurement.id === id) return analysis;
+      }
+    }
+    return undefined;
+  }
+
+  public getMeasurementById(id: string) {
+    for (const analysis of this.analyses) {
+      for (const measurement of analysis.measurements) {
+        if (measurement.id === id) return measurement;
+      }
+    }
+    return undefined;
+  }
+
   /**
    * Get an array of objects (key + count) of all the titles.
    */
   public getDistinctTitles() {
     let values: Record<string, CounterType> = {};
     for (let measurement of this.getMeasurements()) {
-      if (measurement.description) {
-        appendDistinctValue(values, measurement.description);
+      if (measurement.title) {
+        appendDistinctValue(values, measurement.title);
       }
     }
     return Object.keys(values).map((key) => values[key]);

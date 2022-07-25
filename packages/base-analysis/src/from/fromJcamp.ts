@@ -8,7 +8,7 @@ import { Analysis } from '../Analysis';
  *
  * @param jcamp - String containing the JCAMP data.
  * @param [options={}]
- * @param [options.id=Math.random()]
+ * @param [options.id=v4()]
  * @param [options.label=options.id] - Human redeable label.
  * @param [options.measurementCallback] - A callback to apply on variables when creating measurement.
  * @returns - New class element with the given data.
@@ -73,9 +73,7 @@ function addJcamp(analysis: Analysis, jcamp: string | ArrayBuffer) {
 
     analysis.pushMeasurement(currentMeasurement.variables, {
       dataType: entry.dataType,
-      // TODO: check this.
-      // @ts-expect-error It seems description does not exist in jcampconverter types.
-      description: entry.description || entry.title, // todo hack waiting for jcampconverter update
+      title: entry.title,
       meta: entry.meta,
     });
   }

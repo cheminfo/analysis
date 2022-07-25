@@ -5,7 +5,7 @@
     "outDir": "lib",
     "composite": true
   },
-  "include": ["src/**/__tests__"],
+  "include": ["src/**/__tests__", "src/util/getMeasurementsXY.ts"],
   "references": [
     {
       "path": "./tsconfig.json"
