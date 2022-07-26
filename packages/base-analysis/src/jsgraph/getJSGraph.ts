@@ -53,33 +53,41 @@ export function getJSGraph(analyses: Analysis[], options: JSGraphOptions = {}) {
 
   for (let i = 0; i < analyses.length; i++) {
     const analysis = analyses[i];
-    let serie: Record<string, unknown> = {};
-    let currentData = analysis.getNormalizedMeasurement({
+
+    let measurements = analysis.getNormalizedMeasurements({
       selector,
       normalization,
     });
-    if (!currentData) continue;
-    if (!xLabel) xLabel = currentData.variables.x.label;
-    if (!yLabel) yLabel = currentData.variables.y.label;
-    if (!xUnits) xUnits = currentData.variables.x.units;
-    if (!yUnits) yUnits = currentData.variables.y.units;
-    addStyle(serie, analysis, {
-      color: colors[i % colors.length],
-      opacity: opacities[i % opacities.length],
-      lineWidth: linesWidth[i % linesWidth.length],
-    });
-    serie.data = {
-      x: currentData.variables.x.data,
-      y: currentData.variables.y.data,
-    };
+    if (measurements.length === 0) continue;
+    const firstMeasurement = measurements[0];
 
-    if (xAxis.logScale) {
-      // TODO: check if data can always exist.
-      // @ts-expect-error Something wrong here.
-      serie.data = xyFilterXPositive(serie.data);
+    // todo: if many spectra are available and not xUnits / yUnits are specified we should ensure that all the3 spectra are compatible
+
+    if (!xLabel) xLabel = firstMeasurement.variables.x.label;
+    if (!yLabel) yLabel = firstMeasurement.variables.y.label;
+    if (!xUnits) xUnits = firstMeasurement.variables.x.units;
+    if (!yUnits) yUnits = firstMeasurement.variables.y.units;
+
+    for (const measurement of measurements) {
+      let serie: Record<string, unknown> = {};
+      addStyle(serie, analysis, {
+        color: colors[i % colors.length],
+        opacity: opacities[i % opacities.length],
+        lineWidth: linesWidth[i % linesWidth.length],
+      });
+      serie.data = {
+        x: measurement.variables.x.data,
+        y: measurement.variables.y.data,
+      };
+
+      if (xAxis.logScale) {
+        // TODO: check if data can always exist.
+        // @ts-expect-error Something wrong here.
+        serie.data = xyFilterXPositive(serie.data);
+      }
+
+      series.push(serie);
     }
-
-    series.push(serie);
   }
   return {
     axes: {
