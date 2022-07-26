@@ -1,9 +1,5 @@
-import { toBeDeepCloseTo, toMatchCloseTo } from 'jest-matcher-deep-close-to';
-
 import { MeasurementXYWithId } from '../../types/MeasurementXYWithId';
 import { getMeasurementsXY } from '../getMeasurementsXY';
-
-expect.extend({ toBeDeepCloseTo, toMatchCloseTo });
 
 const measurements: MeasurementXYWithId[] = [
   {
