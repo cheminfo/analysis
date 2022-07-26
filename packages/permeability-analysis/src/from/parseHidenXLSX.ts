@@ -68,7 +68,7 @@ function getVariables(matrix: string[][], from: number, to: number) {
 
   for (let row of submatrix) {
     for (let i = 0; i < variables.length; i++) {
-      if (!row[i]) continue;
+      if (row[i] === undefined) continue;
       variables[i].data.push(row[i]);
     }
   }
