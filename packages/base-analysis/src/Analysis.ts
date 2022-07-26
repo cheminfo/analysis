@@ -9,6 +9,7 @@ import { MeasurementNormalizationOptions } from './types/MeasurementNormalizatio
 import { MeasurementSelector } from './types/MeasurementSelector';
 import { MeasurementXYWithId } from './types/MeasurementXYWithId';
 import { getMeasurementXY } from './util/getMeasurementXY';
+import { getMeasurementsXY } from './util/getMeasurementsXY';
 import { getNormalizedMeasurement } from './util/getNormalizedMeasurement';
 
 type MeasurementCallback = (
@@ -35,14 +36,17 @@ export class Analysis {
   public label: string;
   public measurementCallback: MeasurementCallback | undefined;
   public measurements: Array<MeasurementXYWithId>;
-  public cache: Record<string, MeasurementXY | undefined>;
+  private cache: {
+    measurement: Record<string, MeasurementXY>;
+    measurements: Record<string, MeasurementXY[]>;
+  };
 
   public constructor(options: AnalysisOptions = {}) {
     this.id = options.id || v4();
     this.label = options.label || this.id;
     this.measurementCallback = options.measurementCallback;
     this.measurements = [];
-    this.cache = {};
+    this.cache = { measurement: {}, measurements: {} };
   }
 
   /**
@@ -60,7 +64,7 @@ export class Analysis {
         measurementCallback: this.measurementCallback,
       }),
     );
-    this.cache = {};
+    this.cache = { measurement: {}, measurements: {} };
   }
 
   /**
@@ -71,10 +75,29 @@ export class Analysis {
    */
   public getMeasurementXY(selector: MeasurementSelector = {}) {
     let id = JSON.stringify(selector);
-    if (!this.cache[id]) {
-      this.cache[id] = getMeasurementXY(this.measurements, selector);
+    if (!this.cache.measurement[id]) {
+      const measurement = getMeasurementXY(this.measurements, selector);
+      if (measurement) {
+        this.cache.measurement[id] = measurement;
+      }
     }
-    return this.cache[id];
+    return this.cache.measurement[id];
+  }
+
+  /**
+   * Retrieve spectra matching selector
+   *
+   * @param selector
+   */
+  public getMeasurementsXY(selector: MeasurementSelector = {}) {
+    let id = JSON.stringify(selector);
+    if (!this.cache.measurements[id]) {
+      this.cache.measurements[id] = getMeasurementsXY(
+        this.measurements,
+        selector,
+      );
+    }
+    return this.cache.measurements[id];
   }
 
   /**
@@ -109,6 +132,24 @@ export class Analysis {
     const measurement = this.getMeasurementXY(selector);
     if (!measurement) return undefined;
     return getNormalizedMeasurement(measurement, normalization);
+  }
+
+  /**
+   * @param options
+   */
+  public getNormalizedMeasurements(
+    options: NormalizedOptions = {},
+  ): MeasurementXY[] {
+    const { normalization, selector } = options;
+    const measurements = this.getMeasurementsXY(selector);
+    if (measurements.length === 0) return [];
+    const normalizedMeasurements = [];
+    for (const measurement of measurements) {
+      normalizedMeasurements.push(
+        getNormalizedMeasurement(measurement, normalization),
+      );
+    }
+    return normalizedMeasurements;
   }
 
   /**
