@@ -4,3 +4,4 @@ lib-esm
 coverage
 jest.setup.ts
 scripts/templates
+dist
