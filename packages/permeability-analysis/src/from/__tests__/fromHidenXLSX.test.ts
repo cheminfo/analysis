@@ -20,5 +20,9 @@ describe('fromHidenXLSX', () => {
       'g',
     ]);
     expect(result.measurements[0].dataType).toBe('Permeability');
+    for (const key in result.measurements[0].variables) {
+      //@ts-expect-error just tests
+      expect(result.measurements[0].variables[key].data).toHaveLength(1621);
+    }
   });
 });
