@@ -1,8 +1,4 @@
-import { toBeDeepCloseTo, toMatchCloseTo } from 'jest-matcher-deep-close-to';
-
 import { Analysis, fromJcamp, toJcamp, JSGraph } from '..';
-
-expect.extend({ toBeDeepCloseTo, toMatchCloseTo });
 
 test('index', () => {
   let analysis = new Analysis();
