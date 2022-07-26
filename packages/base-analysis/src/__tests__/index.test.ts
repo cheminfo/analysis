@@ -2,7 +2,7 @@ import { Analysis, fromJcamp, toJcamp, JSGraph } from '..';
 
 test('index', () => {
   let analysis = new Analysis();
-  expect(analysis.id).toHaveLength(8);
+  expect(analysis.id).toHaveLength(36);
 
   analysis.pushMeasurement(
     {
@@ -23,7 +23,7 @@ test('index', () => {
       },
     },
     {
-      description: 'My measurement',
+      title: 'My measurement',
       dataType: 'TGA',
       meta: {
         meta1: 'Meta 1',
@@ -69,7 +69,7 @@ test('index', () => {
 
   let analysis2 = fromJcamp(jcamp);
 
-  expect(analysis2.measurements[0]).toStrictEqual({
+  expect(analysis2.measurements[0]).toMatchCloseTo({
     variables: {
       x: {
         data: [1, 2],
@@ -90,7 +90,7 @@ test('index', () => {
         symbol: 'Y',
       },
     },
-    description: 'My measurement',
+    title: 'My measurement',
     dataType: 'TGA',
     meta: { meta1: 'Meta 1', meta2: 'Meta 2' },
   });

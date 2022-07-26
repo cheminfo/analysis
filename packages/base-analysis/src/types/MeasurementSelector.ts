@@ -29,8 +29,8 @@ export interface MeasurementSelector {
   yVariable?: OneLowerCase;
   /** Select based on the data type */
   dataType?: string | RegExp;
-  /** Select based on the description field */
-  description?: string | RegExp;
+  /** Select based on the title field */
+  title?: string | RegExp;
   /** Select based on the presence of a meta information */
   meta?: Record<string, string>;
   /** The index of the measurement in the measurements array */

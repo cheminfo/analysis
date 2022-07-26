@@ -3,7 +3,7 @@ import max from 'ml-array-max';
 import min from 'ml-array-min';
 import { xIsMonotone } from 'ml-spectra-processing';
 
-import { convertUnit } from './convertUnit';
+import { convertUnits } from './convertUnits';
 
 /**
  * @param variable
@@ -14,8 +14,8 @@ export function getConvertedVariable(
   newUnits: string,
 ): MeasurementVariable {
   const data =
-    variable.units !== undefined && variable.units !== newUnits // would be nice if convertUnit would allow typedArray
-      ? convertUnit(Array.from(variable.data), variable.units, newUnits)
+    variable.units !== undefined && variable.units !== newUnits // would be nice if convertUnits would allow typedArray
+      ? convertUnits(Array.from(variable.data), variable.units, newUnits)
       : variable.data;
   return {
     units: newUnits,

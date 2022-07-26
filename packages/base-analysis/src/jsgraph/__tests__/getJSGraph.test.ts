@@ -2,7 +2,7 @@ import { Analysis, JSGraph } from '../..';
 
 test('getJSGraph', () => {
   let analysis = new Analysis();
-  expect(analysis.id).toHaveLength(8);
+  expect(analysis.id).toHaveLength(36);
 
   analysis.pushMeasurement(
     {
@@ -18,7 +18,7 @@ test('getJSGraph', () => {
       },
     },
     {
-      description: 'My measurement',
+      title: 'My measurement',
       dataType: 'TGA',
       meta: {
         meta1: 'Meta 1',

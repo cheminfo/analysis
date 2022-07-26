@@ -32,7 +32,7 @@ export function fromTAInstruments(
         label: 'Time [min]',
       },
     },
-    { dataType: 'TGA', description: parsed.meta.sampleName, meta: parsed.meta },
+    { dataType: 'TGA', title: parsed.meta.sampleName, meta: parsed.meta },
   );
 
   return analysis;

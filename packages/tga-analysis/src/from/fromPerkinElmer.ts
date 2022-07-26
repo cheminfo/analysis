@@ -31,7 +31,7 @@ export function fromPerkinElmer(
     },
     {
       dataType: 'TGA',
-      description: measurement.meta['Sample ID'],
+      title: measurement.meta['Sample ID'],
       meta: measurement.meta,
     },
   );
@@ -48,7 +48,7 @@ export function fromPerkinElmer(
     },
     {
       dataType: 'TGA',
-      description: measurement.meta['Sample ID'],
+      title: measurement.meta['Sample ID'],
       meta: measurement.meta,
     },
   );

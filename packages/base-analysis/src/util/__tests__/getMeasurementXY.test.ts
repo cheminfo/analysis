@@ -40,7 +40,7 @@ const measurements: MeasurementXY[] = [
         label: 'Temperature [°C]',
       },
     },
-    description: 'My measurement',
+    title: 'My measurement',
     dataType: 'TGA',
     meta: {
       meta1: 'Meta 1',
@@ -208,9 +208,8 @@ describe('getMeasurementXY', () => {
     });
   });
 
-  it('MeasurementXY by description My', () => {
-    let xy =
-      getMeasurementXY(measurements, { description: 'My' })?.variables || {};
+  it('MeasurementXY by title My', () => {
+    let xy = getMeasurementXY(measurements, { title: 'My' })?.variables || {};
 
     // @ts-expect-error
     xy.x.data = Array.from(xy.x.data);
@@ -251,8 +250,8 @@ describe('getMeasurementXY', () => {
 
   it('MeasurementXY by units L vs °F', () => {
     let xy = getMeasurementXY(measurements, { xUnits: 'L', yUnits: '°F' });
-    expect(xy).toBeDeepCloseTo({
-      description: 'My measurement',
+    expect(xy).toMatchCloseTo({
+      title: 'My measurement',
       dataType: 'TGA',
       meta: { meta1: 'Meta 1', meta2: 'Meta 2' },
       variables: {

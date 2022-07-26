@@ -28,7 +28,7 @@ describe('case for ntuples', () => {
       },
     },
     {
-      description: 'My measurement',
+      title: 'My measurement',
       dataType: 'TGA',
       meta: {
         meta1: 'Meta 1',
@@ -38,7 +38,7 @@ describe('case for ntuples', () => {
   );
 
   it('Check analysis ID', () => {
-    expect(analysis.id).toHaveLength(8);
+    expect(analysis.id).toHaveLength(36);
   });
 
   it('First measurement', () => {
@@ -87,7 +87,7 @@ describe('case for ntuples', () => {
 
     let analysis2 = fromJcamp(jcamp);
 
-    expect(analysis2.measurements[0]).toStrictEqual({
+    expect(analysis2.measurements[0]).toMatchCloseTo({
       variables: {
         x: {
           symbol: 'x',
@@ -129,7 +129,7 @@ describe('case for ntuples', () => {
           last: 6,
         },
       },
-      description: 'My measurement',
+      title: 'My measurement',
       dataType: 'TGA',
       meta: { meta1: 'Meta 1', meta2: 'Meta 2' },
     });
