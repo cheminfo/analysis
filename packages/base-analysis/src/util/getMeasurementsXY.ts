@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-dynamic-delete */
 
-import type { OneLowerCase, MeasurementXYVariables } from 'cheminfo-types';
+import type {
+  OneLowerCase,
+  MeasurementXYVariables,
+  MeasurementVariable,
+} from 'cheminfo-types';
 
-import { MeasurementSelector } from '../types/MeasurementSelector';
+import { MeasurementSelectorWithoutDefaultXY } from '../types/MeasurementSelector';
 import { MeasurementXYWithId } from '../types/MeasurementXYWithId';
 
 import { convertUnits } from './convertUnits';
@@ -10,20 +14,18 @@ import { ensureRegexp } from './ensureRegexp';
 import { getConvertedVariable } from './getConvertedVariable';
 
 /**
- * Retrieve the measurement with only X/Y data that match all the selectors
- * If more than one variable match the selector the 'x' or 'y' variable will be
- * taken
  *
  * @param measurements
  * @param selector
+ * @returns The list of matching measurements
  */
 export function getMeasurementsXY(
   measurements: Array<MeasurementXYWithId> = [],
-  selector: MeasurementSelector = {},
+  selector: MeasurementSelectorWithoutDefaultXY = {},
 ): MeasurementXYWithId[] {
-  const selectedSpectra: MeasurementXYWithId[] = [];
+  const selectedMeasurements: MeasurementXYWithId[] = [];
 
-  if (measurements.length < 1) return selectedSpectra;
+  if (measurements.length < 1) return selectedMeasurements;
 
   let {
     dataType,
@@ -31,12 +33,13 @@ export function getMeasurementsXY(
     xUnits,
     yUnits,
     variables,
-    xVariable = 'x',
-    yVariable = 'y',
+    xVariable,
+    yVariable,
     units,
     labels,
     xLabel,
     yLabel,
+    yLabels,
     meta,
     index,
   } = selector;
@@ -65,8 +68,18 @@ export function getMeasurementsXY(
     }
   }
 
-  if (xLabel) xLabel = ensureRegexp(xLabel);
-  if (yLabel) yLabel = ensureRegexp(yLabel);
+  const xLabelsRegExp = xLabel ? [ensureRegexp(xLabel)] : [];
+
+  const yLabelRegExp = yLabel && ensureRegexp(yLabel);
+  const yLabelsRegExp = yLabels ? yLabels.map(ensureRegexp) : [];
+  if (
+    yLabelRegExp &&
+    !yLabelsRegExp
+      .map((yLabel) => yLabel.toString())
+      .includes(yLabelRegExp.toString())
+  ) {
+    yLabelsRegExp.push(yLabelRegExp);
+  }
 
   for (let measurement of measurements) {
     let variableNames = Object.keys(measurement.variables);
@@ -97,40 +110,44 @@ export function getMeasurementsXY(
       }
     }
 
-    let x = getPossibleVariable(measurement.variables, {
+    let xs = getPossibleVariables(measurement.variables, {
       units: xUnits,
-      label: xLabel,
+      labels: xLabelsRegExp,
       variableName: xVariable,
     });
-    let y = getPossibleVariable(measurement.variables, {
+    let x = xs[0]; // could be improved in the future
+
+    let ys = getPossibleVariables(measurement.variables, {
       units: yUnits,
-      label: yLabel,
+      labels: yLabelsRegExp,
       variableName: yVariable,
     });
 
-    if (x && y) {
-      selectedSpectra.push({
-        title: measurement.title,
-        dataType: measurement.dataType,
-        meta: measurement.meta,
-        variables: { x, y },
-        id: measurement.id,
-      });
+    if (x && ys.length > 0) {
+      for (let y of ys) {
+        selectedMeasurements.push({
+          title: measurement.title,
+          dataType: measurement.dataType,
+          meta: measurement.meta,
+          variables: { x, y },
+          id: measurement.id,
+        });
+      }
     }
   }
-  return selectedSpectra;
+  return selectedMeasurements;
 }
 
-interface Selector {
+interface PossibleVariableSelector {
   units?: string;
-  label?: string | RegExp;
+  labels: RegExp[];
   variableName?: OneLowerCase;
 }
-function getPossibleVariable(
+function getPossibleVariables(
   variables: MeasurementXYVariables,
-  selector: Selector = {},
-) {
-  const { units, label, variableName } = selector;
+  selector: PossibleVariableSelector = { labels: [] },
+): MeasurementVariable[] {
+  const { units, labels, variableName } = selector;
   let possible: MeasurementXYVariables = { ...variables };
   let key: keyof typeof possible;
   if (units !== undefined) {
@@ -150,32 +167,37 @@ function getPossibleVariable(
     }
   }
 
-  if (label !== undefined) {
-    const regexpLabel = ensureRegexp(label);
+  if (labels.length > 0) {
     for (key in possible) {
-      if (!regexpLabel.exec(variables[key]?.label ?? '')) {
+      let isOk = false;
+      for (let label of labels) {
+        if (label.test(variables[key]?.label || '')) {
+          isOk = true;
+          break;
+        }
+      }
+      if (!isOk) {
         delete possible[key];
       }
     }
   }
 
   if (variableName !== undefined) {
-    if (possible[variableName]) return possible[variableName];
+    if (possible[variableName]) {
+      return [possible[variableName] as MeasurementVariable];
+    }
     const upper = variableName.toUpperCase();
     if (Object.prototype.hasOwnProperty.call(possible, upper)) {
-      return possible[upper as keyof typeof possible];
+      return [possible[upper as keyof typeof possible] as MeasurementVariable];
     }
     const lower = variableName.toLowerCase();
     if (Object.prototype.hasOwnProperty.call(possible, lower)) {
-      return possible[lower as keyof typeof possible];
+      return [possible[lower as keyof typeof possible] as MeasurementVariable];
     }
   }
 
-  const possibleFiltered = Object.values(possible).filter(
+  const possibleVariables = Object.values(possible).filter(
     (val) => val !== undefined,
-  );
-
-  if (possibleFiltered.length > 0) {
-    return possibleFiltered[0];
-  }
+  ) as MeasurementVariable[];
+  return possibleVariables;
 }

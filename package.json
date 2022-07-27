@@ -7,6 +7,7 @@
     "packages/*"
   ],
   "scripts": {
+    "build-permeability": "cheminfo-build --out-name 'permeability-analysis' --entry packages/permeability-analysis/lib-esm/index.js --root PermeabilityAnalysis",
     "check-types": "tsc --noEmit",
     "dev": "npm run tsc-watch",
     "eslint": "eslint .",
@@ -30,6 +31,7 @@
   "homepage": "https://github.com/cheminfo/analysis#readme",
   "devDependencies": {
     "@types/jest": "^28.1.6",
+    "cheminfo-build": "^1.1.11",
     "eslint": "^8.20.0",
     "eslint-config-cheminfo-typescript": "^11.0.1",
     "jest": "^28.1.3",

@@ -1,10 +1,10 @@
 import type { MeasurementXY } from 'cheminfo-types';
 
 import { Analysis } from '../Analysis';
-import { MeasurementSelector } from '../types/MeasurementSelector';
+import { MeasurementSelectorWithDefaultXY } from '../types/MeasurementSelector';
 
 interface ToTextOptions {
-  selector?: MeasurementSelector;
+  selector?: MeasurementSelectorWithDefaultXY;
   endOfLine?: string;
   fieldSeparator?: string;
 }
@@ -18,7 +18,6 @@ export function toText(analysis: Analysis, options: ToTextOptions = {}) {
   if (!options.selector) {
     return exportText(analysis.measurements, options);
   }
-
   // Export selected variables
   const measurements = analysis.getMeasurementXY(options.selector);
   return exportText(measurements ? [measurements] : [], options);
