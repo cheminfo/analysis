@@ -49,7 +49,7 @@ describe('getJSGraph isotherm', () => {
   let analysis = fromJcamp(jcamp);
   it('distinctLabelUnits', () => {
     const jsgraph = JSGraph.getJSGraph([analysis], {
-      selector: { xLabel: '', yLabel: '' },
+      selector: { x: { label: '' }, y: { label: '' } },
     });
     //@ts-expect-error Would be fixed if typed was correctly defined
     expect(jsgraph.series[0].data.x).toHaveLength(68);

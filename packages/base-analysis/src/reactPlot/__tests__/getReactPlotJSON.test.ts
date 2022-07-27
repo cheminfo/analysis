@@ -40,10 +40,8 @@ test('simple test case', () => {
   analyses.push(new Analysis());
 
   const result = getReactPlotJSON(analyses, {
-    xLabel: 'Voltage',
-    xUnits: 'V',
-    yLabel: 'Current',
-    yUnits: 'A',
+    x: { label: 'Voltage', units: 'V' },
+    y: { label: 'Current', units: 'A' },
   });
   expect(result.content).toHaveLength(len);
   expect(result.axes).toStrictEqual([
@@ -73,10 +71,8 @@ test('enforce growing', () => {
   const result = getReactPlotJSON(
     analyses,
     {
-      xLabel: 'Voltage',
-      xUnits: 'kV',
-      yLabel: 'Current',
-      yUnits: 'mA',
+      x: { label: 'Voltage', units: 'kV' },
+      y: { label: 'Current', units: 'mA' },
     },
     { enforceGrowing: true },
   );

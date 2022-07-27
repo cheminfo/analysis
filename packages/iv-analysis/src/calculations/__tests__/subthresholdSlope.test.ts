@@ -12,10 +12,8 @@ describe('ss transfer', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'Vg',
-        xUnits: 'V',
-        yLabel: 'Id_dens',
-        yUnits: 'A/mm',
+        x: { label: 'Vg', units: 'V' },
+        y: { label: 'Id_dens', units: 'A/mm' },
       });
       if (measurement) {
         const res = subthresholdSlope(measurement);
@@ -32,10 +30,8 @@ describe('ss transfer', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'Vg',
-        xUnits: 'V',
-        yLabel: 'Id_dens',
-        yUnits: 'A/mm',
+        x: { label: 'Vg', units: 'V' },
+        y: { label: 'Id_dens', units: 'A/mm' },
       });
       expect(measurement?.meta?.subthresholdSlope).toBeDefined();
       const res = JSON.parse(measurement?.meta?.subthresholdSlope ?? '');

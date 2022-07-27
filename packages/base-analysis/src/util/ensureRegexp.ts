@@ -1,19 +1,19 @@
 const testRegExp = /^\/((?:\\\/|[^/])+)\/([migyu]{0,5})?$/;
 
 /**
- * @param string
+ * @param value
  */
-export function ensureRegexp(string: string | RegExp) {
-  if (typeof string !== 'string') return string;
-  const parts = testRegExp.exec(string);
+export function ensureRegexp(value: string | RegExp): RegExp {
+  if (typeof value !== 'string') return value;
+  const parts = testRegExp.exec(value);
   if (parts) {
     try {
       return new RegExp(parts[1], parts[2]);
     } catch (err) {
-      return stringToRegexp(string);
+      return stringToRegexp(value);
     }
   } else {
-    return stringToRegexp(string);
+    return stringToRegexp(value);
   }
 }
 

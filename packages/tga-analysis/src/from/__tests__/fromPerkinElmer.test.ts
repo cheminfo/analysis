@@ -20,7 +20,10 @@ test('fromPerkinElmer', () => {
   expect(measurement1?.variables.y.units).toBe('mg');
   expect(measurement1?.meta?.methodSteps).toHaveLength(6);
 
-  let measurement2 = analysis.getMeasurementXY({ units: 'mg vs s' });
+  let measurement2 = analysis.getMeasurementXY({
+    x: { units: 's' },
+    y: { units: 'mg' },
+  });
 
   expect(measurement2?.variables.x.data).toHaveLength(1155);
   expect(measurement2?.variables.y.data).toHaveLength(1155);

@@ -1,7 +1,7 @@
 import type { AxisProps, LineSeriesProps, PlotObjectPlot } from 'react-plot';
 
 import { Analysis } from '../Analysis';
-import { MeasurementSelectorWithDefaultXY } from '../types/MeasurementSelector';
+import { MeasurementSelector } from '../types/MeasurementSelector';
 
 type LineSeriesType = { type: 'line' } & LineSeriesProps;
 
@@ -45,13 +45,13 @@ function getData(x: ListNumber, y: ListNumber) {
  * Generate a react-plot chart format from an array of Analysis.
  *
  * @param analyses - An array of Analysis objects.
- * @param query - Object with keys for each measurement selector.
+ * @param selector - Object with keys for each measurement selector.
  * @param options - Options for the plot.
  * @returns properties for a react-plot chart
  */
 export function getReactPlotJSON(
   analyses: Analysis[],
-  query: MeasurementSelectorWithDefaultXY,
+  selector: MeasurementSelector,
   options: ReactPlotOptions = {},
 ): PlotObjectPlot & { meta: Record<string, string>[] } {
   const {
@@ -71,13 +71,13 @@ export function getReactPlotJSON(
   for (const analysis of analyses) {
     let measurements = enforceGrowing
       ? analysis.getNormalizedMeasurement({
-          selector: query,
+          selector,
           normalization: {
             filters: [{ name: 'ensureGrowing' }],
             keepYUnits: true,
           },
         })
-      : analysis.getMeasurementXY(query);
+      : analysis.getMeasurementXY(selector);
     if (!measurements) continue;
     if (measurements.meta) meta.push(measurements.meta);
 

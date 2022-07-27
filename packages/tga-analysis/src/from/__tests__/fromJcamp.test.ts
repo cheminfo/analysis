@@ -20,7 +20,10 @@ test('fromJcamp', () => {
   expect(measurement1.variables.y.label).toBe('Value');
   expect(measurement1.variables.y.units).toBe('mg');
 
-  let measurement2 = analysis.getMeasurementXY({ units: 'mg vs s' });
+  let measurement2 = analysis.getMeasurementXY({
+    x: { units: 's' },
+    y: { units: 'mg' },
+  });
 
   expect(measurement2.variables.x.data).toHaveLength(2251);
   expect(measurement2.variables.y.data).toHaveLength(2251);

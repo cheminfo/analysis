@@ -1,9 +1,9 @@
-import type { MeasurementXY } from 'cheminfo-types';
-
+import { MeasurementXYWithId } from '../../types/MeasurementXYWithId';
 import { getMeasurementXY } from '../getMeasurementXY';
 
-const measurements: MeasurementXY[] = [
+const measurements: MeasurementXYWithId[] = [
   {
+    id: '1',
     variables: {
       x: {
         data: Float64Array.from([1, 2]),
@@ -28,6 +28,7 @@ const measurements: MeasurementXY[] = [
     },
   },
   {
+    id: '2',
     variables: {
       x: {
         data: [1, 2],
@@ -48,6 +49,7 @@ const measurements: MeasurementXY[] = [
     },
   },
   {
+    id: '3',
     variables: {
       x: {
         data: [10, 20],
@@ -66,8 +68,8 @@ const measurements: MeasurementXY[] = [
 describe('getMeasurementXY', () => {
   it('MeasurementXY by labels', () => {
     let xy = getMeasurementXY(measurements, {
-      xLabel: 'Weight [mg]',
-      yLabel: 'Temperature [°C]',
+      x: { label: 'Weight [mg]' },
+      y: { label: 'Temperature [°C]' },
     })?.variables;
 
     // @ts-expect-error
@@ -89,8 +91,8 @@ describe('getMeasurementXY', () => {
   it('MeasurementXY by partial labels', () => {
     let xy =
       getMeasurementXY(measurements, {
-        xLabel: 'weight',
-        yLabel: 'temp',
+        x: { label: 'weight' },
+        y: { label: 'temp' },
       })?.variables || {};
 
     // @ts-expect-error
@@ -110,8 +112,8 @@ describe('getMeasurementXY', () => {
   });
 
   it('MeasurementXY by units s vs g', () => {
-    const query = { xUnits: 's', yUnits: 'g' };
-    let xy = getMeasurementXY(measurements, query)?.variables || {};
+    const selector = { x: { units: 's' }, y: { units: 'g' } };
+    let xy = getMeasurementXY(measurements, selector)?.variables || {};
 
     // @ts-expect-error
     xy.x.data = Array.from(xy.x.data);
@@ -135,35 +137,9 @@ describe('getMeasurementXY', () => {
     });
   });
 
-  it('MeasurementXY by units "" vs °C', () => {
-    let xy =
-      getMeasurementXY(measurements, { units: 'vs °C' })?.variables || {};
-
-    // @ts-expect-error
-    xy.x.data = Array.from(xy.x.data);
-    expect(xy).toStrictEqual({
-      x: {
-        units: '°C',
-        label: 'Temperature',
-        data: [30, 40],
-        min: 30,
-        max: 40,
-        isMonotone: true,
-      },
-      y: {
-        units: '',
-        label: 'Weight',
-        data: [10, 20],
-        min: 10,
-        max: 20,
-        isMonotone: true,
-      },
-    });
-  });
-
   it('MeasurementXY by units °C vs g', () => {
     let xy =
-      getMeasurementXY(measurements, { xUnits: '°C', yUnits: 'g' })
+      getMeasurementXY(measurements, { x: { units: '°C' }, y: { units: 'g' } })
         ?.variables || {};
 
     // @ts-expect-error
@@ -249,7 +225,10 @@ describe('getMeasurementXY', () => {
   });
 
   it('MeasurementXY by units L vs °F', () => {
-    let xy = getMeasurementXY(measurements, { xUnits: 'L', yUnits: '°F' });
+    let xy = getMeasurementXY(measurements, {
+      x: { units: 'L' },
+      y: { units: '°F' },
+    });
     expect(xy).toMatchCloseTo({
       title: 'My measurement',
       dataType: 'TGA',
@@ -275,50 +254,13 @@ describe('getMeasurementXY', () => {
     });
   });
 
-  it('MeasurementXY by units s vs g as units', () => {
-    let xy =
-      getMeasurementXY(measurements, { units: 'g vs s' })?.variables || {};
-
-    // @ts-expect-error
-    xy.x.data = Array.from(xy.x.data);
-    expect(xy).toStrictEqual({
-      x: {
-        units: 's',
-        label: 'Time [s]',
-        data: [7, 8],
-        min: 7,
-        max: 8,
-        isMonotone: true,
-      },
-      y: {
-        units: 'g',
-        label: 'Weight [g]',
-        data: [0.001, 0.002],
-        min: 0.001,
-        max: 0.002,
-        isMonotone: true,
-      },
-    });
-  });
-
   it('xVariable: t, yVariable: Z', () => {
-    // @ts-expect-error We still allow upper or lowercase, this could change in the future
-    let xy = getMeasurementXY(measurements, { xVariable: 't', yVariable: 'Z' });
-    expect(xy).toMatchObject({
-      variables: {
-        x: {
-          units: 's',
-          label: 'Time [s]',
-        },
-        y: {
-          units: '°C',
-          label: 'Expected temperature [°C]',
-        },
-      },
-    });
-  });
-  it('variables: Z vs t', () => {
-    let xy = getMeasurementXY(measurements, { variables: 'Z vs t' });
+    const selector = {
+      x: { variable: 't' },
+      y: { variable: 'Z' },
+    };
+    //@ts-expect-error variable in uppercase for the testcase
+    let xy = getMeasurementXY(measurements, selector);
     expect(xy).toMatchObject({
       variables: {
         x: {

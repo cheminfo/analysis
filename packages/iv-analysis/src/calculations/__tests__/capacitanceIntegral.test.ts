@@ -16,10 +16,8 @@ describe('Capacitance integral on high voltage', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'Vd',
-        xUnits: 'V',
-        yLabel: 'C_dens',
-        yUnits: 'F/mm',
+        x: { label: 'Vd', units: 'V' },
+        y: { label: 'C_dens', units: 'F/mm' },
       });
       if (measurement) {
         const res = capacitanceIntegral(measurement);
@@ -36,10 +34,8 @@ describe('Capacitance integral on high voltage', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'Vd',
-        xUnits: 'V',
-        yLabel: 'C_dens',
-        yUnits: 'F/mm',
+        x: { label: 'Vd', units: 'V' },
+        y: { label: 'C_dens', units: 'F/mm' },
       });
       expect(measurement?.meta?.capacitanceIntegral).toBeDefined();
       const res = JSON.parse(measurement?.meta?.capacitanceIntegral ?? '');
@@ -56,10 +52,8 @@ describe('Capacitance integral on MOSFET', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'VBias',
-        xUnits: 'V',
-        yLabel: 'C_dens',
-        yUnits: 'F/mm',
+        x: { label: 'VBias', units: 'V' },
+        y: { label: 'C_dens', units: 'F/mm' },
       });
       if (measurement) {
         const res = capacitanceIntegral(measurement);
@@ -76,10 +70,8 @@ describe('Capacitance integral on MOSFET', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'VBias',
-        xUnits: 'V',
-        yLabel: 'C_dens',
-        yUnits: 'F/mm',
+        x: { label: 'VBias', units: 'V' },
+        y: { label: 'C_dens', units: 'F/mm' },
       });
       expect(measurement?.meta?.capacitanceIntegral).toBeDefined();
       const res = JSON.parse(measurement?.meta?.capacitanceIntegral ?? '');

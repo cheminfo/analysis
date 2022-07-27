@@ -12,10 +12,8 @@ describe('Vth breakdown', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'Vd',
-        xUnits: 'V',
-        yLabel: 'Id_dens',
-        yUnits: 'A/mm',
+        x: { label: 'Vd', units: 'V' },
+        y: { label: 'Id_dens', units: 'A/mm' },
       });
       if (measurement) {
         const res = thresholdVoltage(measurement);
@@ -32,10 +30,8 @@ describe('Vth breakdown', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'Vd',
-        xUnits: 'V',
-        yLabel: 'Id_dens',
-        yUnits: 'A/mm',
+        x: { label: 'Vd', units: 'V' },
+        y: { label: 'Id_dens', units: 'A/mm' },
       });
       expect(measurement?.meta?.thresholdVoltage).toBeDefined();
       const res = JSON.parse(measurement?.meta?.thresholdVoltage ?? '');
@@ -52,10 +48,8 @@ describe('Vth transfer', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'Vg',
-        xUnits: 'V',
-        yLabel: 'Id_dens',
-        yUnits: 'A/mm',
+        x: { label: 'Vg', units: 'V' },
+        y: { label: 'Id_dens', units: 'A/mm' },
       });
       if (measurement) {
         const res = thresholdVoltage(measurement);
@@ -72,10 +66,8 @@ describe('Vth transfer', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'Vg',
-        xUnits: 'V',
-        yLabel: 'Id_dens',
-        yUnits: 'A/mm',
+        x: { label: 'Vg', units: 'V' },
+        y: { label: 'Id_dens', units: 'A/mm' },
       });
       expect(measurement?.meta?.thresholdVoltage).toBeDefined();
       const res = JSON.parse(measurement?.meta?.thresholdVoltage ?? '');

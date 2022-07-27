@@ -13,10 +13,8 @@ describe('Ron transistor', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'Vd',
-        xUnits: 'V',
-        yLabel: 'Id_dens',
-        yUnits: 'A/mm',
+        x: { label: 'Vd', units: 'V' },
+        y: { label: 'Id_dens', units: 'A/mm' },
       });
       if (measurement) {
         const res = transistorOnResistance(measurement);
@@ -35,10 +33,8 @@ describe('Ron transistor', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'Vd',
-        xUnits: 'V',
-        yLabel: 'Id_dens',
-        yUnits: 'A/mm',
+        x: { label: 'Vd', units: 'V' },
+        y: { label: 'Id_dens', units: 'A/mm' },
       });
       expect(measurement?.meta?.resistanceOn).toBeDefined();
       const res = JSON.parse(measurement?.meta?.resistanceOn ?? '');
@@ -56,10 +52,8 @@ describe('Ron diode', () => {
     );
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'Vd',
-        xUnits: 'V',
-        yLabel: 'Id_dens',
-        yUnits: 'A/mm',
+        x: { label: 'Vd', units: 'V' },
+        y: { label: 'Id_dens', units: 'A/mm' },
       });
       if (measurement) {
         const res = diodeOnResistance(measurement);
@@ -78,10 +72,8 @@ describe('Ron diode', () => {
     const analyses = fromIV(readFileSync(join(__dirname, filename), 'latin1'));
     for (const analysis of analyses) {
       const measurement = analysis.getMeasurementXY({
-        xLabel: 'Vd',
-        xUnits: 'V',
-        yLabel: 'Id_dens',
-        yUnits: 'A/mm',
+        x: { label: 'Vd', units: 'V' },
+        y: { label: 'Id_dens', units: 'A/mm' },
       });
       expect(measurement?.meta?.resistanceOn).toBeDefined();
       const res = JSON.parse(measurement?.meta?.resistanceOn ?? '');

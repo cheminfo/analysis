@@ -1,10 +1,10 @@
 import type { MeasurementXY } from 'cheminfo-types';
 
 import { Analysis } from '../Analysis';
-import { MeasurementSelectorWithDefaultXY } from '../types/MeasurementSelector';
+import { MeasurementSelector } from '../types/MeasurementSelector';
 
 interface ToTextOptions {
-  selector?: MeasurementSelectorWithDefaultXY;
+  selector?: MeasurementSelector;
   endOfLine?: string;
   fieldSeparator?: string;
 }

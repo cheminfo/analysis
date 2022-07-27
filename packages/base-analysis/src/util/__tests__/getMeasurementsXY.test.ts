@@ -66,13 +66,21 @@ const measurements: MeasurementXYWithId[] = [
 ];
 
 describe('getMeasurementsXY', () => {
-  it('No filter', () => {
+  it('No filter, we take variable x and y', () => {
     let xy = getMeasurementsXY(measurements, {});
+    expect(xy).toHaveLength(3);
+  });
+
+  it('Empty x and y filter', () => {
+    let xy = getMeasurementsXY(measurements, { x: {}, y: {} });
     expect(xy).toHaveLength(8);
   });
 
   it('Many spectry with specific units', () => {
-    let xy = getMeasurementsXY(measurements, { xUnits: 'ug', yUnits: '°C' });
+    let xy = getMeasurementsXY(measurements, {
+      x: { units: 'ug' },
+      y: { units: '°C' },
+    });
     expect(xy).toHaveLength(2);
     expect(xy[1].variables).toStrictEqual({
       x: {
@@ -96,8 +104,8 @@ describe('getMeasurementsXY', () => {
 
   it('Measurement by labels', () => {
     let xy = getMeasurementsXY(measurements, {
-      xLabel: 'Weight [mg]',
-      yLabel: 'Temperature [°C]',
+      x: { label: 'Weight [mg]' },
+      y: { label: 'Temperature [°C]' },
     })[0].variables;
 
     xy.x.data = Array.from(xy.x.data);
@@ -115,30 +123,32 @@ describe('getMeasurementsXY', () => {
     });
   });
 
-  it('Measurement by array of yLabels', () => {
+  it('Measurement by y label regexp', () => {
     let xy = getMeasurementsXY(measurements, {
-      yLabels: ['Temperature [°C]', 'Expected temperature [°C]', /milli/],
+      y: { label: /temperature|milli/i },
     });
 
-    expect(xy).toHaveLength(3);
+    expect(xy).toHaveLength(4);
     const xLabels = xy.map((xy) => xy.variables.x.label);
+    const yLabels = xy.map((xy) => xy.variables.y.label);
     expect(xLabels).toStrictEqual([
       'Weight [mg]',
       'Weight [mg]',
       'Volume [mL]',
+      'Weight',
     ]);
-    const yLabels = xy.map((xy) => xy.variables.y.label);
     expect(yLabels).toStrictEqual([
       'milliliters',
       'Expected temperature [°C]',
       'Temperature [°C]',
+      'Temperature',
     ]);
   });
 
   it('mg versus °C', () => {
     let xy = getMeasurementsXY(measurements, {
-      xUnits: 'mg',
-      yUnits: '°C',
+      x: { units: 'mg' },
+      y: { units: '°C' },
     });
     expect(xy).toHaveLength(2);
     expect(xy.map((xy) => xy.id)).toStrictEqual(['1', '3']);
