@@ -6,10 +6,7 @@ import min from 'ml-array-min';
 import { xIsMonotone } from 'ml-spectra-processing';
 
 import { MeasurementNormalizationOptions } from './types/MeasurementNormalizationOptions';
-import {
-  MeasurementSelectorWithDefaultXY,
-  MeasurementSelectorWithoutDefaultXY,
-} from './types/MeasurementSelector';
+import { MeasurementSelector } from './types/MeasurementSelector';
 import { MeasurementXYWithId } from './types/MeasurementXYWithId';
 import { getMeasurementXY } from './util/getMeasurementXY';
 import { getMeasurementsXY } from './util/getMeasurementsXY';
@@ -24,13 +21,9 @@ interface AnalysisOptions {
   label?: string;
   measurementCallback?: MeasurementCallback;
 }
-interface NormalizedOptionsWithDefaultXY {
+interface NormalizedOptions {
   normalization?: MeasurementNormalizationOptions;
-  selector?: MeasurementSelectorWithDefaultXY;
-}
-interface NormalizedOptionsWithoutDefaultXY {
-  normalization?: MeasurementNormalizationOptions;
-  selector?: MeasurementSelectorWithoutDefaultXY;
+  selector?: MeasurementSelector;
 }
 
 /**
@@ -80,7 +73,7 @@ export class Analysis {
    * @param selector
    * @returns an object contaning x and y
    */
-  public getMeasurementXY(selector: MeasurementSelectorWithDefaultXY = {}) {
+  public getMeasurementXY(selector: MeasurementSelector = {}) {
     let id = JSON.stringify(selector);
     if (!this.cache.measurement[id]) {
       const measurement = getMeasurementXY(this.measurements, selector);
@@ -96,7 +89,7 @@ export class Analysis {
    *
    * @param selector
    */
-  public getMeasurementsXY(selector: MeasurementSelectorWithoutDefaultXY = {}) {
+  public getMeasurementsXY(selector: MeasurementSelector = {}) {
     let id = JSON.stringify(selector);
     if (!this.cache.measurements[id]) {
       this.cache.measurements[id] = getMeasurementsXY(
@@ -110,13 +103,10 @@ export class Analysis {
   /**
    * Retrieve a xy object.
    *
-   * @param selector.units - Units separated by vs like for example "g vs °C".
-   * @param selector.xUnits - If undefined takes the first variable.
-   * @param selector.yUnits - If undefined takes the second variable.
    * @param selector
    * @returns Object containing x and y
    */
-  public getXY(selector: MeasurementSelectorWithDefaultXY = {}) {
+  public getXY(selector: MeasurementSelector = {}) {
     let measurement = this.getMeasurementXY(selector);
     if (!measurement) return undefined;
     return {
@@ -134,9 +124,7 @@ export class Analysis {
    * @param options
    * @returns object containing x and y
    */
-  public getNormalizedMeasurement(
-    options: NormalizedOptionsWithDefaultXY = {},
-  ) {
+  public getNormalizedMeasurement(options: NormalizedOptions = {}) {
     const { normalization, selector } = options;
     const measurement = this.getMeasurementXY(selector);
     if (!measurement) return undefined;
@@ -147,7 +135,7 @@ export class Analysis {
    * @param options
    */
   public getNormalizedMeasurements(
-    options: NormalizedOptionsWithoutDefaultXY = {},
+    options: NormalizedOptions = {},
   ): MeasurementXY[] {
     const { normalization, selector } = options;
     const measurements = this.getMeasurementsXY(selector);
@@ -171,25 +159,21 @@ export class Analysis {
   }
 
   /**
-   * Returns the xLabel.
+   * Returns the x axis label.
    *
-   * @param selector.xUnits - // if undefined takes the first variable.
-   * @param selector.yUnits - // if undefined takes the second variable.
    * @param selector
    * @returns A string containing the x label.
    */
-  public getXLabel(selector: MeasurementSelectorWithDefaultXY) {
+  public getXLabel(selector: MeasurementSelector) {
     return this.getMeasurementXY(selector)?.variables.x.label;
   }
 
   /**
-   * Returns the yLabel.
+   * Returns the y axis label.
    *
-   * @param selector.xUnits - // if undefined takes the first variable.
-   * @param selector.yUnits - // if undefined takes the second variable.
    * @param selector
    */
-  public getYLabel(selector: MeasurementSelectorWithDefaultXY) {
+  public getYLabel(selector: MeasurementSelector) {
     return this.getMeasurementXY(selector)?.variables.y.label;
   }
 }

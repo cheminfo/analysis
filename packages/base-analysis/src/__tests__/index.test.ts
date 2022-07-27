@@ -47,12 +47,12 @@ test('index', () => {
       (normalizedMeasurement?.variables?.y?.data?.[1] || 0),
   ).toBeCloseTo(1, 10);
 
-  let undefinedMeasurement = analysis.getMeasurementXY({ xUnits: 'J' });
+  let undefinedMeasurement = analysis.getMeasurementXY({ x: { units: 'J' } });
   expect(undefinedMeasurement).toBeUndefined();
 
   let inverted = analysis.getMeasurementXY({
-    xUnits: 'yUnits',
-    yUnits: 'xUnits',
+    x: { units: 'yUnits' },
+    y: { units: 'xUnits' },
   });
   expect(inverted?.variables.x.data).toStrictEqual([3, 4]);
   expect(inverted?.variables.y.data).toStrictEqual([1, 2]);

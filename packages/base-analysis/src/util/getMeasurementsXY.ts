@@ -6,7 +6,7 @@ import type {
   MeasurementVariable,
 } from 'cheminfo-types';
 
-import { MeasurementSelectorWithoutDefaultXY } from '../types/MeasurementSelector';
+import { MeasurementSelector } from '../types/MeasurementSelector';
 import { MeasurementXYWithId } from '../types/MeasurementXYWithId';
 
 import { convertUnits } from './convertUnits';
@@ -21,7 +21,7 @@ import { getConvertedVariable } from './getConvertedVariable';
  */
 export function getMeasurementsXY(
   measurements: Array<MeasurementXYWithId> = [],
-  selector: MeasurementSelectorWithoutDefaultXY = {},
+  selector: MeasurementSelector = {},
 ): MeasurementXYWithId[] {
   const selectedMeasurements: MeasurementXYWithId[] = [];
 
@@ -30,19 +30,14 @@ export function getMeasurementsXY(
   let {
     dataType,
     title,
-    xUnits,
-    yUnits,
-    variables,
-    xVariable,
-    yVariable,
-    units,
-    labels,
-    xLabel,
-    yLabel,
-    yLabels,
+    x: xSelector = { variable: 'x' },
+    y: ySelector = { variable: 'y' },
     meta,
     index,
   } = selector;
+
+  let { units: xUnits, variable: xVariable, label: xLabel } = xSelector;
+  let { units: yUnits, variable: yVariable, label: yLabel } = ySelector;
 
   if (index !== undefined) {
     return [measurements[index]];
@@ -54,31 +49,6 @@ export function getMeasurementsXY(
 
   if (title) {
     title = ensureRegexp(title);
-  }
-
-  if (units && !xUnits && !yUnits) [yUnits, xUnits] = units.split(/\s*vs\s*/);
-  if (labels && !xLabel && !yLabel) {
-    [yLabel, xLabel] = labels.split(/\s*vs\s*/);
-  }
-  if (variables) {
-    const parts = variables.split(/\s*vs\s*/);
-    if (parts.length === 2) {
-      xVariable = parts[1] as OneLowerCase;
-      yVariable = parts[0] as OneLowerCase;
-    }
-  }
-
-  const xLabelsRegExp = xLabel ? [ensureRegexp(xLabel)] : [];
-
-  const yLabelRegExp = yLabel && ensureRegexp(yLabel);
-  const yLabelsRegExp = yLabels ? yLabels.map(ensureRegexp) : [];
-  if (
-    yLabelRegExp &&
-    !yLabelsRegExp
-      .map((yLabel) => yLabel.toString())
-      .includes(yLabelRegExp.toString())
-  ) {
-    yLabelsRegExp.push(yLabelRegExp);
   }
 
   for (let measurement of measurements) {
@@ -112,14 +82,14 @@ export function getMeasurementsXY(
 
     let xs = getPossibleVariables(measurement.variables, {
       units: xUnits,
-      labels: xLabelsRegExp,
+      label: xLabel,
       variableName: xVariable,
     });
     let x = xs[0]; // could be improved in the future
 
     let ys = getPossibleVariables(measurement.variables, {
       units: yUnits,
-      labels: yLabelsRegExp,
+      label: yLabel,
       variableName: yVariable,
     });
 
@@ -140,14 +110,17 @@ export function getMeasurementsXY(
 
 interface PossibleVariableSelector {
   units?: string;
-  labels: RegExp[];
+  label?: RegExp | string;
   variableName?: OneLowerCase;
 }
 function getPossibleVariables(
   variables: MeasurementXYVariables,
-  selector: PossibleVariableSelector = { labels: [] },
+  selector: PossibleVariableSelector,
 ): MeasurementVariable[] {
-  const { units, labels, variableName } = selector;
+  const { units, label, variableName } = selector;
+
+  const labelRegExp = label !== undefined ? ensureRegexp(label) : undefined;
+
   let possible: MeasurementXYVariables = { ...variables };
   let key: keyof typeof possible;
   if (units !== undefined) {
@@ -167,16 +140,9 @@ function getPossibleVariables(
     }
   }
 
-  if (labels.length > 0) {
+  if (labelRegExp) {
     for (key in possible) {
-      let isOk = false;
-      for (let label of labels) {
-        if (label.test(variables[key]?.label || '')) {
-          isOk = true;
-          break;
-        }
-      }
-      if (!isOk) {
+      if (!labelRegExp.test(variables[key]?.label || '')) {
         delete possible[key];
       }
     }

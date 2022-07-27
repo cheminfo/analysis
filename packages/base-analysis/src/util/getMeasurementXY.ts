@@ -1,10 +1,5 @@
-// TODO: enable ts in this file.
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
-import type { MeasurementXY } from 'cheminfo-types';
-
-import { MeasurementSelectorWithDefaultXY } from '../types/MeasurementSelector';
+import { MeasurementSelector } from '../types/MeasurementSelector';
+import { MeasurementXYWithId } from '../types/MeasurementXYWithId';
 
 import { getMeasurementsXY } from './getMeasurementsXY';
 
@@ -18,14 +13,10 @@ import { getMeasurementsXY } from './getMeasurementsXY';
  * @returns measurement with x/y data
  */
 export function getMeasurementXY(
-  measurements: Array<MeasurementXY> = [],
-  selector: MeasurementSelectorWithDefaultXY = {},
-): MeasurementXY | undefined {
-  const selectedSpectra = getMeasurementsXY(measurements, {
-    xVariable: 'x',
-    yVariable: 'y',
-    ...selector,
-  });
+  measurements: Array<MeasurementXYWithId> = [],
+  selector: MeasurementSelector = {},
+): MeasurementXYWithId | undefined {
+  const selectedSpectra = getMeasurementsXY(measurements, selector);
   if (selectedSpectra.length === 0) return undefined;
   return selectedSpectra[0];
 }

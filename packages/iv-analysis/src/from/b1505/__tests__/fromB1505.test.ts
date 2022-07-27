@@ -27,7 +27,10 @@ function testFile(
   for (const analysis of analyses) {
     const { 'default.xLabel': xLabel, 'default.yLabel': yLabel } =
       analysis.measurements[0]?.meta || {};
-    let measurement = analysis.getMeasurementXY({ xLabel, yLabel });
+    let measurement = analysis.getMeasurementXY({
+      x: { label: xLabel },
+      y: { label: yLabel },
+    });
 
     expect(analysis?.label).toBe(title);
 

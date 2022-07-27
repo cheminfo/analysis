@@ -9,7 +9,10 @@ test('fromMulChannelCap', () => {
     'latin1',
   );
   let analysis = fromMulChannelCap(csv);
-  let measurement = analysis.getMeasurementXY({ xLabel: 'Vd', yLabel: 'Id' });
+  let measurement = analysis.getMeasurementXY({
+    x: { label: 'Vd' },
+    y: { label: 'Id' },
+  });
 
   expect(measurement?.variables.x.data).toHaveLength(6);
   expect(measurement?.variables.x.label).toBe('Vd');

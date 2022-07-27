@@ -9,7 +9,10 @@ function testFile(name: string, length: number) {
     'latin1',
   );
   const analysis = from2636b(csv, 'test');
-  let measurement = analysis.getMeasurementXY({ xLabel: 'Vd', yLabel: 'Id' });
+  let measurement = analysis.getMeasurementXY({
+    x: { label: 'Vd' },
+    y: { label: 'Id' },
+  });
 
   expect(measurement?.variables.x.data).toHaveLength(length);
   expect(measurement?.variables.x.label).toBe('Vd');

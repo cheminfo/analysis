@@ -59,8 +59,8 @@ describe('case for ntuples', () => {
 
   it('MeasurementXY by units', () => {
     const selector = {
-      xUnits: 'tUnits',
-      yUnits: 'xUnits',
+      x: { units: 'tUnits' },
+      y: { units: 'xUnits' },
     };
     let measurement = analysis.getMeasurementXY(selector);
     expect(measurement?.variables.x.data).toStrictEqual([5, 6]);

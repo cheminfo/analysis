@@ -35,7 +35,7 @@ describe('toCvs', () => {
 
   it('select variables', () => {
     let result = toText(analysis, {
-      selector: { xLabel: 'seconds', yLabel: 'voltage' },
+      selector: { x: { label: 'seconds' }, y: { label: 'voltage' } },
     });
     expect(result).toHaveLength(1);
     expect(result[0]).toBe('seconds,voltage\n5,1\n6,2\n7,');

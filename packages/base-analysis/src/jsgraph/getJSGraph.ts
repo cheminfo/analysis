@@ -2,6 +2,7 @@ import { xyFilterXPositive } from 'ml-spectra-processing';
 
 import { Analysis } from '../Analysis';
 import { MeasurementNormalizationOptions } from '../types/MeasurementNormalizationOptions';
+import { MeasurementSelector } from '../types/MeasurementSelector';
 
 import { addStyle } from './addStyle';
 import { COLORS } from './colors';
@@ -23,7 +24,7 @@ interface JSGraphOptions {
   colors?: string[];
   opacities?: number[];
   linesWidth?: number[];
-  selector?: Record<string, unknown>;
+  selector?: MeasurementSelector;
   normalization?: MeasurementNormalizationOptions;
   xAxis?: JSGraphAxisOptions;
   yAxis?: JSGraphAxisOptions;
