@@ -105,8 +105,8 @@ export default class BaseB1505 {
 
       for (const [name, calculation] of this.calculations) {
         const measurement = analysis.getMeasurementXY({
-          xLabel: this.xLabel,
-          yLabel: this.yLabel,
+          x: { label: this.xLabel },
+          y: { label: this.yLabel },
         });
         if (measurement) {
           const result = JSON.stringify(calculation(measurement));
