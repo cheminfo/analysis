@@ -1,7 +1,7 @@
 import type { AxisProps, LineSeriesProps, PlotObjectPlot } from 'react-plot';
 
 import { Analysis } from '../Analysis';
-import { MeasurementSelector } from '../types/MeasurementSelector';
+import { MeasurementSelectorWithDefaultXY } from '../types/MeasurementSelector';
 
 type LineSeriesType = { type: 'line' } & LineSeriesProps;
 
@@ -51,7 +51,7 @@ function getData(x: ListNumber, y: ListNumber) {
  */
 export function getReactPlotJSON(
   analyses: Analysis[],
-  query: MeasurementSelector,
+  query: MeasurementSelectorWithDefaultXY,
   options: ReactPlotOptions = {},
 ): PlotObjectPlot & { meta: Record<string, string>[] } {
   const {

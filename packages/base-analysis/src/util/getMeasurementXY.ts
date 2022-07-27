@@ -4,7 +4,7 @@
 
 import type { MeasurementXY } from 'cheminfo-types';
 
-import { MeasurementSelector } from '../types/MeasurementSelector';
+import { MeasurementSelectorWithDefaultXY } from '../types/MeasurementSelector';
 
 import { getMeasurementsXY } from './getMeasurementsXY';
 
@@ -19,9 +19,13 @@ import { getMeasurementsXY } from './getMeasurementsXY';
  */
 export function getMeasurementXY(
   measurements: Array<MeasurementXY> = [],
-  selector: MeasurementSelector = {},
+  selector: MeasurementSelectorWithDefaultXY = {},
 ): MeasurementXY | undefined {
-  const selectedSpectra = getMeasurementsXY(measurements, selector);
+  const selectedSpectra = getMeasurementsXY(measurements, {
+    xVariable: 'x',
+    yVariable: 'y',
+    ...selector,
+  });
   if (selectedSpectra.length === 0) return undefined;
   return selectedSpectra[0];
 }

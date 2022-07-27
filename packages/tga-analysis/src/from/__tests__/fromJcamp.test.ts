@@ -22,12 +22,8 @@ test('fromJcamp', () => {
 
   let measurement2 = analysis.getMeasurementXY({ units: 'mg vs s' });
 
-  // @ts-expect-error
   expect(measurement2.variables.x.data).toHaveLength(2251);
-  // @ts-expect-error
   expect(measurement2.variables.y.data).toHaveLength(2251);
-  // @ts-expect-error
   expect(measurement2.variables.x.label).toBe('t');
-  // @ts-expect-error
   expect(measurement2.variables.y.label).toBe('Value');
 });

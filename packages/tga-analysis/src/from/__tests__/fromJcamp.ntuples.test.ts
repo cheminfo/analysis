@@ -11,12 +11,8 @@ test('fromJcamp', () => {
   let analysis = fromJcamp(jcamp);
 
   let measurement = analysis.getMeasurementXY();
-  // @ts-expect-error
   expect(measurement.variables.x.data).toHaveLength(408);
-  // @ts-expect-error
   expect(measurement.variables.y.data).toHaveLength(408);
-  // @ts-expect-error
   expect(measurement.variables.x.label).toBe('Temperature');
-  // @ts-expect-error
   expect(measurement.variables.y.label).toBe('Weight');
 });

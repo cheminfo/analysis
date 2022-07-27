@@ -6,7 +6,10 @@ import min from 'ml-array-min';
 import { xIsMonotone } from 'ml-spectra-processing';
 
 import { MeasurementNormalizationOptions } from './types/MeasurementNormalizationOptions';
-import { MeasurementSelector } from './types/MeasurementSelector';
+import {
+  MeasurementSelectorWithDefaultXY,
+  MeasurementSelectorWithoutDefaultXY,
+} from './types/MeasurementSelector';
 import { MeasurementXYWithId } from './types/MeasurementXYWithId';
 import { getMeasurementXY } from './util/getMeasurementXY';
 import { getMeasurementsXY } from './util/getMeasurementsXY';
@@ -21,9 +24,13 @@ interface AnalysisOptions {
   label?: string;
   measurementCallback?: MeasurementCallback;
 }
-interface NormalizedOptions {
+interface NormalizedOptionsWithDefaultXY {
   normalization?: MeasurementNormalizationOptions;
-  selector?: MeasurementSelector;
+  selector?: MeasurementSelectorWithDefaultXY;
+}
+interface NormalizedOptionsWithoutDefaultXY {
+  normalization?: MeasurementNormalizationOptions;
+  selector?: MeasurementSelectorWithoutDefaultXY;
 }
 
 /**
@@ -73,7 +80,7 @@ export class Analysis {
    * @param selector
    * @returns an object contaning x and y
    */
-  public getMeasurementXY(selector: MeasurementSelector = {}) {
+  public getMeasurementXY(selector: MeasurementSelectorWithDefaultXY = {}) {
     let id = JSON.stringify(selector);
     if (!this.cache.measurement[id]) {
       const measurement = getMeasurementXY(this.measurements, selector);
@@ -89,7 +96,7 @@ export class Analysis {
    *
    * @param selector
    */
-  public getMeasurementsXY(selector: MeasurementSelector = {}) {
+  public getMeasurementsXY(selector: MeasurementSelectorWithoutDefaultXY = {}) {
     let id = JSON.stringify(selector);
     if (!this.cache.measurements[id]) {
       this.cache.measurements[id] = getMeasurementsXY(
@@ -109,7 +116,7 @@ export class Analysis {
    * @param selector
    * @returns Object containing x and y
    */
-  public getXY(selector: MeasurementSelector = {}) {
+  public getXY(selector: MeasurementSelectorWithDefaultXY = {}) {
     let measurement = this.getMeasurementXY(selector);
     if (!measurement) return undefined;
     return {
@@ -127,7 +134,9 @@ export class Analysis {
    * @param options
    * @returns object containing x and y
    */
-  public getNormalizedMeasurement(options: NormalizedOptions = {}) {
+  public getNormalizedMeasurement(
+    options: NormalizedOptionsWithDefaultXY = {},
+  ) {
     const { normalization, selector } = options;
     const measurement = this.getMeasurementXY(selector);
     if (!measurement) return undefined;
@@ -138,7 +147,7 @@ export class Analysis {
    * @param options
    */
   public getNormalizedMeasurements(
-    options: NormalizedOptions = {},
+    options: NormalizedOptionsWithoutDefaultXY = {},
   ): MeasurementXY[] {
     const { normalization, selector } = options;
     const measurements = this.getMeasurementsXY(selector);
@@ -169,7 +178,7 @@ export class Analysis {
    * @param selector
    * @returns A string containing the x label.
    */
-  public getXLabel(selector: MeasurementSelector) {
+  public getXLabel(selector: MeasurementSelectorWithDefaultXY) {
     return this.getMeasurementXY(selector)?.variables.x.label;
   }
 
@@ -180,7 +189,7 @@ export class Analysis {
    * @param selector.yUnits - // if undefined takes the second variable.
    * @param selector
    */
-  public getYLabel(selector: MeasurementSelector) {
+  public getYLabel(selector: MeasurementSelectorWithDefaultXY) {
     return this.getMeasurementXY(selector)?.variables.y.label;
   }
 }

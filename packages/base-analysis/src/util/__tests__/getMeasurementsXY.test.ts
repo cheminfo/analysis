@@ -68,7 +68,7 @@ const measurements: MeasurementXYWithId[] = [
 describe('getMeasurementsXY', () => {
   it('No filter', () => {
     let xy = getMeasurementsXY(measurements, {});
-    expect(xy).toHaveLength(3);
+    expect(xy).toHaveLength(8);
   });
 
   it('Many spectry with specific units', () => {
@@ -113,5 +113,34 @@ describe('getMeasurementsXY', () => {
         data: [5, 6],
       },
     });
+  });
+
+  it('Measurement by array of yLabels', () => {
+    let xy = getMeasurementsXY(measurements, {
+      yLabels: ['Temperature [°C]', 'Expected temperature [°C]', /milli/],
+    });
+
+    expect(xy).toHaveLength(3);
+    const xLabels = xy.map((xy) => xy.variables.x.label);
+    expect(xLabels).toStrictEqual([
+      'Weight [mg]',
+      'Weight [mg]',
+      'Volume [mL]',
+    ]);
+    const yLabels = xy.map((xy) => xy.variables.y.label);
+    expect(yLabels).toStrictEqual([
+      'milliliters',
+      'Expected temperature [°C]',
+      'Temperature [°C]',
+    ]);
+  });
+
+  it('mg versus °C', () => {
+    let xy = getMeasurementsXY(measurements, {
+      xUnits: 'mg',
+      yUnits: '°C',
+    });
+    expect(xy).toHaveLength(2);
+    expect(xy.map((xy) => xy.id)).toStrictEqual(['1', '3']);
   });
 });
