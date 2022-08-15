@@ -28,6 +28,11 @@ interface JSGraphOptions {
   normalization?: MeasurementNormalizationOptions;
   xAxis?: JSGraphAxisOptions;
   yAxis?: JSGraphAxisOptions;
+  /**
+   * Define when we should change the color
+   * Either per measurement, analysis, both or auto
+   */
+  colorChange?: 'measurement' | 'analysis' | 'both' | 'auto';
 }
 /**
  * Generate a jsgraph chart format from an array of Analysis.
@@ -44,6 +49,7 @@ export function getJSGraph(analyses: Analysis[], options: JSGraphOptions = {}) {
     normalization,
     xAxis = {},
     yAxis = {},
+    colorChange = 'auto',
   } = options;
   let series = [];
 
@@ -51,6 +57,8 @@ export function getJSGraph(analyses: Analysis[], options: JSGraphOptions = {}) {
   let yLabel = yAxis.label;
   let xUnits = xAxis.units;
   let yUnits = yAxis.units;
+
+  let colorIndex = 0;
 
   for (let i = 0; i < analyses.length; i++) {
     const analysis = analyses[i];
@@ -72,7 +80,7 @@ export function getJSGraph(analyses: Analysis[], options: JSGraphOptions = {}) {
     for (const measurement of measurements) {
       let serie: Record<string, unknown> = {};
       addStyle(serie, analysis, {
-        color: colors[i % colors.length],
+        color: colors[colorIndex % colors.length],
         opacity: opacities[i % opacities.length],
         lineWidth: linesWidth[i % linesWidth.length],
       });
@@ -86,9 +94,21 @@ export function getJSGraph(analyses: Analysis[], options: JSGraphOptions = {}) {
         // @ts-expect-error Something wrong here.
         serie.data = xyFilterXPositive(serie.data);
       }
-
+      const name = [];
+      if (analyses.length > 1) {
+        name.push(analysis.label);
+      }
+      if (analyses.length === 1 || measurements.length > 1) {
+        name.push(measurement.variables.y.label);
+      }
+      serie.name = name.join(' - ');
       series.push(serie);
+
+      if (colorChange === 'both' || colorChange === 'measurement') colorIndex++;
+      if (colorChange === 'auto' && analyses.length === 1) colorIndex++;
     }
+    if (colorChange === 'analysis') colorIndex++;
+    if (colorChange === 'auto' && analyses.length > 1) colorIndex++;
   }
   return {
     axes: {
