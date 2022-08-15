@@ -39,9 +39,9 @@ describe('getNormalizedMeasurement', () => {
       },
     });
   });
-  it('normalize', () => {
+  it('normalize sum to 1', () => {
     let normalized = getNormalizedMeasurement(measurement, {
-      filters: [{ name: 'normalize' }],
+      filters: [{ name: 'normed', options: { algorithm: 'sum', value: 1 } }],
     });
     expect(normalized).toStrictEqual({
       variables: {
@@ -64,23 +64,11 @@ describe('getNormalizedMeasurement', () => {
       },
     });
   });
-  it('divideByMax', () => {
+  it('normalize max to 1', () => {
     let normalized = getNormalizedMeasurement(measurement, {
-      filters: [{ name: 'divideByMax' }],
+      filters: [{ name: 'normed', options: { algorithm: 'max', value: 1 } }],
     });
     expect(normalized.variables.y.data).toBeDeepCloseTo([0.66666, 1], 4);
-  });
-  it('add', () => {
-    let normalized = getNormalizedMeasurement(measurement, {
-      filters: [{ name: 'add', options: { value: 1 } }],
-    });
-    expect(normalized.variables.y.data).toStrictEqual(new Float64Array([3, 4]));
-  });
-  it('multiply', () => {
-    let normalized = getNormalizedMeasurement(measurement, {
-      filters: [{ name: 'multiply', options: { value: 100 } }],
-    });
-    expect(Array.from(normalized.variables.y.data)).toStrictEqual([200, 300]);
   });
   it('dividebysd', () => {
     let normalized = getNormalizedMeasurement(measurement, {

@@ -1,9 +1,7 @@
 import { v4 } from '@lukeed/uuid';
 import type { MeasurementXYVariables, MeasurementXY } from 'cheminfo-types';
 import { isAnyArray } from 'is-any-array';
-import max from 'ml-array-max';
-import min from 'ml-array-min';
-import { xIsMonotone } from 'ml-spectra-processing';
+import { xIsMonotone, xMaxValue, xMinValue } from 'ml-spectra-processing';
 
 import { MeasurementNormalizationOptions } from './types/MeasurementNormalizationOptions';
 import { MeasurementSelector } from './types/MeasurementSelector';
@@ -221,8 +219,8 @@ function standardizeData(
         variable.label = variable.label.replace(/[([].*[)\]]/, '').trim();
       }
     }
-    variable.min = min(variable.data);
-    variable.max = max(variable.data);
+    variable.min = xMinValue(variable.data);
+    variable.max = xMaxValue(variable.data);
     variable.isMonotone = xIsMonotone(variable.data);
   }
 

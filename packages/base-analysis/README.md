@@ -49,7 +49,7 @@ let firstAnalysis = analysis.getMeasurement();
 
 let normalized = analysis.getNormalizedMeasurement({
   normalization: {
-    filters: [{ name: 'normalize' }],
+    filters: [{ name: 'normed' }],
   },
 });
 

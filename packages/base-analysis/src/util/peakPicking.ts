@@ -1,8 +1,7 @@
 import type { MeasurementXY } from 'cheminfo-types';
-import max from 'ml-array-max';
 // @ts-expect-error Untyped library.
 import { optimize as optimizePeak } from 'ml-spectra-fitting';
-import { xFindClosestIndex } from 'ml-spectra-processing';
+import { xMaxValue, xFindClosestIndex } from 'ml-spectra-processing';
 
 import { PeakPickingOptions } from '../types/PeakPickingOptions';
 
@@ -47,7 +46,7 @@ export function peakPicking(
   const result: Record<string, number> = {};
   if (optimize) {
     if (!isMax) {
-      let maximumY = max(y);
+      let maximumY = xMaxValue(y);
       for (let i = 0; i < y.length; i++) {
         y[i] *= -1;
         y[i] += maximumY; // This makes it somewhat more robust

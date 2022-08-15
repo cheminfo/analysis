@@ -50,7 +50,7 @@ describe('getNormalizedMeasurement baseline', () => {
 
   it('rollingballbaseline', () => {
     let normalized = getNormalizedMeasurement(measurement, {
-      filters: [{ name: 'rollingballBaseline' }],
+      filters: [{ name: 'rollingBallBaseline' }],
     });
     expect(Array.from(normalized.variables.y.data)).toMatchCloseTo([
       -0.5, 0, 0, -8, 16, -8, 0, 0, 0, 0.5,

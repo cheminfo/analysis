@@ -35,7 +35,7 @@ let defaultFlavorSpectrum = analysis.get();
 
 // the data of a spectrum can be normalized using various options
 let data = getNormalized(defaultFlavorSpectrum, {
-  filters: [{ name: 'normalize' }],
+  filters: [{ name: 'normed' }],
 });
 console.log(data);
 
