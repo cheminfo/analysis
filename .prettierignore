@@ -2,6 +2,7 @@ coverage
 example
 lib
 lib-esm
+dist
 node_modules
 CHANGELOG.md
 .release-please-manifest.json
