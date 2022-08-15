@@ -8,8 +8,11 @@ interface GetJcampOptions {
   meta?: Record<string, string>;
 }
 /**
+ * Converts an analysis to an array of jcamp string. Each measurement will be in a different jcamp string
+ *
  * @param analysis
  * @param options
+ * @returns array of jcamp strings
  */
 export function toJcamps(analysis: Analysis, options: GetJcampOptions = {}) {
   let jcamps = [];
