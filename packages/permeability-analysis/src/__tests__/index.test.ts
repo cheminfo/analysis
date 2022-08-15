@@ -8,6 +8,6 @@ describe('read jcamp and create jsgraph', () => {
   let analysis = fromJcamp(jcamp);
   it('check number of charts', () => {
     const jsgraph = JSGraph.getJSGraph([analysis]);
-    console.log(jsgraph);
+    expect(jsgraph).toMatchSnapshot();
   });
 });
