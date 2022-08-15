@@ -39,7 +39,7 @@ test('index', () => {
 
   let normalizedMeasurement = analysis.getNormalizedMeasurement({
     normalization: {
-      filters: [{ name: 'normalize' }],
+      filters: [{ name: 'normed' }],
     },
   });
   expect(

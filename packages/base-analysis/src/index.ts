@@ -15,7 +15,7 @@ export * from './util/autoPeakPicking';
 
 export * from './types/types';
 export * from './types/AutoPeakPickingOptions';
-export * from './types/NormalizedFilters';
+export { FilterXYType } from 'ml-signal-processing';
 export * from './types/MeasurementNormalizationOptions';
 export { MeasurementVariable, MeasurementXY } from 'cheminfo-types';
 export * from './types/PlotObject';

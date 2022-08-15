@@ -29,7 +29,6 @@
     "base-analysis": "^0.2.0",
     "cheminfo-types": "^1.4.0",
     "ml-regression-simple-linear": "^2.0.3",
-    "ml-savitzky-golay": "^5.0.0",
     "ndim-parser": "^0.5.1"
   },
   "devDependencies": {

@@ -49,7 +49,7 @@ describe('case for ntuples', () => {
 
     let normalized = analysis.getNormalizedMeasurement({
       normalization: {
-        filters: [{ name: 'normalize' }],
+        filters: [{ name: 'normed' }],
       },
     })?.variables;
     expect(
