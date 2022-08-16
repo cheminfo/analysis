@@ -40,8 +40,6 @@ export function getNormalizedMeasurement(
   }
 
   let {
-    from = measurement.variables.x.min,
-    to = measurement.variables.x.max,
     numberOfPoints,
     filters = [],
     exclusions = [],
@@ -57,20 +55,30 @@ export function getNormalizedMeasurement(
       newMeasurement.variables.y.label?.replace(/\s*\[.*\]/, '');
   }
 
-  filters = JSON.parse(JSON.stringify(filters));
+  let preprocessed = filterXY(data, filters).data;
+
+  let from =
+    options.from === undefined ? xMinValue(preprocessed.x) : options.from;
+  let to = options.to === undefined ? xMaxValue(preprocessed.x) : options.to;
+
+  let final: { x: Float64Array; y: Float64Array };
   if (numberOfPoints) {
-    filters.push({
-      name: 'equallySpaced',
-      options: { from, to, exclusions, zones, numberOfPoints },
-    });
+    final = filterXY(preprocessed, [
+      {
+        name: 'equallySpaced',
+        options: { from, to, exclusions, zones, numberOfPoints },
+      },
+    ]).data;
   } else {
-    filters.push({
-      name: 'filterX',
-      options: { from, to, exclusions, zones },
-    });
+    final = filterXY(preprocessed, [
+      {
+        name: 'filterX',
+        options: { from, to, exclusions, zones },
+      },
+    ]).data;
   }
 
-  let { x, y } = filterXY(data, filters).data;
+  const { x, y } = final;
 
   newMeasurement.variables.x.data = x;
   newMeasurement.variables.x.min = xMinValue(x);
