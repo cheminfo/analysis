@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/cheminfo/analysis/compare/permeability-analysis-v0.2.0...permeability-analysis-v0.3.0) (2022-08-16)
+
+
+### Features
+
+* allow to select 'units' in fromHidenXLSX ([#35](https://www.github.com/cheminfo/analysis/issues/35)) ([73d15d8](https://www.github.com/cheminfo/analysis/commit/73d15d86ea256f76d6e0db9a2ee4f28bb95d3608))
+
 ## [0.2.0](https://www.github.com/cheminfo/analysis/compare/permeability-analysis-v0.1.0...permeability-analysis-v0.2.0) (2022-08-16)
 
 
