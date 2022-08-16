@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/cheminfo/analysis/compare/xray-analysis-v0.2.0...xray-analysis-v0.3.0) (2022-08-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename description to title
+
+### Features
+
+* rename description to title ([d3013dc](https://www.github.com/cheminfo/analysis/commit/d3013dc5ed9bba8e1bf674f2086be1bedf47a3db))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * base-analysis bumped from ^0.2.0 to ^0.3.0
+
 ## [0.2.0](https://www.github.com/cheminfo/analysis/compare/xray-analysis-v0.1.1...xray-analysis-v0.2.0) (2022-07-19)
 
 

@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/cheminfo/analysis/compare/base-analysis-v0.2.0...base-analysis-v0.3.0) (2022-08-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename description to title
+* rename AnalysesManager.getSpectra to AnalysisManager.getMeasurements
+
+### Features
+
+* add getMeasurementsXY ([855f3d4](https://www.github.com/cheminfo/analysis/commit/855f3d419d8ef25c08bb9f834846bfe4a302b0ae))
+* **base-analysis:** add getDistinctLabelUnits ([f516b88](https://www.github.com/cheminfo/analysis/commit/f516b8826e6882aeb140b041d23ac2c231c70841))
+* enhance getJSGraph to have many measurements ([6680c33](https://www.github.com/cheminfo/analysis/commit/6680c33166a076af84aa126604cb4f781173ccb4))
+* getJSGraph can return many series ([15c1935](https://www.github.com/cheminfo/analysis/commit/15c1935145d816f4f80ec420609ed660681a5911))
+* refactor selector to use object containing x and y properties ([89c5cc5](https://www.github.com/cheminfo/analysis/commit/89c5cc52daad0ded80ee3f194b98aca70a6a89b4))
+* rename description to title ([d3013dc](https://www.github.com/cheminfo/analysis/commit/d3013dc5ed9bba8e1bf674f2086be1bedf47a3db))
+
+
+### Bug Fixes
+
+* getNormalizedMeasurements was wrong if x shift ([776770d](https://www.github.com/cheminfo/analysis/commit/776770d54abefaf16ebc518dc5c700bad399053f))
+
+
+### Miscellaneous Chores
+
+* rename AnalysesManager.getSpectra to AnalysisManager.getMeasurements ([c783bb8](https://www.github.com/cheminfo/analysis/commit/c783bb8f58b496f6a2d66efbb54ff25e93b0f7c3))
+
 ## [0.2.0](https://www.github.com/cheminfo/analysis/compare/base-analysis-v0.1.5...base-analysis-v0.2.0) (2022-07-19)
 
 

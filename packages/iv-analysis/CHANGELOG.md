@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/cheminfo/analysis/compare/iv-analysis-v0.2.0...iv-analysis-v0.3.0) (2022-08-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename description to title
+
+### Features
+
+* refactor selector to use object containing x and y properties ([89c5cc5](https://www.github.com/cheminfo/analysis/commit/89c5cc52daad0ded80ee3f194b98aca70a6a89b4))
+* rename description to title ([d3013dc](https://www.github.com/cheminfo/analysis/commit/d3013dc5ed9bba8e1bf674f2086be1bedf47a3db))
+
+
+### Bug Fixes
+
+* correct prettier ignore and package-lock ([9c3ed30](https://www.github.com/cheminfo/analysis/commit/9c3ed303a87b84c655bd638cc62fd8e2b5ea1684))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * base-analysis bumped from ^0.2.0 to ^0.3.0
+
 ## [0.2.0](https://www.github.com/cheminfo/analysis/compare/iv-analysis-v0.1.5...iv-analysis-v0.2.0) (2022-07-19)
 
 
