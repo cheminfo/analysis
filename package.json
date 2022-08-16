@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build-permeability": "npm run tsc && cheminfo-build --out-name 'permeability-analysis' --entry packages/permeability-analysis/lib-esm/index.js --root PermeabilityAnalysis",
+    "build-permeability": "npm run tsc-clean && npm run tsc && cheminfo-build --out-name 'permeability-analysis' --entry packages/permeability-analysis/lib-esm/index.js --root PermeabilityAnalysis",
     "check-types": "tsc --noEmit",
     "dev": "npm run tsc-watch",
     "eslint": "eslint .",

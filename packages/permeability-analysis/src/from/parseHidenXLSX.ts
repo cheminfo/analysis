@@ -36,6 +36,7 @@ function parseScanSetup(matrix: string[][]) {
 
 interface Variable {
   label: string;
+  units: string;
   data: (number | string)[];
 }
 
@@ -49,7 +50,12 @@ function parseData(matrix: string[][]) {
   let currentCategory = categoriesLabel[0];
   for (let i = 0; i < headers.length; i++) {
     if (headers[i] === undefined || i === headers.length - 1) {
-      categories[currentCategory] = getVariables(matrix, from, i - 1);
+      categories[currentCategory] = getVariables(
+        matrix,
+        from,
+        i - 1,
+        currentCategory,
+      );
       from = i + 1;
       currentCategory = categoriesLabel[i + 1];
     }
@@ -57,13 +63,18 @@ function parseData(matrix: string[][]) {
   return categories;
 }
 
-function getVariables(matrix: string[][], from: number, to: number) {
+function getVariables(
+  matrix: string[][],
+  from: number,
+  to: number,
+  currentCategory: string,
+) {
   const headers = matrix[1].slice(from, to + 1);
   matrix = matrix.slice(2);
   const submatrix = matrix.map((row) => row.slice(from, to + 1));
 
   const variables = headers.map((label): Variable => {
-    return { label, data: [] };
+    return { label, units: currentCategory, data: [] };
   });
 
   for (let row of submatrix) {
