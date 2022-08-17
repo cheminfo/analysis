@@ -1,7 +1,7 @@
 {
   "name": "permeability-analysis",
   "version": "0.3.0",
-  "description": "Deal with permeability analysis",
+  "description": "Deal with permeability analysis (from Hiden) and allow the preparation of data series",
   "main": "./lib/index.js",
   "module": "./lib-esm/index.js",
   "types": "./lib/index.d.ts",
