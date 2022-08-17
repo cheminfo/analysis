@@ -8,11 +8,13 @@ export function parseHidenXLSX(binary: ArrayBuffer | Uint8Array) {
   const scanSetup = parseScanSetup(
     utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
       header: 1,
+      blankrows: false,
     }),
   );
   const data = parseData(
     utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[1]], {
       header: 1,
+      blankrows: false,
     }),
   );
   return { scanSetup, data };
@@ -25,6 +27,7 @@ function parseScanSetup(matrix: string[][]) {
   for (let row of data) {
     const data: Record<string, string> = {};
     for (let i = 0; i < headers.length; i++) {
+      if (!headers[i]) continue;
       data[headers[i]] = row[i];
     }
     array.push(data);
