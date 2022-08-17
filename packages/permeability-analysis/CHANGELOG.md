@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.3.1](https://www.github.com/cheminfo/analysis/compare/permeability-analysis-v0.3.0...permeability-analysis-v0.3.1) (2022-08-17)
+
+
+### Bug Fixes
+
+* force release of permeability ([#38](https://www.github.com/cheminfo/analysis/issues/38)) ([3e104a7](https://www.github.com/cheminfo/analysis/commit/3e104a7e15071ecd110b7f353064d078a95f136a))
+
 ## [0.3.0](https://www.github.com/cheminfo/analysis/compare/permeability-analysis-v0.2.0...permeability-analysis-v0.3.0) (2022-08-16)
 
 
