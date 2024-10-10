@@ -10,10 +10,4 @@ jobs:
   nodejs:
     uses: zakodium/workflows/.github/workflows/nodejs.yml@nodejs-v1
     with:
-      npm-setup-command: |
-        # Node.js 14 has npm 6, so we need to update to the latest.
-        npm install -g npm
-        npm ci
-        # Compile TypeScript files before running tests.
-        npm run tsc
-      node-version-matrix: '[14, 16, 18]'
+      lint-check-types: true
