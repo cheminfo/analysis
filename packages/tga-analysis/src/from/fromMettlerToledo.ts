@@ -12,7 +12,7 @@ import { Analysis } from '..';
 export function fromMettlerToledo(
   arrayBuffer: string | ArrayBuffer | Uint8Array,
 ) {
-  let analysis = new Analysis();
+  const analysis = new Analysis();
 
   const results: any[] = tgaParseMettlerToledo(arrayBuffer);
 

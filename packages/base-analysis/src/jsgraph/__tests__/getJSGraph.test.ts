@@ -4,7 +4,7 @@ import { join } from 'path';
 import { Analysis, JSGraph, fromJcamp } from '../..';
 
 test('getJSGraph', () => {
-  let analysis = new Analysis();
+  const analysis = new Analysis();
   expect(analysis.id).toHaveLength(36);
 
   analysis.pushMeasurement(
@@ -48,7 +48,7 @@ describe('getJSGraph isotherm', () => {
   const jcamp = readFileSync(
     join(__dirname, '../../from/__tests__/data/isotherm.jdx'),
   );
-  let analysis = fromJcamp(jcamp);
+  const analysis = fromJcamp(jcamp);
   it('distinctLabelUnits', () => {
     const jsgraph = JSGraph.getJSGraph([analysis], {
       selector: { x: { label: '' }, y: { label: '' } },

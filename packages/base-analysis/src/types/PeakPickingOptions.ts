@@ -3,19 +3,16 @@ import { OneLowerCase } from 'cheminfo-types';
 export interface PeakPickingOptions {
   /**
    * X variable label.
-   *
    * @default 'x'
    */
   xVariable?: OneLowerCase;
   /**
    * Y variable label.
-   *
    * @default 'y'
    */
   yVariable?: OneLowerCase;
   /**
    * Whether to look for the closest min / max.
-   *
    * @default true
    */
   optimize?: boolean;
@@ -26,7 +23,6 @@ export interface PeakPickingOptions {
   shapeOptions?: any;
   /**
    * Whether to  look for maxima or minima.
-   *
    * @default true
    */
   max?: boolean;

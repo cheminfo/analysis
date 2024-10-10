@@ -12,7 +12,6 @@ interface Options {
 
 /**
  * Unifies the densities of the variables.
- *
  * @param label - The label of the variable.
  * @returns - Replaced label with boolean if it had a density word.
  */
@@ -45,7 +44,6 @@ const generatedVars = ['Ron', 'gm'];
 
 /**
  * Append the units to the measurement.
- *
  * @param data - The data to be check the units.
  * @param knownUnits - Dictionary of known units.
  * @returns - Data with the units replaced.
@@ -56,7 +54,7 @@ export function appendUnits(
 ): MeasurementXYVariables {
   let key: keyof MeasurementXYVariables;
   for (key in data) {
-    let value = data[key] as MeasurementVariable;
+    const value = data[key] as MeasurementVariable;
     let label = value.label.trim();
 
     // In the case of calculated variables unifies naming
@@ -92,7 +90,6 @@ export function appendUnits(
 
 /**
  * Query the analysis for the variables.
- *
  * @param analysis - The analysis to query all labels.
  * @returns - Main labels, scale and units.
  */
@@ -109,7 +106,7 @@ export function getLabels(analysis: Analysis): Options {
     'linear'
       ? 'linear'
       : 'log';
-  let units = metaUnits(meta);
+  const units = metaUnits(meta);
   units[xLabel] = units[xLabel] || stdUnits[xLabel[0].toUpperCase()] || '';
   units[yLabel] = units[yLabel] || stdUnits[yLabel[0].toUpperCase()] || '';
   return { xLabel, yLabel, scale, units };

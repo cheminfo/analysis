@@ -20,7 +20,7 @@ function testFile(
   x: string,
   y: string,
 ) {
-  let csv = readFileSync(
+  const csv = readFileSync(
     join(__dirname, `../../../../testFiles/B1505/${name}`),
     'latin1',
   );

@@ -67,18 +67,18 @@ const measurements: MeasurementXYWithId[] = [
 
 describe('getMeasurementXY', () => {
   it('MeasurementXY by labels', () => {
-    let xy = getMeasurementXY(measurements, {
-      x: { label: 'Weight [mg]' },
-      y: { label: 'Temperature [°C]' },
-    })?.variables;
+    const xy = (
+      getMeasurementXY(measurements, {
+        x: { label: 'Weight [mg]' },
+        y: { label: 'Temperature [°C]' },
+      }) as MeasurementXYWithId
+    ).variables;
 
-    // @ts-expect-error
-    xy.x.data = Array.from(xy.x.data);
     expect(xy).toStrictEqual({
       x: {
         units: 'mg',
         label: 'Weight [mg]',
-        data: [1, 2],
+        data: Float64Array.from([1, 2]),
       },
       y: {
         units: '°C',
@@ -89,13 +89,13 @@ describe('getMeasurementXY', () => {
   });
 
   it('MeasurementXY by partial labels', () => {
-    let xy =
+    const xy = (
       getMeasurementXY(measurements, {
         x: { label: 'weight' },
         y: { label: 'temp' },
-      })?.variables || {};
+      }) as MeasurementXYWithId
+    ).variables;
 
-    // @ts-expect-error
     xy.x.data = Array.from(xy.x.data);
     expect(xy).toStrictEqual({
       x: {
@@ -113,9 +113,9 @@ describe('getMeasurementXY', () => {
 
   it('MeasurementXY by units s vs g', () => {
     const selector = { x: { units: 's' }, y: { units: 'g' } };
-    let xy = getMeasurementXY(measurements, selector)?.variables || {};
+    const xy = (getMeasurementXY(measurements, selector) as MeasurementXYWithId)
+      .variables;
 
-    // @ts-expect-error
     xy.x.data = Array.from(xy.x.data);
     expect(xy).toStrictEqual({
       x: {
@@ -124,7 +124,7 @@ describe('getMeasurementXY', () => {
         data: [7, 8],
         min: 7,
         max: 8,
-        isMonotone: true,
+        isMonotonic: 1,
       },
       y: {
         units: 'g',
@@ -132,17 +132,19 @@ describe('getMeasurementXY', () => {
         data: [0.001, 0.002],
         min: 0.001,
         max: 0.002,
-        isMonotone: true,
+        isMonotonic: 1,
       },
     });
   });
 
   it('MeasurementXY by units °C vs g', () => {
-    let xy =
-      getMeasurementXY(measurements, { x: { units: '°C' }, y: { units: 'g' } })
-        ?.variables || {};
+    const xy = (
+      getMeasurementXY(measurements, {
+        x: { units: '°C' },
+        y: { units: 'g' },
+      }) as MeasurementXYWithId
+    ).variables;
 
-    // @ts-expect-error
     xy.x.data = Array.from(xy.x.data);
     expect(xy).toStrictEqual({
       x: {
@@ -151,7 +153,7 @@ describe('getMeasurementXY', () => {
         data: [3, 4],
         min: 3,
         max: 4,
-        isMonotone: true,
+        isMonotonic: 1,
       },
       y: {
         units: 'g',
@@ -159,16 +161,16 @@ describe('getMeasurementXY', () => {
         data: [0.001, 0.002],
         min: 0.001,
         max: 0.002,
-        isMonotone: true,
+        isMonotonic: 1,
       },
     });
   });
 
   it('MeasurementXY by dataType TGA', () => {
-    let xy =
-      getMeasurementXY(measurements, { dataType: 'TGA' })?.variables || {};
+    const xy = (
+      getMeasurementXY(measurements, { dataType: 'TGA' }) as MeasurementXYWithId
+    ).variables;
 
-    // @ts-expect-error
     xy.x.data = Array.from(xy.x.data);
     expect(xy).toStrictEqual({
       x: {
@@ -185,9 +187,10 @@ describe('getMeasurementXY', () => {
   });
 
   it('MeasurementXY by title My', () => {
-    let xy = getMeasurementXY(measurements, { title: 'My' })?.variables || {};
+    const xy = (
+      getMeasurementXY(measurements, { title: 'My' }) as MeasurementXYWithId
+    ).variables;
 
-    // @ts-expect-error
     xy.x.data = Array.from(xy.x.data);
     expect(xy).toStrictEqual({
       x: {
@@ -204,11 +207,12 @@ describe('getMeasurementXY', () => {
   });
 
   it('MeasurementXY by meta meta2="Meta"', () => {
-    let xy =
-      getMeasurementXY(measurements, { meta: { meta2: 'meta' } })?.variables ||
-      {};
+    const xy = (
+      getMeasurementXY(measurements, {
+        meta: { meta2: 'meta' },
+      }) as MeasurementXYWithId
+    ).variables;
 
-    // @ts-expect-error
     xy.x.data = Array.from(xy.x.data);
     expect(xy).toStrictEqual({
       x: {
@@ -225,7 +229,7 @@ describe('getMeasurementXY', () => {
   });
 
   it('MeasurementXY by units L vs °F', () => {
-    let xy = getMeasurementXY(measurements, {
+    const xy = getMeasurementXY(measurements, {
       x: { units: 'L' },
       y: { units: '°F' },
     });
@@ -240,7 +244,7 @@ describe('getMeasurementXY', () => {
           data: [0.001, 0.002],
           min: 0.001,
           max: 0.002,
-          isMonotone: true,
+          isMonotonic: 1,
         },
         y: {
           units: '°F',
@@ -248,7 +252,7 @@ describe('getMeasurementXY', () => {
           data: [37.4, 39.2],
           min: 37.4,
           max: 39.2,
-          isMonotone: true,
+          isMonotonic: 1,
         },
       },
     });
@@ -260,7 +264,7 @@ describe('getMeasurementXY', () => {
       y: { variable: 'Z' },
     };
     //@ts-expect-error variable in uppercase for the testcase
-    let xy = getMeasurementXY(measurements, selector);
+    const xy = getMeasurementXY(measurements, selector);
     expect(xy).toMatchObject({
       variables: {
         x: {

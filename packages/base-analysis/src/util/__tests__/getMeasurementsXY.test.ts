@@ -67,17 +67,17 @@ const measurements: MeasurementXYWithId[] = [
 
 describe('getMeasurementsXY', () => {
   it('No filter, we take variable x and y', () => {
-    let xy = getMeasurementsXY(measurements, {});
+    const xy = getMeasurementsXY(measurements, {});
     expect(xy).toHaveLength(3);
   });
 
   it('Empty x and y filter', () => {
-    let xy = getMeasurementsXY(measurements, { x: {}, y: {} });
+    const xy = getMeasurementsXY(measurements, { x: {}, y: {} });
     expect(xy).toHaveLength(8);
   });
 
   it('Many spectry with specific units', () => {
-    let xy = getMeasurementsXY(measurements, {
+    const xy = getMeasurementsXY(measurements, {
       x: { units: 'ug' },
       y: { units: '°C' },
     });
@@ -89,7 +89,7 @@ describe('getMeasurementsXY', () => {
         data: [10000000, 20000000],
         min: 10000000,
         max: 20000000,
-        isMonotone: true,
+        isMonotonic: 1,
       },
       y: {
         units: '°C',
@@ -97,13 +97,13 @@ describe('getMeasurementsXY', () => {
         data: [30, 40],
         min: 30,
         max: 40,
-        isMonotone: true,
+        isMonotonic: 1,
       },
     });
   });
 
   it('Measurement by labels', () => {
-    let xy = getMeasurementsXY(measurements, {
+    const xy = getMeasurementsXY(measurements, {
       x: { label: 'Weight [mg]' },
       y: { label: 'Temperature [°C]' },
     })[0].variables;
@@ -124,7 +124,7 @@ describe('getMeasurementsXY', () => {
   });
 
   it('Measurement by y label regexp', () => {
-    let xy = getMeasurementsXY(measurements, {
+    const xy = getMeasurementsXY(measurements, {
       y: { label: /temperature|milli/i },
     });
 
@@ -146,7 +146,7 @@ describe('getMeasurementsXY', () => {
   });
 
   it('mg versus °C', () => {
-    let xy = getMeasurementsXY(measurements, {
+    const xy = getMeasurementsXY(measurements, {
       x: { units: 'mg' },
       y: { units: '°C' },
     });

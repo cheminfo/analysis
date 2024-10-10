@@ -6,8 +6,8 @@ import { parseTAInstrumentsExcel } from './parseTAInstrumentsExcel';
  * @param arrayBuffer
  */
 export function fromTAInstrumentsExcel(arrayBuffer: ArrayBuffer | Uint8Array) {
-  let analysis = new Analysis();
-  let parsed = parseTAInstrumentsExcel(arrayBuffer);
+  const analysis = new Analysis();
+  const parsed = parseTAInstrumentsExcel(arrayBuffer);
 
   analysis.pushMeasurement(
     {

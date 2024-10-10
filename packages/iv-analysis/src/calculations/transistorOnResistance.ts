@@ -1,12 +1,11 @@
 import { MeasurementXY } from 'cheminfo-types';
-import SimpleLinearRegression from 'ml-regression-simple-linear';
+import { SimpleLinearRegression } from 'ml-regression-simple-linear';
 import fit from 'ml-savitzky-golay';
 
 import { SlopeOptions, SlopeResult } from './types';
 
 /**
  * Calculates the transistor resistance.
- *
  * @param measurement - The measurement to calculate the transistor resistance.
  * @param options - Options for the calculation.
  * @returns - The calculated resistance.
@@ -23,8 +22,8 @@ export function transistorOnResistance(
   const y = measurement.variables.y.data as number[];
   const dy = fit(y, dx, { derivative: 1 });
 
-  let xRes = [];
-  let yRes = [];
+  const xRes = [];
+  const yRes = [];
   let xStart = Infinity;
 
   let converged = false;

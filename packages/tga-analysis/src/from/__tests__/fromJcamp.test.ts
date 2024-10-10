@@ -4,13 +4,13 @@ import { join } from 'path';
 import { fromJcamp } from '../..';
 
 test('fromJcamp', () => {
-  let jcamp = readFileSync(
+  const jcamp = readFileSync(
     join(__dirname, '../../../testFiles/jcamp.jdx'),
     'utf8',
   );
-  let analysis = fromJcamp(jcamp);
+  const analysis = fromJcamp(jcamp);
 
-  let measurement1 = analysis.getMeasurementXY();
+  const measurement1 = analysis.getMeasurementXY();
 
   if (!measurement1) throw new Error('Could not getMeasurementXY');
   expect(measurement1.variables.x.data).toHaveLength(2251);
@@ -20,7 +20,7 @@ test('fromJcamp', () => {
   expect(measurement1.variables.y.label).toBe('Value');
   expect(measurement1.variables.y.units).toBe('mg');
 
-  let measurement2 = analysis.getMeasurementXY({
+  const measurement2 = analysis.getMeasurementXY({
     x: { units: 's' },
     y: { units: 'mg' },
   });

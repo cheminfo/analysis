@@ -9,7 +9,7 @@ test('fromXRD', () => {
     'utf8',
   );
   const analysis = fromXRD(csv);
-  let measurement = analysis.getMeasurementXY();
+  const measurement = analysis.getMeasurementXY();
 
   expect(measurement?.variables.x.data).toHaveLength(2201);
   expect(measurement?.variables.x.label).toBe('x');
@@ -24,7 +24,7 @@ test('fromXRC', () => {
     'utf8',
   );
   const analysis = fromXRC(csv);
-  let measurement = analysis.getMeasurementXY();
+  const measurement = analysis.getMeasurementXY();
 
   expect(measurement?.variables.x.data).toHaveLength(641);
   expect(measurement?.variables.x.label).toBe('x');

@@ -20,7 +20,6 @@ interface Options {
 
 /**
  * General parser from B1505 instrument.
- *
  * @param text - Original text from the file.
  * @param options - Query options.
  * @returns - List of general analysis.
@@ -46,7 +45,6 @@ interface BreakdownOptions {
 }
 /**
  * Parser from breakdown process.
- *
  * @param text - Original text from the file.
  * @param options - Calculation options.
  * @returns - List of breakdown analysis.
@@ -65,7 +63,6 @@ interface TransferOptions {
 }
 /**
  * Parser from transfer process.
- *
  * @param text - Original text from the file.
  * @param options - Calculation options.
  * @returns - List of transfer analysis.
@@ -86,7 +83,6 @@ interface OutputOptions {
 }
 /**
  * Parser from output process.
- *
  * @param text - Original text from the file.
  * @param options - Calculation options.
  * @returns - List of output analysis.
@@ -104,7 +100,6 @@ interface IVOptions {
 }
 /**
  * Parser from IV process.
- *
  * @param text - Original text from the file.
  * @param options - Calculation options.
  * @returns - List of IV analysis.
@@ -122,7 +117,6 @@ interface CapacitanceOptions {
 }
 /**
  * Parser from capacitance process.
- *
  * @param text - Original text from the file.
  * @param options - Calculation options.
  * @returns - List of capacitance analysis.
@@ -140,7 +134,6 @@ export function fromCapacitance(
 
 /**
  * Parser from MOS capacitance process.
- *
  * @param text - Original text from the file.
  * @param options - Calculation options.
  * @returns - List of MOS capacitance analysis.

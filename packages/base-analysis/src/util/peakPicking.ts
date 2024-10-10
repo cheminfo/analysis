@@ -1,7 +1,7 @@
 import type { MeasurementXY } from 'cheminfo-types';
 // @ts-expect-error Untyped library.
 import { optimize as optimizePeak } from 'ml-spectra-fitting';
-import { xMaxValue, xFindClosestIndex } from 'ml-spectra-processing';
+import { xFindClosestIndex, xMaxValue } from 'ml-spectra-processing';
 
 import { PeakPickingOptions } from '../types/PeakPickingOptions';
 
@@ -10,7 +10,6 @@ import { PeakPickingOptions } from '../types/PeakPickingOptions';
  * if you set optimize=True the returned positions will be
  * the closest actual datapoints to the fitted peak location.
  * The x/y of the fitted peak will be in xOptimized and yOptimized.
- *
  * @param measurement
  * @param target
  * @param options
@@ -39,14 +38,13 @@ export function peakPicking(
   }
 
   if (!x || !y) return;
-  let targetIndex;
-  targetIndex = xFindClosestIndex(x, target);
+  const targetIndex = xFindClosestIndex(x, target);
   let optimizedPeak;
   let optimizedIndex;
   const result: Record<string, number> = {};
   if (optimize) {
     if (!isMax) {
-      let maximumY = xMaxValue(y);
+      const maximumY = xMaxValue(y);
       for (let i = 0; i < y.length; i++) {
         y[i] *= -1;
         y[i] += maximumY; // This makes it somewhat more robust
@@ -61,13 +59,13 @@ export function peakPicking(
 
     optimizedIndex = xFindClosestIndex(x, optimizedPeak.peaks[0].x);
 
-    for (let [key, variable] of Object.entries(measurement.variables)) {
+    for (const [key, variable] of Object.entries(measurement.variables)) {
       result[key] = variable.data[optimizedIndex];
     }
     // TODO: result is supposed to only contain numbers.
     result.optimized = optimizedPeak.peaks[0];
   } else {
-    for (let [key, variable] of Object.entries(measurement.variables)) {
+    for (const [key, variable] of Object.entries(measurement.variables)) {
       result[key] = variable.data[targetIndex];
     }
   }

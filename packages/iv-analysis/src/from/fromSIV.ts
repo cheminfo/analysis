@@ -3,7 +3,6 @@ import { Analysis } from 'base-analysis';
 
 /**
  * From SIV file
- *
  * @param content - File content
  * @returns Analysis
  */
@@ -77,7 +76,7 @@ function parseDate(line: string) {
 }
 
 function parseScale(line: string, nbValues: number) {
-  let result: Record<string, PartType> = {};
+  const result: Record<string, PartType> = {};
   const parts = line.replace(/ (?<part>[xy]) /g, ',$<part>,').split('; ');
 
   for (const part of parts) {
@@ -88,7 +87,7 @@ function parseScale(line: string, nbValues: number) {
 }
 
 function parseS(lines: string[]) {
-  let result: Record<string, number | string> = {};
+  const result: Record<string, number | string> = {};
   for (const line of lines) {
     const key = getFieldName(
       line.replace(/X ._(?<var>[^=]*)=(?<val>.*)/, '$<var>').trim(),
@@ -104,7 +103,7 @@ function parseS(lines: string[]) {
 }
 
 function parseV(lines: string[]) {
-  let result: Record<string, string | number> = {};
+  const result: Record<string, string | number> = {};
   for (const line of lines) {
     const key = getFieldName(
       line.replace(/X ._(?<var>[^=]*)=(?<val>.*)/, '$<var>').trim(),
@@ -123,7 +122,7 @@ function parseV(lines: string[]) {
 function parseNote(line: string) {
   line = line.replace(/"/g, '').replace(/\\r/g, ';');
   const parts = line.split(/ *[;,] */);
-  let result: Record<string, string | number> = {};
+  const result: Record<string, string | number> = {};
   for (const part of parts) {
     const semiColumn = part.indexOf(':');
     const key = getFieldName(part.substring(0, semiColumn));
@@ -145,7 +144,7 @@ interface PartType {
 }
 function parseScalePart(scale: string, nbValues: number): PartType {
   const parts = scale.split(',');
-  let result: PartType = {
+  const result: PartType = {
     axis: parts[1],
     kind: parts[0],
     unit: parts[4].replace(/"/g, ''),

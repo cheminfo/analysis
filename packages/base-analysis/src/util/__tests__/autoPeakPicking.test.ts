@@ -23,14 +23,14 @@ describe('autoPeakPicking positive', () => {
   };
 
   it('No options', () => {
-    let peaks = autoPeakPicking(measurement);
+    const peaks = autoPeakPicking(measurement);
     expect(peaks).toStrictEqual([
       { x: 6, y: 6, z: 5, width: 4 },
       { x: 14, y: 6, z: 5, width: 4 },
     ]);
   });
   it('xVariable=x, yVariable=z', () => {
-    let peaks = autoPeakPicking(measurement, {
+    const peaks = autoPeakPicking(measurement, {
       xVariable: 'x',
       yVariable: 'z',
     });
@@ -38,12 +38,12 @@ describe('autoPeakPicking positive', () => {
   });
 
   it('minPeakWidth: 5', () => {
-    let peaks = autoPeakPicking(measurement, { minPeakWidth: 5 });
+    const peaks = autoPeakPicking(measurement, { minPeakWidth: 5 });
     expect(peaks).toStrictEqual([]);
   });
 
   it('xVariable=x, yVariable=z, from:2, to:18', () => {
-    let peaks = autoPeakPicking(measurement, {
+    const peaks = autoPeakPicking(measurement, {
       xVariable: 'x',
       yVariable: 'z',
       from: 2,
@@ -77,7 +77,7 @@ describe('autoPeakPicking negative', () => {
   };
 
   it('maxCriteria=false', () => {
-    let peaks = autoPeakPicking(measurement, {
+    const peaks = autoPeakPicking(measurement, {
       gsdOptions: { maxCriteria: false },
     });
 
@@ -88,7 +88,7 @@ describe('autoPeakPicking negative', () => {
   });
 
   it('xVariable=x, yVariable=z, from:2, to:18', () => {
-    let peaks = autoPeakPicking(measurement, {
+    const peaks = autoPeakPicking(measurement, {
       xVariable: 'x',
       yVariable: 'z',
       from: 2,

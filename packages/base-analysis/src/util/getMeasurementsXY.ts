@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-dynamic-delete */
 
 import type {
-  OneLowerCase,
-  MeasurementXYVariables,
   MeasurementVariable,
+  MeasurementXYVariables,
+  OneLowerCase,
 } from 'cheminfo-types';
 
 import { MeasurementSelector } from '../types/MeasurementSelector';
@@ -20,24 +20,23 @@ import { getConvertedVariable } from './getConvertedVariable';
  * @returns The list of matching measurements
  */
 export function getMeasurementsXY(
-  measurements: Array<MeasurementXYWithId> = [],
+  measurements: MeasurementXYWithId[] = [],
   selector: MeasurementSelector = {},
 ): MeasurementXYWithId[] {
   const selectedMeasurements: MeasurementXYWithId[] = [];
 
   if (measurements.length < 1) return selectedMeasurements;
 
-  let {
-    dataType,
-    title,
+  const {
     x: xSelector = { variable: 'x' },
     y: ySelector = { variable: 'y' },
     meta,
     index,
   } = selector;
+  let { dataType, title } = selector;
 
-  let { units: xUnits, variable: xVariable, label: xLabel } = xSelector;
-  let { units: yUnits, variable: yVariable, label: yLabel } = ySelector;
+  const { units: xUnits, variable: xVariable, label: xLabel } = xSelector;
+  const { units: yUnits, variable: yVariable, label: yLabel } = ySelector;
 
   if (index !== undefined) {
     return [measurements[index]];
@@ -51,8 +50,8 @@ export function getMeasurementsXY(
     title = ensureRegexp(title);
   }
 
-  for (let measurement of measurements) {
-    let variableNames = Object.keys(measurement.variables);
+  for (const measurement of measurements) {
+    const variableNames = Object.keys(measurement.variables);
     if (!(variableNames.length > 1)) continue;
 
     // we filter on general measurement information
@@ -73,28 +72,28 @@ export function getMeasurementsXY(
 
     if (meta && typeof meta === 'object') {
       if (!measurement.meta) continue;
-      for (let key in measurement.meta) {
+      for (const key in measurement.meta) {
         if (!measurement.meta[key]) continue;
-        let value = ensureRegexp(measurement.meta[key]);
+        const value = ensureRegexp(measurement.meta[key]);
         if (!value.exec(measurement.meta[key])) continue;
       }
     }
 
-    let xs = getPossibleVariables(measurement.variables, {
+    const xs = getPossibleVariables(measurement.variables, {
       units: xUnits,
       label: xLabel,
       variableName: xVariable,
     });
-    let x = xs[0]; // could be improved in the future
+    const x = xs[0]; // could be improved in the future
 
-    let ys = getPossibleVariables(measurement.variables, {
+    const ys = getPossibleVariables(measurement.variables, {
       units: yUnits,
       label: yLabel,
       variableName: yVariable,
     });
 
     if (x && ys.length > 0) {
-      for (let y of ys) {
+      for (const y of ys) {
         selectedMeasurements.push({
           title: measurement.title,
           dataType: measurement.dataType,
@@ -121,7 +120,7 @@ function getPossibleVariables(
 
   const labelRegExp = label !== undefined ? ensureRegexp(label) : undefined;
 
-  let possible: MeasurementXYVariables = { ...variables };
+  const possible: MeasurementXYVariables = { ...variables };
   let key: keyof typeof possible;
   if (units !== undefined) {
     for (key in possible) {
@@ -150,14 +149,14 @@ function getPossibleVariables(
 
   if (variableName !== undefined) {
     if (possible[variableName]) {
-      return [possible[variableName] as MeasurementVariable];
+      return [possible[variableName]];
     }
     const upper = variableName.toUpperCase();
-    if (Object.prototype.hasOwnProperty.call(possible, upper)) {
+    if (Object.hasOwn(possible, upper)) {
       return [possible[upper as keyof typeof possible] as MeasurementVariable];
     }
     const lower = variableName.toLowerCase();
-    if (Object.prototype.hasOwnProperty.call(possible, lower)) {
+    if (Object.hasOwn(possible, lower)) {
       return [possible[lower as keyof typeof possible] as MeasurementVariable];
     }
   }

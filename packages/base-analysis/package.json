@@ -14,22 +14,22 @@
     "src"
   ],
   "dependencies": {
-    "@lukeed/uuid": "^2.0.0",
-    "baselines": "^1.1.1",
-    "cheminfo-types": "^1.4.0",
-    "convert-to-jcamp": "^5.2.0",
-    "is-any-array": "^2.0.0",
-    "jcampconverter": "^9.0.2",
-    "js-quantities": "^1.7.6",
+    "@lukeed/uuid": "^2.0.1",
+    "baselines": "^1.1.9",
+    "cheminfo-types": "^1.8.0",
+    "convert-to-jcamp": "^5.4.11",
+    "is-any-array": "^2.0.1",
+    "jcampconverter": "^9.6.4",
+    "js-quantities": "^1.8.0",
     "ml-gsd": "^6.9.2",
-    "ml-signal-processing": "^0.5.2",
+    "ml-signal-processing": "^1.1.1",
     "ml-spectra-fitting": "^1.0.0",
-    "ml-spectra-processing": "^11.9.0",
-    "react-plot": "^0.20.1",
-    "xy-parser": "^5.0.2"
+    "ml-spectra-processing": "^14.6.0",
+    "react-plot": "^2.0.0",
+    "xy-parser": "^5.0.5"
   },
   "devDependencies": {
-    "@types/js-quantities": "^1.6.3"
+    "@types/js-quantities": "^1.6.6"
   },
   "homepage": "https://github.com/cheminfo/analysis#readme",
   "repository": {

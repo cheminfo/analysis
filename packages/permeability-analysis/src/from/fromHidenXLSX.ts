@@ -12,7 +12,6 @@ export function fromHidenXLSX(
   options: {
     /**
      * Which columns contain the data
-     *
      * @default 'ppm'
      */
     units?: string;
@@ -33,7 +32,7 @@ export function fromHidenXLSX(
     //@ts-expect-error we hope there is not too many channels
     variables[String.fromCharCode(96 + i)] = data[channels[i]];
   }
-  let analysis = new Analysis();
+  const analysis = new Analysis();
   analysis.pushMeasurement(variables, {
     dataType: 'Permeability',
   });

@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`read jcamp and create jsgraph check number of charts 1`] = `
-Object {
-  "axes": Object {
-    "x": Object {
+{
+  "axes": {
+    "x": {
       "display": true,
       "flipped": false,
       "label": "Elapsed Time",
@@ -11,7 +11,7 @@ Object {
       "unitWrapperAfter": ")",
       "unitWrapperBefore": "(",
     },
-    "y": Object {
+    "y": {
       "display": true,
       "flipped": false,
       "label": "Hydrogen",
@@ -20,10 +20,10 @@ Object {
       "unitWrapperBefore": "(",
     },
   },
-  "series": Array [
-    Object {
-      "data": Object {
-        "x": Array [
+  "series": [
+    {
+      "data": {
+        "x": [
           0.471,
           9.079,
           20.653,
@@ -685,7 +685,7 @@ Object {
           12022.269,
           12040.584,
         ],
-        "y": Array [
+        "y": [
           1.21e-10,
           1.14e-10,
           1.13e-10,
@@ -1349,21 +1349,21 @@ Object {
         ],
       },
       "name": "Hydrogen",
-      "style": Array [
-        Object {
+      "style": [
+        {
           "name": "unselected",
-          "style": Object {
-            "line": Object {
+          "style": {
+            "line": {
               "color": "#FFB300FF",
               "dash": 1,
               "width": 1,
             },
           },
         },
-        Object {
+        {
           "name": "selected",
-          "style": Object {
-            "line": Object {
+          "style": {
+            "line": {
               "color": "#FFB300FF",
               "dash": 1,
               "width": 3,

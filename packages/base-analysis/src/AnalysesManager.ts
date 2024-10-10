@@ -15,7 +15,7 @@ export class AnalysesManager {
   }
 
   public addAnalysis(analysis: Analysis) {
-    let index = this.getAnalysisIndex(analysis.id);
+    const index = this.getAnalysisIndex(analysis.id);
     if (index === undefined) {
       this.analyses.push(analysis);
     } else {
@@ -25,7 +25,7 @@ export class AnalysesManager {
 
   public getAnalyses(options: GetAnalysesOptions = {}) {
     const { ids } = options;
-    let analyses: Analysis[] = [];
+    const analyses: Analysis[] = [];
     for (const analysis of this.analyses) {
       if (!ids || ids.includes(analysis.id)) {
         analyses.push(analysis);
@@ -64,8 +64,8 @@ export class AnalysesManager {
    * Get an array of objects (key + count) of all the titles.
    */
   public getDistinctTitles() {
-    let values: Record<string, CounterType> = {};
-    for (let measurement of this.getMeasurements()) {
+    const values: Record<string, CounterType> = {};
+    for (const measurement of this.getMeasurements()) {
       if (measurement.title) {
         appendDistinctValue(values, measurement.title);
       }
@@ -77,10 +77,10 @@ export class AnalysesManager {
    * Get an array of objects (key + count) of all the units.
    */
   public getDistinctUnits() {
-    let values: Record<string, CounterType> = {};
-    for (let measurement of this.getMeasurements()) {
+    const values: Record<string, CounterType> = {};
+    for (const measurement of this.getMeasurements()) {
       if (measurement.variables) {
-        for (let [, variable] of Object.entries(measurement.variables)) {
+        for (const [, variable] of Object.entries(measurement.variables)) {
           const units = variable.units?.replace(/\s+\[.*/, '');
           if (units) {
             appendDistinctValue(values, units);
@@ -95,13 +95,13 @@ export class AnalysesManager {
    * Get an array of objects (key + unit + label + count) of all the units
    */
   public getDistinctLabelUnits() {
-    let values: Record<
+    const values: Record<
       string,
       { key: string; units: string; label: string; count: number }
     > = {};
-    for (let spectrum of this.getMeasurements()) {
+    for (const spectrum of this.getMeasurements()) {
       if (spectrum.variables) {
-        for (let [, variable] of Object.entries(spectrum.variables)) {
+        for (const [, variable] of Object.entries(spectrum.variables)) {
           const { label, units } = normalizeLabelUnits(
             variable.label,
             variable.units,
@@ -123,10 +123,10 @@ export class AnalysesManager {
    * Get an array of objects (key + count) of all the labels.
    */
   public getDistinctLabels() {
-    let values: Record<string, CounterType> = {};
-    for (let measurement of this.getMeasurements()) {
+    const values: Record<string, CounterType> = {};
+    for (const measurement of this.getMeasurements()) {
       if (measurement.variables) {
-        for (let [, variable] of Object.entries(measurement.variables)) {
+        for (const [, variable] of Object.entries(measurement.variables)) {
           appendDistinctValue(values, variable.label.replace(/\s+\[.*/, ''));
         }
       }
@@ -138,8 +138,8 @@ export class AnalysesManager {
    * Get an array of objects (key + count) of all the dataTypes.
    */
   public getDistinctDataTypes() {
-    let values: Record<string, CounterType> = {};
-    for (let measurement of this.getMeasurements()) {
+    const values: Record<string, CounterType> = {};
+    for (const measurement of this.getMeasurements()) {
       if (measurement.dataType) {
         appendDistinctValue(values, measurement.dataType);
       }
@@ -151,10 +151,10 @@ export class AnalysesManager {
    * Get an array of objects (key + count) of all the meta.
    */
   public getDistinctMeta() {
-    let values: Record<string, DifferentType> = {};
-    for (let measurement of this.getMeasurements()) {
+    const values: Record<string, DifferentType> = {};
+    for (const measurement of this.getMeasurements()) {
       if (measurement.meta) {
-        for (let key in measurement.meta) {
+        for (const key in measurement.meta) {
           appendDistinctParameter(values, key, measurement.meta[key]);
         }
       }
@@ -168,24 +168,22 @@ export class AnalysesManager {
 
   /**
    * Remove the analysis from the AnalysesManager for the specified id.
-   *
    * @param id
    */
   public removeAnalysis(id: string) {
-    let index = this.getAnalysisIndex(id);
+    const index = this.getAnalysisIndex(id);
     if (index === undefined) return undefined;
     return this.analyses.splice(index, 1);
   }
 
   /**
    * Returns the index of the analysis in the analyses array.
-   *
    * @param id
    */
   public getAnalysisIndex(id: string) {
     if (!id) return undefined;
     for (let i = 0; i < this.analyses.length; i++) {
-      let analysis = this.analyses[i];
+      const analysis = this.analyses[i];
       if (analysis.id === id) return i;
     }
     return undefined;
@@ -193,7 +191,6 @@ export class AnalysesManager {
 
   /**
    * Checks if the ID of an analysis exists in the AnalysesManager.
-   *
    * @param id
    */
   public includes(id: string) {

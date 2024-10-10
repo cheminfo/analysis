@@ -4,7 +4,6 @@ import Qty from 'js-quantities';
 /**
  * Try to convert a number of an array from one unit to another
  * Will throw an error if the units can not be converted
- *
  * @param array
  * @param fromUnits - String containing the original units
  * @param toUnits - String containing the destination units
@@ -27,7 +26,6 @@ export function convertUnits<T extends DoubleArray | number>(
 
 /**
  * Deal with °C and °F
- *
  * @param unit
  * @returns A normalized units
  */

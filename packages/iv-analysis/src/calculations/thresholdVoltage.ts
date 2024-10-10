@@ -4,7 +4,6 @@ import { ThresholdVoltageOptions, ThresholdVoltageResult } from './types';
 
 /**
  * Calculates the threshold voltage of a measurement.
- *
  * @param measurement - The measurement to search for the threshold voltage.
  * @param options - The options for the threshold voltage calculation.
  * @returns - Threshold voltage result.

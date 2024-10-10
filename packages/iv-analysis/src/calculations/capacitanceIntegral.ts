@@ -4,7 +4,6 @@ import { RangeOptions, IntegralResult } from './types';
 
 /**
  * Calculates the capacitance integral of a given XY measurement.
- *
  * @param measurement - Measurement to integrate.
  * @param options - Options for integration.
  * @returns - Integral result.

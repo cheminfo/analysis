@@ -5,9 +5,9 @@ import { read, utils } from 'xlsx';
  */
 export function parseTAInstrumentsExcel(blob: ArrayBuffer | Uint8Array) {
   const workbook = read(blob);
-  let meta = parseMeta(workbook.Sheets.Details);
+  const meta = parseMeta(workbook.Sheets.Details);
 
-  let data: any = {
+  const data: any = {
     time: [],
     temperature: [],
     weight: [],
@@ -49,8 +49,8 @@ function valueElseUndefinedFloat(cell: any) {
  * @param sheet
  */
 function parseDataSheet(sheet: any) {
-  let range = utils.decode_range(sheet['!ref']);
-  let data: any = [[], [], [], []]; // we assume that it is time, temperature, weight, weight %
+  const range = utils.decode_range(sheet['!ref']);
+  const data: any = [[], [], [], []]; // we assume that it is time, temperature, weight, weight %
   let rowNum;
   let colNum;
   for (rowNum = range.s.r + 4; rowNum <= range.e.r; rowNum++) {
@@ -71,7 +71,7 @@ function parseDataSheet(sheet: any) {
  * @param detailsSheet
  */
 function parseMeta(detailsSheet: any) {
-  let meta: any = {};
+  const meta: any = {};
   meta.fileName = valueElseUndefined(detailsSheet.B1);
   meta.instrumentName = valueElseUndefined(detailsSheet.B2);
   meta.operator = valueElseUndefined(detailsSheet.B3);
@@ -80,7 +80,7 @@ function parseMeta(detailsSheet: any) {
   meta.procedure = valueElseUndefined(detailsSheet.B6)
     .split(';')
     .map((item: string) => item.trim());
-  let mass = valueElseUndefined(detailsSheet.B16).split(' ');
+  const mass = valueElseUndefined(detailsSheet.B16).split(' ');
   meta.sampleWeight = parseFloat(mass[0]);
   meta.sampleWeightUnit = mass[1].trim();
   meta.comments = valueElseUndefined(detailsSheet.B18);

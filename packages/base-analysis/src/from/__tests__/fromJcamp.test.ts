@@ -5,16 +5,16 @@ import { fromJcamp } from '../fromJcamp';
 
 describe('fromJcamp', () => {
   it('normal', () => {
-    let jcamp = readFileSync(
+    const jcamp = readFileSync(
       join(__dirname, '../../../testFiles/jcamp.jdx'),
       'utf8',
     );
 
-    let result = fromJcamp(jcamp);
+    const result = fromJcamp(jcamp);
 
     expect(result.measurements).toHaveLength(2);
 
-    let first = result.measurements[0];
+    const first = result.measurements[0];
 
     expect(first.variables.x.data).toHaveLength(2251);
     expect(first.variables.y.data).toHaveLength(2251);
@@ -23,7 +23,7 @@ describe('fromJcamp', () => {
     expect(first.variables.y.label).toBe('Value');
     expect(first.variables.y.units).toBe('mg');
 
-    let second = result.measurements[1];
+    const second = result.measurements[1];
 
     expect(second.variables.x.data).toHaveLength(2251);
     expect(second.variables.y.data).toHaveLength(2251);
@@ -34,12 +34,12 @@ describe('fromJcamp', () => {
   });
 
   it('ntuples', () => {
-    let jcamp = readFileSync(
+    const jcamp = readFileSync(
       join(__dirname, '../../../testFiles/ntuples.jdx'),
       'utf8',
     );
 
-    let result = fromJcamp(jcamp).measurements[0];
+    const result = fromJcamp(jcamp).measurements[0];
 
     expect(result.variables.x.data).toHaveLength(408);
     expect(result.variables.y.data).toHaveLength(408);

@@ -5,16 +5,15 @@ import { Analysis } from '../Analysis';
 
 /**
  * Creates a new Analysis from a JCAMP string.
- *
  * @param jcamp - String containing the JCAMP data.
- * @param [options={}]
- * @param [options.id=v4()]
- * @param [options.label=options.id] - Human redeable label.
+ * @param [options]
+ * @param [options.id]
+ * @param [options.label] - Human redeable label.
  * @param [options.measurementCallback] - A callback to apply on variables when creating measurement.
  * @returns - New class element with the given data.
  */
 export function fromJcamp(jcamp: string | ArrayBuffer, options = {}): Analysis {
-  let analysis = new Analysis(options);
+  const analysis = new Analysis(options);
   addJcamp(analysis, jcamp);
   return analysis;
 }
@@ -24,13 +23,13 @@ export function fromJcamp(jcamp: string | ArrayBuffer, options = {}): Analysis {
  * @param jcamp
  */
 function addJcamp(analysis: Analysis, jcamp: string | ArrayBuffer) {
-  let converted = convert(jcamp, {
+  const converted = convert(jcamp, {
     keepRecordsRegExp: /.*/,
   });
 
-  for (let entry of converted.flatten) {
-    if (!entry.spectra || !entry.spectra[0]) continue;
-    let currentMeasurement = entry.spectra[0];
+  for (const entry of converted.flatten) {
+    if (!entry.spectra?.[0]) continue;
+    const currentMeasurement = entry.spectra[0];
 
     // we ensure variables
     if (!currentMeasurement.variables) {
@@ -47,18 +46,19 @@ function addJcamp(analysis: Analysis, jcamp: string | ArrayBuffer) {
         data: currentMeasurement.data.y || currentMeasurement.data.Y,
       };
     } else {
-      for (let key in currentMeasurement.variables) {
+      for (const key in currentMeasurement.variables) {
         const variable = currentMeasurement.variables[key];
         if (variable.label) continue;
         variable.label = variable.name || variable.symbol || key;
         if (variable.units && !variable.label.includes(variable.units)) {
+          // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
           variable.label += ` [${variable.units}]`;
         }
       }
     }
 
     // todo hack waiting jcampconverter update
-    for (let symbol in currentMeasurement.variables) {
+    for (const symbol in currentMeasurement.variables) {
       const variable = currentMeasurement.variables[symbol];
       if (variable?.type?.toUpperCase() === 'DEPENDENT') {
         delete variable.type;

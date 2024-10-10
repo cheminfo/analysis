@@ -19,15 +19,15 @@ function testFile(
   length: number,
   title: string,
 ) {
-  let csv = readFileSync(
+  const csv = readFileSync(
     join(__dirname, `../../../../testFiles/B1505/${name}`),
     'latin1',
   );
-  let analyses = func(csv);
+  const analyses = func(csv);
   for (const analysis of analyses) {
     const { 'default.xLabel': xLabel, 'default.yLabel': yLabel } =
       analysis.measurements[0]?.meta || {};
-    let measurement = analysis.getMeasurementXY({
+    const measurement = analysis.getMeasurementXY({
       x: { label: xLabel },
       y: { label: yLabel },
     });
@@ -44,7 +44,7 @@ function testFile(
 
 describe('Automatic labels selection', () => {
   it('Breakdown', () => {
-    let csv = readFileSync(
+    const csv = readFileSync(
       join(__dirname, '../../../../testFiles/B1505/Breakdown/breakdown.csv'),
       'latin1',
     );
@@ -54,7 +54,7 @@ describe('Automatic labels selection', () => {
   });
 
   it('Capacitance', () => {
-    let csv = readFileSync(
+    const csv = readFileSync(
       join(
         __dirname,
         '../../../../testFiles/B1505/Capacitance/high_voltage.csv',
@@ -78,14 +78,14 @@ describe('Breakdown', () => {
   });
 
   it('Multiple breakdown', () => {
-    let csv = readFileSync(
+    const csv = readFileSync(
       join(
         __dirname,
         '../../../../testFiles/B1505/Breakdown/multiple_breakdown.csv',
       ),
       'latin1',
     );
-    let analyses = fromBreakdown(csv);
+    const analyses = fromBreakdown(csv);
     expect(analyses).toHaveLength(164);
   });
 

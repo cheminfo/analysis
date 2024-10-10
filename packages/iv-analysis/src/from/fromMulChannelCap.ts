@@ -13,7 +13,7 @@ function parseMeta(
 ): Record<string, string> {
   if (!meta) return {};
 
-  let ans: Record<string, string> = {};
+  const ans: Record<string, string> = {};
   for (const key in meta) {
     const line = [key, ...meta[key].split(',')];
     for (let index = 0; index < line.length; index += 2) {
@@ -38,7 +38,6 @@ function keyMap(keys: string[]) {
 
 /**
  * Parse a multi-channel capacitance file.
- *
  * @param text - The text to parse.
  * @returns - Analysis with the parsed data.
  */
@@ -51,7 +50,7 @@ export function fromMulChannelCap(text: string) {
   );
 
   for (const key in variables) {
-    if (Object.prototype.hasOwnProperty.call(variables, key)) {
+    if (Object.hasOwn(variables, key)) {
       (
         variables[key as keyof MeasurementXYVariables] as MeasurementVariable<
           number[]
@@ -60,7 +59,7 @@ export function fromMulChannelCap(text: string) {
     }
   }
 
-  let analysis = new Analysis({
+  const analysis = new Analysis({
     label: variables.g ? `Vg = ${variables.g.data[0]}V` : undefined,
   });
   analysis.pushMeasurement(appendUnits(variables), {

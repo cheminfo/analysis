@@ -4,12 +4,12 @@ import { join } from 'path';
 import { fromMulChannelCap } from '../fromMulChannelCap';
 
 test('fromMulChannelCap', () => {
-  let csv = readFileSync(
+  const csv = readFileSync(
     join(__dirname, '../../../testFiles/capacitanceStudy.csv'),
     'latin1',
   );
-  let analysis = fromMulChannelCap(csv);
-  let measurement = analysis.getMeasurementXY({
+  const analysis = fromMulChannelCap(csv);
+  const measurement = analysis.getMeasurementXY({
     x: { label: 'Vd' },
     y: { label: 'Id' },
   });

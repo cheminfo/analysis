@@ -8,7 +8,6 @@ import { getNormalizedMeasurement } from './getNormalizedMeasurement';
 
 /**
  * Based on a x value we will return a peak.
- *
  * @param measurement
  * @param options
  */
@@ -45,7 +44,7 @@ export function autoPeakPicking(
   }
 
   if (!x || !y) return;
-  let { from, to } = options;
+  const { from, to } = options;
 
   let peaks = gsd({ x, y }, gsdOptions);
 
@@ -55,7 +54,7 @@ export function autoPeakPicking(
       gsdOptions.maxCriteria === undefined || gsdOptions.maxCriteria
         ? xyMaxClosestYPoint
         : xyMinClosestYPoint;
-    for (let peak of peaks) {
+    for (const peak of peaks) {
       const closest = xyClosestYPoint(
         {
           x: measurement.variables.x.data,
@@ -69,10 +68,10 @@ export function autoPeakPicking(
   }
 
   if (from !== undefined) {
-    peaks = peaks.filter((peak) => peak.x >= (from as number));
+    peaks = peaks.filter((peak) => peak.x >= from);
   }
   if (to !== undefined) {
-    peaks = peaks.filter((peak) => peak.x <= (to as number));
+    peaks = peaks.filter((peak) => peak.x <= to);
   }
   if (minPeakWidth) {
     peaks = peaks.filter((peak) => peak.width >= minPeakWidth);
