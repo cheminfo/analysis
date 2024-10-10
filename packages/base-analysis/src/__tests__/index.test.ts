@@ -1,14 +1,14 @@
-import { Analysis, fromJcamp, toJcamp, JSGraph } from '..';
+import { Analysis, fromJcamp, JSGraph, toJcamp } from '..';
 
 test('index', () => {
-  let analysis = new Analysis();
+  const analysis = new Analysis();
   expect(analysis.id).toHaveLength(36);
 
   analysis.pushMeasurement(
     {
       x: {
         data: [1, 2],
-        isMonotone: true,
+        isMonotonic: 1,
         min: 1,
         max: 2,
         units: 'xUnits',
@@ -32,12 +32,12 @@ test('index', () => {
     },
   );
 
-  let firstMeasurement = analysis.getMeasurementXY();
+  const firstMeasurement = analysis.getMeasurementXY();
 
   expect(firstMeasurement?.variables.x.data).toStrictEqual([1, 2]);
   expect(firstMeasurement?.variables.y.data).toStrictEqual([3, 4]);
 
-  let normalizedMeasurement = analysis.getNormalizedMeasurement({
+  const normalizedMeasurement = analysis.getNormalizedMeasurement({
     normalization: {
       filters: [{ name: 'normed' }],
     },
@@ -47,33 +47,33 @@ test('index', () => {
       (normalizedMeasurement?.variables?.y?.data?.[1] || 0),
   ).toBeCloseTo(1, 10);
 
-  let undefinedMeasurement = analysis.getMeasurementXY({ x: { units: 'J' } });
+  const undefinedMeasurement = analysis.getMeasurementXY({ x: { units: 'J' } });
   expect(undefinedMeasurement).toBeUndefined();
 
-  let inverted = analysis.getMeasurementXY({
+  const inverted = analysis.getMeasurementXY({
     x: { units: 'yUnits' },
     y: { units: 'xUnits' },
   });
   expect(inverted?.variables.x.data).toStrictEqual([3, 4]);
   expect(inverted?.variables.y.data).toStrictEqual([1, 2]);
 
-  let jsgraph = JSGraph.getJSGraph([analysis]);
+  const jsgraph = JSGraph.getJSGraph([analysis]);
   expect(jsgraph.series[0].data).toStrictEqual({ x: [1, 2], y: [3, 4] });
 
-  let jcamp = toJcamp(analysis, {
+  const jcamp = toJcamp(analysis, {
     info: {
       owner: 'cheminfo',
       origin: 'Common MeasurementXY',
     },
   });
 
-  let analysis2 = fromJcamp(jcamp);
+  const analysis2 = fromJcamp(jcamp);
 
   expect(analysis2.measurements[0]).toMatchCloseTo({
     variables: {
       x: {
         data: [1, 2],
-        isMonotone: true,
+        isMonotonic: 1,
         min: 1,
         max: 2,
         units: 'xUnits',
@@ -82,7 +82,7 @@ test('index', () => {
       },
       y: {
         data: [3, 4],
-        isMonotone: true,
+        isMonotonic: 1,
         min: 3,
         max: 4,
         units: 'yUnits',

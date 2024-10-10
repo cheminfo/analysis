@@ -9,7 +9,6 @@ interface GetJcampOptions {
 
 /**
  * converts an analysis to a jcamp string
- *
  * @param analysis
  * @param options
  * @returns Jcamp text file containing the analysis

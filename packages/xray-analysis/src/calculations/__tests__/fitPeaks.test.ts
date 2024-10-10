@@ -11,7 +11,7 @@ test('XRD', () => {
     'latin1',
   );
   const analysis = fromText(content);
-  let measurement = analysis.measurements[0];
+  const measurement = analysis.measurements[0];
   const peaks = fitPeaks(measurement);
   expect(peaks.peaks).toHaveLength(3);
   expect(peaks.error).toBeCloseTo(6.356, 2);

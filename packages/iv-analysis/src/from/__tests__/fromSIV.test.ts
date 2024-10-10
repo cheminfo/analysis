@@ -4,11 +4,11 @@ import { join } from 'path';
 import { fromSIV } from '../fromSIV';
 
 test('fromSIV', () => {
-  let siv = readFileSync(
+  const siv = readFileSync(
     join(__dirname, '../../../testFiles/test.sIv'),
     'utf8',
   );
-  let analysis = fromSIV(siv);
+  const analysis = fromSIV(siv);
 
   const experiments: string[] = analysis.measurements.map(
     ({ meta }) => meta?.experiment || '',

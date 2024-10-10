@@ -13,7 +13,7 @@ function parseMeta(
 ): Record<string, string> {
   if (!meta) return {};
 
-  let ans: Record<string, string> = {};
+  const ans: Record<string, string> = {};
   for (const key in meta) {
     const line = [key, ...meta[key].split(',')];
     for (let index = 0; index < line.length; index += 2) {
@@ -36,7 +36,6 @@ function keyMap(keys: string[]) {
 
 /**
  * Parse a file from 2636B instrument.
- *
  * @param text - Text from the file.
  * @param name - Name of the experiment.
  * @returns - Analysis object.
@@ -50,7 +49,7 @@ export function from2636b(text: string, name?: string) {
   );
 
   for (const key in variables) {
-    if (Object.prototype.hasOwnProperty.call(variables, key)) {
+    if (Object.hasOwn(variables, key)) {
       (
         variables[key as keyof MeasurementXYVariables] as MeasurementVariable<
           number[]
@@ -64,9 +63,9 @@ export function from2636b(text: string, name?: string) {
     (variables.g
       ? `Vg = ${variables.g.data[0]}V`
       : variables.s
-      ? `Vs = ${variables.s.data[0]}V`
-      : '2636b');
-  let analysis = new Analysis({ label });
+        ? `Vs = ${variables.s.data[0]}V`
+        : '2636b');
+  const analysis = new Analysis({ label });
   analysis.pushMeasurement(appendUnits(variables), { meta: parseMeta(meta) });
 
   return analysis;

@@ -7,14 +7,14 @@ export function parsePerkinElmer(
   arrayBuffer: string | ArrayBuffer | Uint8Array,
 ) {
   const text = ensureString(arrayBuffer);
-  let lines = text.split(/[\r\n]+/);
-  let result: any = {
+  const lines = text.split(/[\r\n]+/);
+  const result: any = {
     meta: { methodSteps: [] },
     data: { time: [], weight: [], temperature: [] },
   };
   let section = '';
   let inMethodSteps = false;
-  for (let line of lines) {
+  for (const line of lines) {
     if (inMethodSteps) {
       if (line.startsWith('1) TGA')) {
         inMethodSteps = false;
@@ -24,12 +24,12 @@ export function parsePerkinElmer(
     } else if (/^[a-zA-Z -]+$/.exec(line)) {
       section = trim(line);
     } else if (/.*:.*/.exec(line)) {
-      let position = line.indexOf(':');
-      let title = line.substring(0, position);
-      let value = trim(line.substring(position + 1));
+      const position = line.indexOf(':');
+      const title = line.substring(0, position);
+      const value = trim(line.substring(position + 1));
       result.meta[(section ? `${section}_` : '') + title] = value;
     } else if (/^[0-9\t .]+$/.exec(line)) {
-      let fields = line.replace(/^\t/, '').split('\t');
+      const fields = line.replace(/^\t/, '').split('\t');
       result.data.time.push(Number(fields[0]) * 60);
       result.data.weight.push(Number(fields[1]));
       result.data.temperature.push(Number(fields[4]));

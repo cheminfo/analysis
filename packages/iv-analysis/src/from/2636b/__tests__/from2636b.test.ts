@@ -4,12 +4,12 @@ import { join } from 'path';
 import { from2636b } from '../index';
 
 function testFile(name: string, length: number) {
-  let csv = readFileSync(
+  const csv = readFileSync(
     join(__dirname, `../../../../testFiles/2636B/${name}`),
     'latin1',
   );
   const analysis = from2636b(csv, 'test');
-  let measurement = analysis.getMeasurementXY({
+  const measurement = analysis.getMeasurementXY({
     x: { label: 'Vd' },
     y: { label: 'Id' },
   });

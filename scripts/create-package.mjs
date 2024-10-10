@@ -82,7 +82,6 @@ await copyTemplate('tsconfig.test.json', packageUrl);
 
 /**
  * Read a local file as JSON.
- *
  * @param {string} path - Relative path of the file to read.
  * @returns {object} The parsed JSON.
  */
@@ -92,7 +91,6 @@ async function readJSON(path) {
 
 /**
  * Write JSON to a local file.
- *
  * @param {string} path - Relative path of the file to write.
  * @param {object} json - The JSON to write.
  */
@@ -102,7 +100,6 @@ async function writeJSON(path, json) {
 
 /**
  * Convert a relative path to a file: URL.
- *
  * @param {string} path - Relative path of the file.
  * @returns {URL} - URL of the file.
  */

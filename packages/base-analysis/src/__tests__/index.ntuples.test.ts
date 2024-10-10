@@ -1,7 +1,7 @@
-import { Analysis, fromJcamp, toJcamp, toJcamps, JSGraph } from '..';
+import { Analysis, fromJcamp, JSGraph, toJcamp, toJcamps } from '..';
 
 describe('case for ntuples', () => {
-  let analysis = new Analysis();
+  const analysis = new Analysis();
 
   analysis.pushMeasurement(
     {
@@ -42,12 +42,12 @@ describe('case for ntuples', () => {
   });
 
   it('First measurement', () => {
-    let firstMeasurement = analysis.getMeasurementXY();
+    const firstMeasurement = analysis.getMeasurementXY();
 
     expect(firstMeasurement?.variables.x.data).toStrictEqual([1, 2]);
     expect(firstMeasurement?.variables.y.data).toStrictEqual([3, 4]);
 
-    let normalized = analysis.getNormalizedMeasurement({
+    const normalized = analysis.getNormalizedMeasurement({
       normalization: {
         filters: [{ name: 'normed' }],
       },
@@ -62,14 +62,14 @@ describe('case for ntuples', () => {
       x: { units: 'tUnits' },
       y: { units: 'xUnits' },
     };
-    let measurement = analysis.getMeasurementXY(selector);
+    const measurement = analysis.getMeasurementXY(selector);
     expect(measurement?.variables.x.data).toStrictEqual([5, 6]);
     expect(measurement?.variables.y.data).toStrictEqual([1, 2]);
 
-    let jsgraph = JSGraph.getJSGraph([analysis], { selector });
+    const jsgraph = JSGraph.getJSGraph([analysis], { selector });
     expect(jsgraph.series[0].data).toStrictEqual({ x: [5, 6], y: [1, 2] });
 
-    let jcamps = toJcamps(analysis, {
+    const jcamps = toJcamps(analysis, {
       info: {
         owner: 'cheminfo',
         origin: 'Common MeasurementXY',
@@ -78,14 +78,14 @@ describe('case for ntuples', () => {
 
     expect(jcamps).toHaveLength(1);
 
-    let jcamp = toJcamp(analysis, {
+    const jcamp = toJcamp(analysis, {
       info: {
         owner: 'cheminfo',
         origin: 'Common MeasurementXY',
       },
     });
 
-    let analysis2 = fromJcamp(jcamp);
+    const analysis2 = fromJcamp(jcamp);
 
     expect(analysis2.measurements[0]).toMatchCloseTo({
       variables: {
@@ -95,7 +95,7 @@ describe('case for ntuples', () => {
           dim: 2,
           units: 'xUnits',
           data: [1, 2],
-          isMonotone: true,
+          isMonotonic: 1,
           min: 1,
           max: 2,
           label: 'X axis',
@@ -107,7 +107,7 @@ describe('case for ntuples', () => {
           isDependent: true,
           dim: 2,
           units: 'yUnits',
-          isMonotone: true,
+          isMonotonic: 1,
           min: 3,
           max: 4,
           data: [3, 4],
@@ -120,7 +120,7 @@ describe('case for ntuples', () => {
           isDependent: true,
           dim: 2,
           units: 'tUnits',
-          isMonotone: true,
+          isMonotonic: 1,
           min: 5,
           max: 6,
           data: [5, 6],

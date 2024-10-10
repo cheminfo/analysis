@@ -1,7 +1,7 @@
 import { v4 } from '@lukeed/uuid';
-import type { MeasurementXYVariables, MeasurementXY } from 'cheminfo-types';
+import type { MeasurementXY, MeasurementXYVariables } from 'cheminfo-types';
 import { isAnyArray } from 'is-any-array';
-import { xIsMonotone, xMaxValue, xMinValue } from 'ml-spectra-processing';
+import { xIsMonotonic, xMaxValue, xMinValue } from 'ml-spectra-processing';
 
 import { MeasurementNormalizationOptions } from './types/MeasurementNormalizationOptions';
 import { MeasurementSelector } from './types/MeasurementSelector';
@@ -33,7 +33,7 @@ export class Analysis {
   public id: string;
   public label: string;
   public measurementCallback: MeasurementCallback | undefined;
-  public measurements: Array<MeasurementXYWithId>;
+  public measurements: MeasurementXYWithId[];
   private cache: {
     measurement: Record<string, MeasurementXY>;
     measurements: Record<string, MeasurementXY[]>;
@@ -49,7 +49,6 @@ export class Analysis {
 
   /**
    * Add a measurement in the internal measurements variable.
-   *
    * @param variables
    * @param options
    */
@@ -67,12 +66,11 @@ export class Analysis {
 
   /**
    * Retrieve a MeasurementXY based on x/y units.
-   *
    * @param selector
    * @returns an object contaning x and y
    */
   public getMeasurementXY(selector: MeasurementSelector = {}) {
-    let id = JSON.stringify(selector);
+    const id = JSON.stringify(selector);
     if (!this.cache.measurement[id]) {
       const measurement = getMeasurementXY(this.measurements, selector);
       if (measurement) {
@@ -84,11 +82,10 @@ export class Analysis {
 
   /**
    * Retrieve spectra matching selector
-   *
    * @param selector
    */
   public getMeasurementsXY(selector: MeasurementSelector = {}) {
-    let id = JSON.stringify(selector);
+    const id = JSON.stringify(selector);
     if (!this.cache.measurements[id]) {
       this.cache.measurements[id] = getMeasurementsXY(
         this.measurements,
@@ -100,12 +97,11 @@ export class Analysis {
 
   /**
    * Retrieve a xy object.
-   *
    * @param selector
    * @returns Object containing x and y
    */
   public getXY(selector: MeasurementSelector = {}) {
-    let measurement = this.getMeasurementXY(selector);
+    const measurement = this.getMeasurementXY(selector);
     if (!measurement) return undefined;
     return {
       x: measurement.variables.x.data,
@@ -116,7 +112,6 @@ export class Analysis {
   /**
    * Returns the data object for specific x/y units with possibly some
    * normalization options.
-   *
    * @param options.selector.xUnits - // if undefined takes the first variable.
    * @param options.selector.yUnits - // if undefined takes the second variable.
    * @param options
@@ -149,7 +144,6 @@ export class Analysis {
 
   /**
    * Returns the first measurement. This method could be improved in the future.
-   *
    * @returns
    */
   public getFirstMeasurement() {
@@ -158,7 +152,6 @@ export class Analysis {
 
   /**
    * Returns the x axis label.
-   *
    * @param selector
    * @returns A string containing the x label.
    */
@@ -168,7 +161,6 @@ export class Analysis {
 
   /**
    * Returns the y axis label.
-   *
    * @param selector
    */
   public getYLabel(selector: MeasurementSelector) {
@@ -178,7 +170,6 @@ export class Analysis {
 
 /**
  * Internal function that ensure the order of x / y array.
- *
  * @param variables
  * @param options
  * @param analysisOptions
@@ -188,14 +179,14 @@ function standardizeData(
   options: Omit<MeasurementXY, 'variables'>,
   analysisOptions: Pick<AnalysisOptions, 'measurementCallback'>,
 ) {
-  let { meta = {}, dataType = '', title = '' } = options;
+  const { meta = {}, dataType = '', title = '' } = options;
   const { measurementCallback } = analysisOptions;
 
   if (measurementCallback) {
     measurementCallback(variables);
   }
-  let xVariable = variables.x;
-  let yVariable = variables.y;
+  const xVariable = variables.x;
+  const yVariable = variables.y;
   if (!xVariable || !yVariable) {
     throw Error('A measurement must contain at least x and y variables');
   }
@@ -203,10 +194,10 @@ function standardizeData(
     throw Error('x and y variables must contain an array data');
   }
 
-  let x = xVariable.data;
-  let reverse = x && x.length > 1 && x[0] > x[x.length - 1];
+  const x = xVariable.data;
+  const reverse = x && x.length > 1 && x[0] > x[x.length - 1];
 
-  for (let [key, variable] of Object.entries(variables)) {
+  for (const [key, variable] of Object.entries(variables)) {
     if (reverse) variable.data = variable.data.slice().reverse();
     variable.label = variable.label || key;
     if (variable.label.match(/^.*[([](?<units>.*)[)\]].*$/)) {
@@ -221,7 +212,7 @@ function standardizeData(
     }
     variable.min = xMinValue(variable.data);
     variable.max = xMaxValue(variable.data);
-    variable.isMonotone = xIsMonotone(variable.data);
+    variable.isMonotonic = xIsMonotonic(variable.data);
   }
 
   return {

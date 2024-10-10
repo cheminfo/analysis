@@ -1,5 +1,5 @@
 import { MeasurementXY } from 'cheminfo-types';
-import SimpleLinearRegression from 'ml-regression-simple-linear';
+import { SimpleLinearRegression } from 'ml-regression-simple-linear';
 import fit from 'ml-savitzky-golay';
 
 import { SlopeOptions, SlopeResult } from './types';
@@ -11,7 +11,6 @@ interface DiodeResult extends SlopeResult {
 
 /**
  * Calculates the diode on resistance.
- *
  * @param measurement - The measurement to calculate the diode on resistance.
  * @param options - Options to calculate the diode on resistance.
  * @returns - The diode on resistance.
@@ -31,8 +30,8 @@ export function diodeOnResistance(
   let Von = { x: 0, y: Infinity };
   let Vf = { x: 0, found: false };
 
-  let xRes = [];
-  let yRes = [];
+  const xRes = [];
+  const yRes = [];
   let xStart = Infinity;
 
   for (let i = 0; i < y.length; i++) {

@@ -4,13 +4,13 @@ import { join } from 'path';
 import { fromJcamp } from '../..';
 
 test('fromJcamp', () => {
-  let jcamp = readFileSync(
+  const jcamp = readFileSync(
     join(__dirname, '../../../testFiles/ntuples.jdx'),
     'utf8',
   );
-  let analysis = fromJcamp(jcamp);
+  const analysis = fromJcamp(jcamp);
 
-  let measurement = analysis.getMeasurementXY();
+  const measurement = analysis.getMeasurementXY();
   expect(measurement.variables.x.data).toHaveLength(408);
   expect(measurement.variables.y.data).toHaveLength(408);
   expect(measurement.variables.x.label).toBe('Temperature');

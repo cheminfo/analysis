@@ -8,16 +8,16 @@ export function parseTAInstruments(
 ) {
   let text = ensureString(arrayBuffer);
   text = text.replace(/[\r\f]/g, '');
-  let metaLines = text.split(/\n/).filter((line) => /^[a-zA-Z]/.test(line));
-  let allDataLines = text
+  const metaLines = text.split(/\n/).filter((line) => /^[a-zA-Z]/.test(line));
+  const allDataLines = text
     .split(/\n/)
     .filter((line) => /^[0-9.-]/.exec(line))
     .map((line) => line.split(/\s+/).map(Number));
 
-  let meta = parseMeta(metaLines);
+  const meta = parseMeta(metaLines);
 
   //let events = allDataLines.filter((line) => line[0] < 0);
-  let dataLines = allDataLines.filter((line) => line[0] > 0);
+  const dataLines = allDataLines.filter((line) => line[0] > 0);
 
   meta.balancePurgeFlow = [];
   meta.samplePurgeFlow = [];
@@ -52,7 +52,7 @@ function splitTrim(string: string, item = 1) {
  */
 function parseMeta(lines: string[]) {
   const meta: any = { comments: [], methodSteps: [] };
-  for (let [i, line] of lines.entries()) {
+  for (const [i, line] of lines.entries()) {
     if (/^Instrument/.exec(line)) {
       meta.instrument = splitTrim(line);
     } else if (/^InstSerial/.exec(line)) {

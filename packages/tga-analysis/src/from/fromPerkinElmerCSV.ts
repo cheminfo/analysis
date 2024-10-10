@@ -5,7 +5,6 @@ import { Analysis } from '..';
 
 /**
  * Creates a new Chromatogram element based in a JCAMP string.
- *
  * @param text - String containing the JCAMP data.
  * @param arrayBuffer
  * @returns - New class element with the given data.
@@ -14,13 +13,13 @@ export function fromPerkinElmerCSV(
   arrayBuffer: string | ArrayBuffer | Uint8Array,
 ) {
   const text = ensureString(arrayBuffer);
-  let parsed = Papa.parse(text, {
+  const parsed = Papa.parse(text, {
     skipEmptyLines: true,
     header: true,
     dynamicTyping: true,
   }).data;
 
-  let analysis = new Analysis();
+  const analysis = new Analysis();
   analysis.pushMeasurement(
     {
       x: {

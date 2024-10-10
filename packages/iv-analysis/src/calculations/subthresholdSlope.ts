@@ -1,12 +1,11 @@
 import { MeasurementXY } from 'cheminfo-types';
-import SimpleLinearRegression from 'ml-regression-simple-linear';
+import { SimpleLinearRegression } from 'ml-regression-simple-linear';
 
 import { thresholdVoltage } from './thresholdVoltage';
-import { SlopeResult, RangeOptions } from './types';
+import { RangeOptions, SlopeResult } from './types';
 
 /**
  * Calculates the slope of the subthreshold current.
- *
  * @param measurement - The measurement to calculate the subthreshold slope.
  * @param options - Options for the calculation.
  * @returns - The subthreshold slope.
@@ -29,8 +28,8 @@ export function subthresholdSlope(
     toIndex = toVoltage.index;
   }
 
-  let xRes: number[] = [];
-  let yRes: number[] = [];
+  const xRes: number[] = [];
+  const yRes: number[] = [];
   for (let i = fromIndex; i < toIndex; i++) {
     xRes.push(measurement.variables.x.data[i]);
     yRes.push(Math.log10(measurement.variables.y.data[i]));

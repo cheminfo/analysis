@@ -28,13 +28,12 @@ type ListNumber = number[] | Float64Array;
 
 /**
  * Transforms a list of numbers into a list of objects with x and y properties.
- *
  * @param x - List of x values.
  * @param y - List of y values.
  * @returns array of x-y objects
  */
 function getData(x: ListNumber, y: ListNumber) {
-  let data: DataXY[] = new Array(x.length);
+  const data: DataXY[] = new Array(x.length);
   for (let i = 0; i < x.length; i++) {
     data[i] = { x: x[i], y: y[i] };
   }
@@ -43,7 +42,6 @@ function getData(x: ListNumber, y: ListNumber) {
 
 /**
  * Generate a react-plot chart format from an array of Analysis.
- *
  * @param analyses - An array of Analysis objects.
  * @param selector - Object with keys for each measurement selector.
  * @param options - Options for the plot.
@@ -53,7 +51,7 @@ export function getReactPlotJSON(
   analyses: Analysis[],
   selector: MeasurementSelector,
   options: ReactPlotOptions = {},
-): PlotObjectPlot & { meta: Record<string, string>[] } {
+): PlotObjectPlot & { meta: Array<Record<string, string>> } {
   const {
     enforceGrowing = false,
     xAxis: xAxisOptions = {},
@@ -62,14 +60,14 @@ export function getReactPlotJSON(
     dimensions = { width: 550, height: 500 },
     ...otherOptions
   } = options;
-  let content: PlotObjectPlot['content'] = [];
-  let meta: Record<string, string>[] = [];
+  const content: PlotObjectPlot['content'] = [];
+  const meta: Array<Record<string, string>> = [];
   type Axes = { type: 'main' } & AxisProps;
   let xAxis: Axes | null = null;
   let yAxis: Axes | null = null;
 
   for (const analysis of analyses) {
-    let measurements = enforceGrowing
+    const measurements = enforceGrowing
       ? analysis.getNormalizedMeasurement({
           selector,
           normalization: {

@@ -4,8 +4,8 @@ import { join } from 'path';
 import { JSGraph, fromJcamp } from 'base-analysis';
 
 describe('read jcamp and create jsgraph', () => {
-  let jcamp = readFileSync(join(__dirname, 'data/test.jdx'));
-  let analysis = fromJcamp(jcamp);
+  const jcamp = readFileSync(join(__dirname, 'data/test.jdx'));
+  const analysis = fromJcamp(jcamp);
   it('check number of charts', () => {
     const jsgraph = JSGraph.getJSGraph([analysis]);
     expect(jsgraph).toMatchSnapshot();

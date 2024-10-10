@@ -8,7 +8,6 @@ import { Analysis } from '../Analysis';
 
 /**
  * Convert strings into JCAMP and add extra information.
- *
  * @param {string} data - Values to add to the file, usually a csv or tsv values.
  * @param {object} [options={}]
  * @param {string} [options.info={}] - Metadata of the file.
@@ -28,11 +27,11 @@ import { Analysis } from '../Analysis';
  * @param options
  */
 export function fromText(data: string | ArrayBuffer, options = {}): Analysis {
-  let analysis = new Analysis(options);
+  const analysis = new Analysis(options);
 
   const { info = {}, parser = {} } = options;
 
-  let parsed = parseXYAndKeepInfo(data, parser);
+  const parsed = parseXYAndKeepInfo(data, parser);
   const variables = {
     x: {
       data: parsed.data.x,

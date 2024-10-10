@@ -9,14 +9,13 @@ interface GetJcampOptions {
 }
 /**
  * Converts an analysis to an array of jcamp string. Each measurement will be in a different jcamp string
- *
  * @param analysis
  * @param options
  * @returns array of jcamp strings
  */
 export function toJcamps(analysis: Analysis, options: GetJcampOptions = {}) {
-  let jcamps = [];
-  for (let measurement of analysis.measurements) {
+  const jcamps = [];
+  for (const measurement of analysis.measurements) {
     jcamps.push(getJcamp(measurement, options));
   }
   return jcamps;
@@ -29,7 +28,7 @@ export function toJcamps(analysis: Analysis, options: GetJcampOptions = {}) {
 function getJcamp(measurement: MeasurementXY, options: GetJcampOptions) {
   const { info = {}, meta = {} } = options;
 
-  let jcampOptions = {
+  const jcampOptions = {
     options: {},
     info: {
       title: measurement.title,

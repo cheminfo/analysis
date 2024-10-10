@@ -1,6 +1,6 @@
-import type { MeasurementXY } from 'cheminfo-types';
+import type { DataXY, DoubleArray, MeasurementXY } from 'cheminfo-types';
 import { filterXY } from 'ml-signal-processing';
-import { xIsMonotone, xMinValue, xMaxValue } from 'ml-spectra-processing';
+import { xIsMonotonic, xMaxValue, xMinValue } from 'ml-spectra-processing';
 
 import { MeasurementNormalizationOptions } from '../types/MeasurementNormalizationOptions';
 
@@ -12,11 +12,11 @@ export function getNormalizedMeasurement(
   measurement: MeasurementXY,
   options: MeasurementNormalizationOptions = {},
 ): MeasurementXY {
-  let data = {
+  const data = {
     x: measurement.variables.x.data,
     y: measurement.variables.y.data,
   };
-  let newMeasurement: MeasurementXY = {
+  const newMeasurement: MeasurementXY = {
     variables: {
       x: {
         data: measurement.variables.x.data,
@@ -39,7 +39,7 @@ export function getNormalizedMeasurement(
     }
   }
 
-  let {
+  const {
     numberOfPoints,
     filters = [],
     exclusions = [],
@@ -55,13 +55,13 @@ export function getNormalizedMeasurement(
       newMeasurement.variables.y.label?.replace(/\s*\[.*\]/, '');
   }
 
-  let preprocessed = filterXY(data, filters).data;
+  const preprocessed = filterXY(data, filters).data;
 
-  let from =
+  const from =
     options.from === undefined ? xMinValue(preprocessed.x) : options.from;
-  let to = options.to === undefined ? xMaxValue(preprocessed.x) : options.to;
+  const to = options.to === undefined ? xMaxValue(preprocessed.x) : options.to;
 
-  let final: { x: Float64Array; y: Float64Array };
+  let final: DataXY;
   if (numberOfPoints) {
     final = filterXY(preprocessed, [
       {
@@ -80,14 +80,14 @@ export function getNormalizedMeasurement(
 
   const { x, y } = final;
 
-  newMeasurement.variables.x.data = x;
+  newMeasurement.variables.x.data = x as DoubleArray;
   newMeasurement.variables.x.min = xMinValue(x);
   newMeasurement.variables.x.max = xMaxValue(x);
-  newMeasurement.variables.x.isMonotone = xIsMonotone(x);
-  newMeasurement.variables.y.data = y;
+  newMeasurement.variables.x.isMonotonic = xIsMonotonic(x);
+  newMeasurement.variables.y.data = y as DoubleArray;
   newMeasurement.variables.y.min = xMinValue(y);
   newMeasurement.variables.y.max = xMaxValue(y);
-  newMeasurement.variables.y.isMonotone = xIsMonotone(y);
+  newMeasurement.variables.y.isMonotonic = xIsMonotonic(y);
 
   return newMeasurement;
 }

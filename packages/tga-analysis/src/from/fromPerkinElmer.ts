@@ -6,7 +6,6 @@ import { parsePerkinElmer } from './parsePerkinElmer';
 
 /**
  * Creates a new Chromatogram element based in a JCAMP string.
- *
  * @param text - String containing the JCAMP data.
  * @param arrayBuffer
  * @returns - New class element with the given data.

@@ -24,7 +24,7 @@ function parseScanSetup(matrix: string[][]) {
   const headers = matrix[0];
   const data = matrix.slice(1);
   const array = [];
-  for (let row of data) {
+  for (const row of data) {
     const data: Record<string, string> = {};
     for (let i = 0; i < headers.length; i++) {
       if (!headers[i]) continue;
@@ -40,7 +40,7 @@ function parseScanSetup(matrix: string[][]) {
 interface Variable {
   label: string;
   units: string;
-  data: (number | string)[];
+  data: Array<number | string>;
 }
 
 function parseData(matrix: string[][]) {
@@ -80,7 +80,7 @@ function getVariables(
     return { label, units: currentCategory, data: [] };
   });
 
-  for (let row of submatrix) {
+  for (const row of submatrix) {
     for (let i = 0; i < variables.length; i++) {
       if (row[i] === undefined) continue;
       variables[i].data.push(row[i]);

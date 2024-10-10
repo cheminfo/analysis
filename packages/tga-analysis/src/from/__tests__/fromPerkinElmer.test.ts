@@ -4,13 +4,13 @@ import { join } from 'path';
 import { fromPerkinElmer } from '../fromPerkinElmer';
 
 test('fromPerkinElmer', () => {
-  let jcamp = readFileSync(
+  const jcamp = readFileSync(
     join(__dirname, '../../../testFiles/perkinElmer_tga4000.txt'),
     'latin1',
   );
-  let analysis = fromPerkinElmer(jcamp);
+  const analysis = fromPerkinElmer(jcamp);
 
-  let measurement1 = analysis.getMeasurementXY();
+  const measurement1 = analysis.getMeasurementXY();
   expect(measurement1).toBeDefined();
   expect(measurement1?.variables.x.data).toHaveLength(1155);
   expect(measurement1?.variables.y.data).toHaveLength(1155);
@@ -20,7 +20,7 @@ test('fromPerkinElmer', () => {
   expect(measurement1?.variables.y.units).toBe('mg');
   expect(measurement1?.meta?.methodSteps).toHaveLength(6);
 
-  let measurement2 = analysis.getMeasurementXY({
+  const measurement2 = analysis.getMeasurementXY({
     x: { units: 's' },
     y: { units: 'mg' },
   });

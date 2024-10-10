@@ -25,11 +25,11 @@ describe('peakPicking', () => {
   };
 
   it('No options', () => {
-    let peak = peakPicking(measurement, 2);
+    const peak = peakPicking(measurement, 2);
     expect(peak).toStrictEqual({ x: 2, y: 2, z: 0.2, t: 20 });
   });
   it('optimize=true', () => {
-    let peak = peakPicking(measurement, 2, { optimize: true });
+    const peak = peakPicking(measurement, 2, { optimize: true });
     expect(peak).toBeDeepCloseTo({
       x: 3,
       y: 3,
@@ -43,7 +43,7 @@ describe('peakPicking', () => {
     });
   });
   it('max=false, optimize=true', () => {
-    let peak = peakPicking(measurement, 6, {
+    const peak = peakPicking(measurement, 6, {
       optimize: true,
       max: false,
     });

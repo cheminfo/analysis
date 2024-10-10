@@ -7,7 +7,6 @@ export interface MeasurementSelector {
   /**
    * Parameters allow to select the right X variable
    * If more that one variable match the selector, the first one is used.
-   *
    * @default {variable:'x'}
    */
   x?: {
@@ -21,7 +20,6 @@ export interface MeasurementSelector {
   /**
    * Parameters allow to select the right Y variable
    * All matching variable are used
-   *
    * @default {variable:'y'}
    */
   y?: {

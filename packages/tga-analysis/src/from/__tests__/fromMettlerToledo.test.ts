@@ -19,28 +19,28 @@ describe('fromMettlerToledo', () => {
         label: 'time',
         min: 0,
         max: 2250,
-        isMonotone: true,
+        isMonotonic: 1,
       },
       x: {
         units: '°C',
         label: 'Temperature recorded',
         min: 36.622,
         max: 658.132,
-        isMonotone: false,
+        isMonotonic: 0,
       },
       r: {
         units: '°C',
         label: 'Temperature programmed',
         min: 35,
         max: 650,
-        isMonotone: false,
+        isMonotonic: 0,
       },
       y: {
         units: 'mg',
         label: 'Weight',
         min: 2.304,
         max: 12.8038,
-        isMonotone: false,
+        isMonotonic: 0,
       },
     });
 

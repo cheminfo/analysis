@@ -1,4 +1,5 @@
 import { readFileSync } from 'fs';
+import assert from 'node:assert';
 import { join } from 'path';
 
 import type { MeasurementVariable } from 'cheminfo-types';
@@ -22,22 +23,20 @@ function irCallback(variables: Record<string, MeasurementVariable>) {
 
 describe('fromJcamp with callback', () => {
   it('absorbance', () => {
-    let jcamp = readFileSync(
+    const jcamp = readFileSync(
       join(__dirname, '../../../testFiles/ir.jdx'),
       'utf8',
     );
 
     const result = fromJcamp(jcamp, { measurementCallback: irCallback });
     const measurement = result.measurements[0];
+    assert(measurement.variables.t);
     expect(measurement.variables.x.label).toBe('1/CM');
     expect(measurement.variables.y.label).toBe('ABSORBANCE');
-    // @ts-expect-error
     expect(measurement.variables.t.label).toBe('Transmittance');
-    // @ts-expect-error
     expect(measurement.variables.t.units).toBe('%');
     expect(measurement.variables.x.data).toHaveLength(1738);
     expect(measurement.variables.y.data).toHaveLength(1738);
-    // @ts-expect-error
     expect(measurement.variables.t.data).toHaveLength(1738);
   });
 });

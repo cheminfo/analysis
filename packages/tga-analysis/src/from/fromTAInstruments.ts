@@ -11,8 +11,8 @@ export function fromTAInstruments(
   arrayBuffer: string | ArrayBuffer | Uint16Array,
 ) {
   const text = ensureString(arrayBuffer);
-  let analysis = new Analysis();
-  let parsed = parseTAInstruments(text);
+  const analysis = new Analysis();
+  const parsed = parseTAInstruments(text);
 
   analysis.pushMeasurement(
     {

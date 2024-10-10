@@ -1,7 +1,7 @@
 import { getNormalizedMeasurement } from '../getNormalizedMeasurement';
 
 describe('getNormalizedMeasurement baseline', () => {
-  let measurement = {
+  const measurement = {
     variables: {
       x: {
         data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -17,19 +17,19 @@ describe('getNormalizedMeasurement baseline', () => {
   };
 
   it('airPLSBaseline', () => {
-    let normalized = getNormalizedMeasurement(measurement, {
+    const normalized = getNormalizedMeasurement(measurement, {
       filters: [{ name: 'airPLSBaseline' }],
     });
     expect(normalized.variables.y.data).toMatchCloseTo([
-      -3.169014084442461, -2.2007042253000275, -1.25440140841972,
-      -0.3080985915394123, 24.638204225340896, 1.584507042221202,
-      2.5308098591015087, 3.4771126759818163, 4.423415492862123,
-      5.36971830974243,
+      -3.134444079621124, -2.4478884875832367, -1.768911122709742,
+      -1.1043811169738778, 23.5369487654199, 0.17827864781367708,
+      0.8334394603035724, 1.5141848751660767, 2.2126020080923636,
+      2.9205472800839676,
     ]);
   });
 
   it('rollingaveragebaseline', () => {
-    let normalized = getNormalizedMeasurement(measurement, {
+    const normalized = getNormalizedMeasurement(measurement, {
       filters: [{ name: 'rollingAverageBaseline' }],
     });
     expect(Array.from(normalized.variables.y.data)).toMatchCloseTo([
@@ -38,7 +38,7 @@ describe('getNormalizedMeasurement baseline', () => {
   });
 
   it('iterativepolynomialbaseline', () => {
-    let normalized = getNormalizedMeasurement(measurement, {
+    const normalized = getNormalizedMeasurement(measurement, {
       filters: [{ name: 'iterativePolynomialBaseline' }],
     });
     expect(normalized.variables.y.data).toMatchCloseTo([
@@ -49,16 +49,16 @@ describe('getNormalizedMeasurement baseline', () => {
   });
 
   it('rollingballbaseline', () => {
-    let normalized = getNormalizedMeasurement(measurement, {
+    const normalized = getNormalizedMeasurement(measurement, {
       filters: [{ name: 'rollingBallBaseline' }],
     });
     expect(Array.from(normalized.variables.y.data)).toMatchCloseTo([
-      -0.5, 0, 0, -8, 16, -8, 0, 0, 0, 0.5,
+      -1.5, -1, -1.333, -1.333, 22.666, -1, -1, -1, -0.666, 0,
     ]);
   });
 
   it('rollingmedianbaseline', () => {
-    let normalized = getNormalizedMeasurement(measurement, {
+    const normalized = getNormalizedMeasurement(measurement, {
       filters: [{ name: 'rollingMedianBaseline' }],
     });
     expect(Array.from(normalized.variables.y.data)).toMatchCloseTo([
