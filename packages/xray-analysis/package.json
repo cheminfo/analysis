@@ -1,6 +1,6 @@
 {
   "name": "xray-analysis",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "X-ray analysis package for treatment of an x-ray rocking curve (XRC) and an x-ray diffraction (XRD) measurement",
   "main": "./lib/index.js",
   "module": "./lib-esm/index.js",
@@ -20,7 +20,7 @@
     "lib-esm"
   ],
   "dependencies": {
-    "base-analysis": "^0.3.0",
+    "base-analysis": "^0.4.0",
     "cheminfo-types": "^1.8.0",
     "ml-gsd": "^10.2.0",
     "ml-spectra-fitting": "^4.0.2"

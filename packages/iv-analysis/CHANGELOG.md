@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.4.0](https://www.github.com/cheminfo/analysis/compare/iv-analysis-v0.3.0...iv-analysis-v0.4.0) (2024-10-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* `isMonotone` is renamed to `isMonotonic` and now contains a number (-1, 0, 1). Some returned objects now contain Float64Array for data instead of Array. `rollingBallBaseline` and `airPLSBaseline` normalizations have been updated and give different results.
+
+### Miscellaneous Chores
+
+* update dependencies ([a5f734a](https://www.github.com/cheminfo/analysis/commit/a5f734a597bd6f841b6998bc13917abaa9d26399))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * base-analysis bumped from ^0.3.0 to ^0.4.0
+
 ## [0.3.0](https://www.github.com/cheminfo/analysis/compare/iv-analysis-v0.2.0...iv-analysis-v0.3.0) (2022-08-16)
 
 
